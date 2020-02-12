@@ -11,6 +11,7 @@
                         style="width:100%"
                         placeholder="Выберите заказчика"
                         autocomplete
+                        @input="loadContracts"
                 >
                     <vs-select-item
                             :key="index"
@@ -19,6 +20,25 @@
                             v-for="(unit, index) in contragents"
                     >
                         {{ unit.title }}
+                    </vs-select-item>
+                </vs-select>
+
+                <br/>
+
+
+                <vs-select
+                        v-if="contracts"
+                        v-model="supply.contract_id"
+                        style="width:100%"
+                        placeholder="Выберите договор"
+                        autocomplete
+                >
+                    <vs-select-item
+                            :key="index"
+                            :value="unit.id"
+                            :text="renderContractName(unit)"
+                            v-for="(unit, index) in contracts"
+                    >
                     </vs-select-item>
                 </vs-select>
 
@@ -141,7 +161,8 @@
                 planned_date: null,
                 execute_date: null,
                 products: null,
-                customer_id: null
+                customer_id: null,
+                contract_id: 0
             };
 
             return {
@@ -156,7 +177,8 @@
                 products: null,
                 supplyProducts: null,
                 idProductInCreatedForm: 0,
-                contragents: null
+                contragents: null,
+                contracts: null
             }
         },
 
@@ -185,6 +207,8 @@
                 this.$axios.get(API_URL + '/supplies/' + this.supplyId)
                     .then(response => {
                         this.supply = response.data.data;
+
+                        this.loadContracts();
                     })
                     .catch(e => {
                         this.error = e;
@@ -214,6 +238,16 @@
                 this.$axios.get(API_URL + '/contragents')
                     .then(response => {
                         this.contragents = response.data.data;
+                    });
+            },
+            loadContracts() {
+                if (!this.supply.customer_id) {
+                    return false;
+                }
+
+                this.$axios.get(API_URL + '/contracts/find-by-customer/' + this.supply.customer_id)
+                    .then(response => {
+                        this.contracts = response.data.data;
                     });
             },
             checkForm(e) {
@@ -253,6 +287,10 @@
                 );
 
                 this.supply.totalPrice = totalPrice.toFixed(2);
+            },
+            renderContractName(contract)
+            {
+                return '[' + contract.planned_date + '] ' + contract.title;
             }
         },
         created() {

@@ -5,6 +5,8 @@ import ProductList from "./components/Product/ProductList";
 import ProductEdit from "./components/Product/ProductEdit";
 import SupplyList from "./components/Supply/SupplyList";
 import SupplyEdit from "./components/Supply/SupplyEdit";
+import ContractList from "./components/Contract/ContractList";
+import ContractEdit from "./components/Contract/ContractEdit";
 
 Vue.use(Router)
 
@@ -192,6 +194,21 @@ export default new Router({
                     path: '/supplies/:id/edit',
                     name: 'SupplyEdit',
                     component: SupplyEdit
+                },
+                {
+                    path: '/contracts',
+                    name: 'ContractList',
+                    component: ContractList
+                },
+                {
+                    path: '/contracts/:id/edit',
+                    name: 'ContractEdit',
+                    component: ContractEdit
+                },
+                {
+                    path: '/contracts/create',
+                    name: 'ContractCreate',
+                    component: ContractEdit
                 }
             ]
 		},

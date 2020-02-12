@@ -51,6 +51,23 @@
 		]
 	},
 	{
+		url: "/contracts",
+		name: "Договоры",
+		icon: 'shopping_cart',
+		children: [
+			{
+				url: "/contracts",
+				name: "Список",
+				icon: 'view_agenda'
+			},
+			{
+				url: "/contracts/create",
+				name: "Создать",
+				icon: 'note_add'
+			}
+		]
+	},
+	{
 		url:"/starterkit",
 		name:"Starterkit",
 		icon:"favorite_border"
