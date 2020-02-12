@@ -24,6 +24,24 @@
 
                 <br/>
 
+                <vs-select
+                        v-model="contract.template_id"
+                        style="width:100%"
+                        placeholder="Выберите шаблон договора"
+                        autocomplete
+                >
+                    <vs-select-item
+                            :key="index"
+                            :value="unit.id"
+                            :text="unit.name"
+                            v-for="(unit, index) in templates"
+                    >
+                        {{ unit.title }}
+                    </vs-select-item>
+                </vs-select>
+
+                <br/>
+
                 <div class="default-input d-flex align-items-c">
                     <vs-input label-placeholder="Наименование" v-model="contract.title" style="width:100%" />
                 </div>
@@ -42,24 +60,23 @@
 
                 <br/>
 
-                <div v-if="contract.requisites">
-                    <vs-collapse>
-                        <vs-collapse-item v-for="(item, key) in contract.requisites">
-                            <div slot="header">
-                                Банковский реквизит №{{ key + 1 }}:
-                            </div>
+                <div v-if="contract.supplies.length > 0">
+                    <vs-list>
+                        <vs-list-header title="Поставки по договору" color="success"></vs-list-header>
+                        <vs-list-item
+                                :title="renderSupplyTitle(item)"
+                                :subtitle="renderSupplySubTitle(item)"
+                                v-for="(item, key) in contract.supplies"
+                        >
+                            <vs-chip color="warning">
+                                <router-link :to="{ name: 'SupplyEdit', params: { id: item.id }}">
+                                    Открыть
+                                </router-link>
+                            </vs-chip>
+                        </vs-list-item>
+                    </vs-list>
 
-                            <div class="default-input d-flex align-items-center">
-                                <vs-input label-placeholder="ОКТМО" v-model="item.bank.short_name" style="width:100%" />
-                            </div>
-
-                            <br/>
-
-                            <div class="default-input d-flex align-items-center">
-                                <vs-input label-placeholder="ОКТМО" v-model="item.score" style="width:100%" />
-                            </div>
-                        </vs-collapse-item>
-                    </vs-collapse>
+                    <br/>
                 </div>
 
                 <vs-button color="success" style="width:100%" type="filled" @click="checkForm">Сохранить</vs-button>
@@ -68,7 +85,7 @@
             <br/>
 
             <router-link v-bind:to="linkList">
-                <vs-button style="width:100%" color="primary">Открыть список контрагентов</vs-button>
+                <vs-button style="width:100%" color="primary">Открыть список договоров</vs-button>
             </router-link>
         </vs-card>
 
@@ -93,7 +110,10 @@
                 firstName: null,
                 patronymic: null,
                 family: null,
-                phone: null
+                phone: null,
+                template_id: 0,
+                supplies: [],
+                executed_date: null
             };
 
             return {
@@ -105,7 +125,8 @@
                 contractId: this.$route.params.id,
                 contract: blankContract,
                 typeAction: (this.$route.params.id > 0) ? 'put' : 'post',
-                contragents: null
+                contragents: null,
+                templates: null
             }
         },
 
@@ -134,16 +155,14 @@
             },
             loadContract() {
                 this.$axios.get(API_URL + '/contracts/' + this.contractId)
-                    .then(response => {
-                        this.contract = response.data;
-                    })
+                    .then(response => this.contract = response.data)
                     .finally(() => (document.title = 'Договор #' + this.contract.id));
             },
             loadContragents() {
-                this.$axios.get(API_URL + '/contragents')
-                    .then(response => {
-                        this.contragents = response.data.data;
-                    });
+                this.$axios.get(API_URL + '/contragents').then(response => this.contragents = response.data.data);
+            },
+            loadTemplates() {
+                this.$axios.get(API_URL + '/contract-templates').then(response => this.templates = response.data);
             },
             checkForm(e) {
                 e.preventDefault();
@@ -164,6 +183,14 @@
             },
             closeModalResult() {
                 this.isOpenModalResult = false;
+            },
+            renderSupplyTitle(supply)
+            {
+                return 'Поставка №' + supply.id;
+            },
+            renderSupplySubTitle(supply)
+            {
+                return 'Выполнена ' + supply.execute_date + '. Заказчик: ' + supply.customer.title;
             }
         },
         created() {
@@ -174,6 +201,7 @@
             }
 
             this.loadContragents();
+            this.loadTemplates();
         }
     }
 </script>
