@@ -32,4 +32,7 @@ new Vue({
 }).$mount('#app')
 import '@/assets/scss/style.scss'
 
-window.API_URL = 'http://localhost:8001';
+window.API_URL = 'http://localhost:8000';
+window.duplicate = function (object) {
+  return Object.assign({}, object);
+};

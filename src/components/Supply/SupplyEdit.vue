@@ -6,6 +6,24 @@
             </div>
 
             <form>
+                <vs-select
+                        v-model="supply.customer_id"
+                        style="width:100%"
+                        placeholder="Выберите заказчика"
+                        autocomplete
+                >
+                    <vs-select-item
+                            :key="index"
+                            :value="unit.id"
+                            :text="unit.title"
+                            v-for="(unit, index) in contragents"
+                    >
+                        {{ unit.title }}
+                    </vs-select-item>
+                </vs-select>
+
+                <br/>
+
                 <div class="default-input d-flex align-items-c">
                     <vs-input
                             label-placeholder="Полная стоимость"
@@ -42,10 +60,22 @@
                     <tbody>
                         <tr v-if="supply.products.length > 0" v-for="(product, i) in supply.products">
                             <td>{{ i + 1}}</td>
-                            <td>{{ product.name }}</td>
-                            <td>{{ product.price || 0 }}</td>
+                            <td>{{ product.name || product.parent.name }}</td>
                             <td>
-                                <vs-input-number v-model="product.mount" min="1"/>
+                                <vs-input-number
+                                        v-model="product.price"
+                                        min="1"
+                                        max="99999999"
+                                        @input="bringTotalPrice"
+                                />
+                            </td>
+                            <td>
+                                <vs-input-number
+                                        v-model="product.mount"
+                                        min="1"
+                                        max="99999999"
+                                        @input="bringTotalPrice"
+                                />
                             </td>
                             <td>{{ (product.price * product.mount).toFixed(2) || 0}}</td>
                             <td></td>
@@ -55,7 +85,27 @@
 
                 <br/>
 
-                <vs-button color="warning" style="width:100%" type="filled" @click="">Добавить товар</vs-button>
+                <vs-select
+                        v-model="idProductInCreatedForm"
+                        style="width:100%"
+                        placeholder="Введите название или выберите"
+                        autocomplete
+                >
+                    <vs-select-item
+                            :key="index"
+                            :value="index"
+                            :text="unit.name"
+                            v-for="(unit, index) in products"
+                    >
+                        {{ unit.name }}
+                    </vs-select-item>
+                </vs-select>
+
+                <br/>
+
+                <vs-button color="warning" style="width:100%" type="filled" @click="addProductInSupply">
+                    Добавить товар
+                </vs-button>
 
                 <br/>
                 <br/>
@@ -69,18 +119,29 @@
                 <vs-button style="width:100%" color="primary">Открыть список поставок</vs-button>
             </router-link>
         </vs-card>
+
+        <ModalResult
+                v-if="isOpenModalResult"
+                v-bind:result="resultSave"
+                @closeModal="closeModalResult"
+                v-bind:form-errors="formErrors"
+        />
     </vs-row>
 </template>
 
 <script>
-    import axios from 'axios';
+    import ModalResult from "../based/ModalResult";
     export default {
+        components: {
+            ModalResult
+        },
         data() {
             let blankSupply = {
                 id: 0,
                 planned_date: null,
                 execute_date: null,
-                products: null
+                products: null,
+                customer_id: null
             };
 
             return {
@@ -92,10 +153,10 @@
                 supplyId: this.$route.params.id,
                 supply: blankSupply,
                 typeAction: (this.$route.params.id > 0) ? 'put' : 'post',
-                sizeOfUnits: null,
-                currencies: null,
                 products: null,
-                supplyProducts: null
+                supplyProducts: null,
+                idProductInCreatedForm: 0,
+                contragents: null
             }
         },
 
@@ -105,9 +166,9 @@
 
                 let request;
                 if (this.typeAction === 'put') {
-                    request = axios.put(API_URL + '/products/' + this.productId, this.product);
+                    request = this.$axios.put(API_URL + '/supplies/' + this.supplyId, this.supply);
                 } else {
-                    request = axios.post(API_URL + '/products/', options);
+                    request = this.$axios.post(API_URL + '/supplies/', this.supply);
                 }
 
                 request.then((response) => {
@@ -116,14 +177,12 @@
                     } else {
                         this.resultSave = response.data.message;
                     }
-                })
-                    .catch((error) => {
+                }).catch((error) => {
                         this.resultSave = error;
-                    })
-                    .finally(() => (this.isOpenModalResult = true));
+                }).finally(() => (this.isOpenModalResult = true));
             },
             loadSupply() {
-                axios.get(API_URL + '/supplies/' + this.supplyId)
+                this.$axios.get(API_URL + '/supplies/' + this.supplyId)
                     .then(response => {
                         this.supply = response.data.data;
                     })
@@ -132,29 +191,29 @@
                     }).finally(() => (document.title = 'Поставка №' + this.supply.id));
             },
             loadProducts() {
-                axios.get(API_URL + '/products/')
+                this.$axios.get(API_URL + '/products/')
                     .then(response => {
                         this.products = response.data.data;
 
                         this.products.map(function(product) {
+                            product.product_id = product.id;
+
+                            delete product.id;
                             product.mount = 10;
                         });
 
-                        if (this.supply.products.length === 0) {
-                            this.supply.products.push(this.products[0]);
+                        if (this.supply.products === null) {
+                            this.supply.products = [];
+                            this.supply.products.push(
+                                duplicate(this.products[0])
+                            );
                         }
                     })
             },
-            loadSizeOfUnits() {
-                axios.get(API_URL + '/vocab/size-of-units')
+            loadContragents() {
+                this.$axios.get(API_URL + '/contragents')
                     .then(response => {
-                        this.sizeOfUnits = response.data.data;
-                    });
-            },
-            loadCurrencies() {
-                axios.get(API_URL + '/vocab/currencies')
-                    .then(response => {
-                        this.currencies = response.data.data;
+                        this.contragents = response.data.data;
                     });
             },
             checkForm(e) {
@@ -162,21 +221,13 @@
                 this.formErrors = [];
                 this.resultSave = '';
 
-                if (!this.supply.name) {
-                    this.formErrors.push('Не указано наименование');
+                if (!this.supply.customer_id) {
+                    this.formErrors.push('Не указан заказчик');
                 }
-                //
-                // if (!this.contragent.patronymic) {
-                //     this.formErrors.push('Не указано отчество');
-                // }
-                //
-                // if (!this.contragent.family) {
-                //     this.formErrors.push('Не указана фамилия');
-                // }
-                //
-                // if (!this.isValidPhone()) {
-                //     this.formErrors.push('Не корректно указан номер');
-                // }
+
+                if (!this.supply.planned_date) {
+                    this.formErrors.push('Не указана планируемая дата');
+                }
 
                 if (!this.formErrors.length) {
                     this.save();
@@ -186,20 +237,33 @@
 
                 e.preventDefault();
             },
+            addProductInSupply() {
+                this.supply.products.push(
+                    duplicate(this.products[this.idProductInCreatedForm])
+                );
+            },
             closeModalResult() {
                 this.isOpenModalResult = false;
+            },
+            bringTotalPrice() {
+                let totalPrice = 0.0;
+
+                this.supply.products.forEach(
+                    product => totalPrice += parseFloat((product.price * product.mount).toFixed(2))
+                );
+
+                this.supply.totalPrice = totalPrice.toFixed(2);
             }
         },
         created() {
+            this.loadProducts();
+            this.loadContragents();
+
             if (this.supplyId > 0) {
                 this.loadSupply();
             } {
                 document.title = 'Создать поставку';
             }
-
-            this.loadCurrencies();
-            this.loadSizeOfUnits();
-            this.loadProducts();
         }
     }
 </script>
