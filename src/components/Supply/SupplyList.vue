@@ -18,14 +18,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="item in workers">
+                    <tr v-for="item in supplies">
                         <td>{{ item.id }}</td>
                         <td>{{ item.customer.title }}</td>
                         <td>{{ item.totalPrice }}</td>
                         <td>{{ item.planned_date }}</td>
                         <td>{{ item.execute_date }}</td>
                         <td>
-                            <a href="#" style="color:red" @click="removeWorker(item.id)" title="Удалить товар">
+                            <a @click="downloadScoreForPayment(item.id)"
+                               title="Скачать счет на оплату"
+                               style="cursor:pointer">
+                                <i class="material-icons">
+                                    cloud_download
+                                </i>
+                            </a>
+
+                            <a href="#" style="color:red" @click="removeSupply(item.id)" title="Удалить товар">
                                 <i class="material-icons">
                                     delete_forever
                                 </i>
@@ -49,7 +57,7 @@
     export default {
         name: "SupplyList",
         data: () => ({
-            workers: [],
+            supplies: [],
             error: null,
             totalCount: null,
             maxCountEntriesForOnePage: 10,
@@ -62,13 +70,13 @@
 
 
         created() {
-            this.loadWorkers(1);
+            this.loadSupplies(1);
 
-            document.title = 'Список товаров';
+            document.title = 'Список поставок';
         },
 
         methods: {
-            loadWorkers(page) {
+            loadSupplies(page) {
                 if (page === undefined) {
                     page = this.currentPage;
                 }
@@ -77,27 +85,21 @@
 
                 this.$axios.get(URL)
                     .then(response => {
-                        this.workers = response.data.data;
+                        this.supplies = response.data.data;
                         this.totalCount = response.data.total;
                         this.isLoadEntries = true;
 
                         this.currentPage = page;
-                    })
-                    .catch(e => {
-                        this.error=e;
                     });
             },
-            refreshWorkers(page) {
-                this.loadWorkers(page);
+            refreshSupplies(page) {
+                this.loadSupplies(page);
             },
-            removeWorker(id) {
-                this.$axios.delete(API_URL + '/contragents/' + id)
+            removeSupply(id) {
+                this.$axios.delete(API_URL + '/supplies/' + id)
                     .then(response => {
-                        this.openModalResult('Контрагент удален!');
-                        this.refreshWorkers();
-                    })
-                    .catch(e => {
-                        this.error=e;
+                        this.openModalResult('Поставка удалена!');
+                        this.refreshSupplies();
                     });
             },
             closeModalResult() {
@@ -106,6 +108,10 @@
             openModalResult(result) {
                 this.isOpenModalResult = true;
                 this.resultAction = result;
+            },
+            downloadScoreForPayment(supplyId)
+            {
+                window.open(API_URL + '/score-for-payments/download-by-supply/' + supplyId);
             }
         }
     };

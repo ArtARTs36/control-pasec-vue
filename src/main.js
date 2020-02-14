@@ -36,3 +36,8 @@ window.API_URL = 'http://localhost:8000';
 window.duplicate = function (object) {
   return Object.assign({}, object);
 };
+
+window.downloadDocument = function (id) {
+  return API_URL + '/documents/' + id + '/download';
+};
+
