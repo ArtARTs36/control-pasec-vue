@@ -63,6 +63,15 @@
                                 </i>
                             </a>
 
+
+                            <a @click="downloadTorg12(item.id)"
+                               title="Скачать ТОРГ-12"
+                               style="cursor:pointer">
+                                <i class="material-icons">
+                                    attachment
+                                </i>
+                            </a>
+
                             <a href="#" style="color:red" @click="removeSupply(item.id)" title="Удалить товар">
                                 <i class="material-icons">
                                     delete_forever
@@ -163,6 +172,18 @@
                 };
 
                 this.$axios.post(url, options)
+                .then((response) => {
+                    if (response.data) {
+                        console.log(response);
+                        window.open(response.data.data.download_url);
+                    } else {
+                        this.resultSave = response.data.message;
+                    }
+                });
+            },
+            downloadTorg12(supplyId)
+            {
+                this.$axios.get(API_URL + '/supplies/' + supplyId +'/torg12')
                 .then((response) => {
                     if (response.data) {
                         console.log(response);
