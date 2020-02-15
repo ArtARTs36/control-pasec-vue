@@ -162,7 +162,7 @@
                 execute_date: null,
                 products: null,
                 customer_id: null,
-                contract_id: 0
+                contract_id: null
             };
 
             return {

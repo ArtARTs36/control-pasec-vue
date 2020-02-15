@@ -6,9 +6,35 @@
             </div>
 
             <div class="table-responsive">
+                <vs-select
+                        v-model="selectManyAction"
+                        style="width:100%"
+                        placeholder="Выберите действие"
+                        autocomplete
+                >
+                    <vs-select-item
+                            :key="index"
+                            :value="unit.key"
+                            :text="unit.title"
+                            v-for="(unit, index) in manyActions"
+                    >
+                        {{ unit.title }}
+                    </vs-select-item>
+                </vs-select>
+
+                <br/>
+
+                <vs-button color="success" style="width:100%" type="filled" @click="manyActionsExecute">
+                    Выполнить
+                </vs-button>
+
+                <br/>
+                <br/>
+
                 <table class="table v-middle border">
                     <thead>
                     <tr class="">
+                        <th class="border-top-0"></th>
                         <th class="border-top-0">#</th>
                         <th class="border-top-0">Заказчик</th>
                         <th class="border-top-0">Сумма</th>
@@ -19,9 +45,13 @@
                     </thead>
                     <tbody>
                     <tr v-for="item in supplies">
+                        <td>
+                            <vs-checkbox class="justify-content-start" v-model="item.isSelected">
+                            </vs-checkbox>
+                        </td>
                         <td>{{ item.id }}</td>
                         <td>{{ item.customer.title }}</td>
-                        <td>{{ item.totalPrice }}</td>
+                        <td>{{ item.totalPrice.toFixed(2) }}</td>
                         <td>{{ item.planned_date }}</td>
                         <td>{{ item.execute_date }}</td>
                         <td>
@@ -65,9 +95,15 @@
             currentOffset: 0,
             currentPage: 1,
             isOpenModalResult: false,
-            resultAction: ''
+            resultAction: '',
+            selectManyAction: 0,
+            manyActions: [
+                {
+                    key: 1,
+                    title: 'Скачать счета для оплаты'
+                }
+            ]
         }),
-
 
         created() {
             this.loadSupplies(1);
@@ -112,6 +148,45 @@
             downloadScoreForPayment(supplyId)
             {
                 window.open(API_URL + '/score-for-payments/download-by-supply/' + supplyId);
+            },
+            downloadScoreForPayments(supplies)
+            {
+                let url = API_URL + '/score-for-payments/check-document-of-many/';
+                let suppliesOfOptions = [];
+
+                supplies.forEach(function (supply) {
+                    suppliesOfOptions.push(supply.id);
+                });
+
+                let options = {
+                    'supplies': suppliesOfOptions
+                };
+
+                this.$axios.post(url, options)
+                .then((response) => {
+                    if (response.data) {
+                        console.log(response);
+                        window.open(response.data.data.download_url);
+                    } else {
+                        this.resultSave = response.data.message;
+                    }
+                });
+            },
+            manyActionsExecute()
+            {
+                let supplies = [];
+                this.supplies.forEach(function (supply) {
+                    if (supply.isSelected) {
+                        supplies.push(supply);
+                    }
+                });
+
+                switch (this.selectManyAction) {
+                    case 1:
+                        return this.downloadScoreForPayments(supplies);
+                    default:
+                        return;
+                }
             }
         }
     };
