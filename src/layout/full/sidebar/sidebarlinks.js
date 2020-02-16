@@ -1,5 +1,22 @@
 	export default [
 	{
+		url: "/scores-for-payments",
+		name: "Счета",
+		icon: 'all_inbox',
+		children: [
+			{
+				url: "/scores-for-payments",
+				name: "Список счетов",
+				icon: 'all_inbox'
+			},
+			{
+				url: "/contragents/find-in-external-system",
+				name: "Выставить счет",
+				icon: 'search'
+			}
+		]
+	},
+	{
 		url: "/contragents",
 		name: "Контрагенты",
 		icon: 'face',

@@ -7,6 +7,8 @@ import SupplyList from "./components/Supply/SupplyList";
 import SupplyEdit from "./components/Supply/SupplyEdit";
 import ContractList from "./components/Contract/ContractList";
 import ContractEdit from "./components/Contract/ContractEdit";
+import ScoreForPaymentList from "./components/Product/ScoreForPaymentList";
+import ScoreForPaymentEdit from "./components/Product/ScoreForPaymentEdit";
 
 Vue.use(Router)
 
@@ -209,6 +211,16 @@ export default new Router({
                     path: '/contracts/create',
                     name: 'ContractCreate',
                     component: ContractEdit
+                },
+                {
+                    path: '/scores-for-payments',
+                    name: 'ScoresForPaymentsList',
+                    component: ScoreForPaymentList
+                },
+                {
+                    path: '/scores-for-payments/:id/edit',
+                    name: 'ScoreForPaymentEdit',
+                    component: ScoreForPaymentEdit
                 }
             ]
 		},
