@@ -2,7 +2,20 @@
  <div>
   <States/>
  <vs-row vs-justify="center">
-    <vs-col type="flex" vs-justify="center" vs-align="center" vs-lg="8" vs-sm="6" vs-xs="12" code-toggler>
+     <vs-col type="flex" vs-justify="center" vs-align="center" vs-sm="4" vs-lg="8" vs-xs="12">
+         <vs-card class="cardx">
+             <div slot="header">
+                 <h4>
+                     Курсы валют
+                 </h4>
+             </div>
+             <div>
+                 <SalesIncome/>
+             </div>
+         </vs-card>
+
+     </vs-col>
+    <vs-col type="flex" vs-justify="center" vs-align="center" vs-lg="4" vs-sm="4" vs-xs="12" code-toggler>
       <vs-card class="cardx">
         <div slot="header">
           <h4>
@@ -14,19 +27,6 @@
         </div>
         
       </vs-card>
-    </vs-col>
-    <vs-col type="flex" vs-justify="center" vs-align="center" vs-sm="6" vs-lg="4" vs-xs="12">
-      <vs-card class="cardx">
-        <div slot="header">
-          <h4>
-            Sales Income 
-          </h4>
-        </div>
-        <div>
-          <SalesIncome/>
-        </div>
-      </vs-card>
-
     </vs-col>
     <vs-col vs-lg="12">
       <vs-card>
