@@ -55,13 +55,13 @@
                             </div>
 
                             <div class="default-input d-flex align-items-center">
-                                <vs-input label-placeholder="ОКТМО" v-model="item.bank.short_name" style="width:100%" />
+                                <vs-input label-placeholder="Банк" v-model="item.bank.short_name" style="width:100%" />
                             </div>
 
                             <br/>
 
                             <div class="default-input d-flex align-items-center">
-                                <vs-input label-placeholder="ОКТМО" v-model="item.score" style="width:100%" />
+                                <vs-input label-placeholder="Счет" v-model="item.score" style="width:100%" />
                             </div>
                         </vs-collapse-item>
                     </vs-collapse>
