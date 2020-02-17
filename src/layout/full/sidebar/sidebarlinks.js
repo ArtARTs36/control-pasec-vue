@@ -10,7 +10,7 @@
 				icon: 'all_inbox'
 			},
 			{
-				url: "/contragents/find-in-external-system",
+				url: "/scores-for-payments/create",
 				name: "Выставить счет",
 				icon: 'search'
 			}

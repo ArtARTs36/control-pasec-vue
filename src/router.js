@@ -9,6 +9,7 @@ import ContractList from "./components/Contract/ContractList";
 import ContractEdit from "./components/Contract/ContractEdit";
 import ScoreForPaymentList from "./components/Product/ScoreForPaymentList";
 import ScoreForPaymentEdit from "./components/Product/ScoreForPaymentEdit";
+import ScoreForPaymentCreate from "./components/Product/ScoreForPaymentCreate";
 
 Vue.use(Router)
 
@@ -221,6 +222,11 @@ export default new Router({
                     path: '/scores-for-payments/:id/edit',
                     name: 'ScoreForPaymentEdit',
                     component: ScoreForPaymentEdit
+                },
+                {
+                    path: '/scores-for-payments/create',
+                    name: 'ScoreForPaymentCreate',
+                    component: ScoreForPaymentCreate
                 }
             ]
 		},
