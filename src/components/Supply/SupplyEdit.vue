@@ -109,13 +109,13 @@
                             </td>
                             <td>
                                 <vs-input-number
-                                        v-model="product.mount"
+                                        v-model="product.quantity"
                                         min="1"
                                         max="99999999"
                                         @input="bringTotalPrice"
                                 />
                             </td>
-                            <td>{{ (product.price * product.mount).toFixed(2) || 0}}</td>
+                            <td>{{ (product.price * product.quantity).toFixed(2) || 0}}</td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -212,8 +212,6 @@
                     request = this.$axios.post(API_URL + '/supplies/', this.supply);
                 }
 
-                console.log(this.supply);
-
                 request.then((response) => {
                     if (response.data.success) {
                         this.resultSave = 'Данные успешно сохранены!';
@@ -244,7 +242,7 @@
                             product.product_id = product.id;
 
                             delete product.id;
-                            product.mount = 10;
+                            product.quantity = 10;
                         });
 
                         if (this.supply.products === null) {
@@ -310,7 +308,7 @@
                 let totalPrice = 0.0;
 
                 this.supply.products.forEach(
-                    product => totalPrice += parseFloat((product.price * product.mount).toFixed(2))
+                    product => totalPrice += parseFloat((product.price * product.quantity).toFixed(2))
                 );
 
                 this.supply.totalPrice = totalPrice.toFixed(2);

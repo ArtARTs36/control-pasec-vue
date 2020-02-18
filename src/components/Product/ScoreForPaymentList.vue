@@ -120,7 +120,7 @@
                 let totalPrice = 0.0;
 
                 supply.products.forEach(
-                    product => totalPrice += parseFloat((product.price * product.mount).toFixed(2))
+                    product => totalPrice += parseFloat((product.price * product.quantity).toFixed(2))
                 );
 
                 return totalPrice.toFixed(2);
