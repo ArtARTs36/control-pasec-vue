@@ -72,6 +72,7 @@
                         <th class="border-top-0">#</th>
                         <th class="border-top-0">Товар</th>
                         <th class="border-top-0">Цена</th>
+                        <th class="border-top-0">Единица измерения</th>
                         <th class="border-top-0">Количество</th>
                         <th class="border-top-0">Сумма</th>
                         <th class="border-top-0">Действия</th>
@@ -88,6 +89,23 @@
                                         max="99999999"
                                         @input="bringTotalPrice"
                                 />
+                            </td>
+                            <td>
+                                <vs-select
+                                        v-model="product.quantity_unit_id"
+                                        style="width:100%"
+                                        placeholder="Выберите единицу измерения количества"
+                                        autocomplete
+                                >
+                                    <vs-select-item
+                                            :key="index"
+                                            :value="unit.id"
+                                            :text="unit.name"
+                                            v-for="(unit, index) in quantityUnits"
+                                    >
+                                        {{ unit.name }}
+                                    </vs-select-item>
+                                </vs-select>
                             </td>
                             <td>
                                 <vs-input-number
@@ -178,7 +196,8 @@
                 supplyProducts: null,
                 idProductInCreatedForm: 0,
                 contragents: null,
-                contracts: null
+                contracts: null,
+                quantityUnits: null
             }
         },
 
@@ -192,6 +211,8 @@
                 } else {
                     request = this.$axios.post(API_URL + '/supplies/', this.supply);
                 }
+
+                console.log(this.supply);
 
                 request.then((response) => {
                     if (response.data.success) {
@@ -233,6 +254,12 @@
                             );
                         }
                     })
+            },
+            loadQuantityUnits() {
+                this.$axios.get(API_URL + '/vocab-quantity-units')
+                    .then(response => {
+                        this.quantityUnits = response.data;
+                    });
             },
             loadContragents() {
                 this.$axios.get(API_URL + '/contragents')
@@ -296,6 +323,7 @@
         created() {
             this.loadProducts();
             this.loadContragents();
+            this.loadQuantityUnits();
 
             if (this.supplyId > 0) {
                 this.loadSupply();
