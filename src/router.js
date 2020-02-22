@@ -10,6 +10,8 @@ import ContractEdit from "./components/Contract/ContractEdit";
 import ScoreForPaymentList from "./components/Product/ScoreForPaymentList";
 import ScoreForPaymentEdit from "./components/Product/ScoreForPaymentEdit";
 import ScoreForPaymentCreate from "./components/Product/ScoreForPaymentCreate";
+import VocabGosStandardList from "./components/Vocab/VocabGosStandardList";
+import VocabGosStandardEdit from "./components/Vocab/VocabGosStandardEdit";
 
 Vue.use(Router)
 
@@ -227,6 +229,21 @@ export default new Router({
                     path: '/scores-for-payments/create',
                     name: 'ScoreForPaymentCreate',
                     component: ScoreForPaymentCreate
+                },
+                {
+                    path: '/vocab/gos-standards',
+                    name: 'VocabGosStandardList',
+                    component: VocabGosStandardList
+                },
+                {
+                    path: '/vocab/gos-standards/:id/edit',
+                    name: 'VocabGosStandardEdit',
+                    component: VocabGosStandardEdit
+                },
+                {
+                    path: '/vocab/gos-standards/create',
+                    name: 'VocabGosStandardCreate',
+                    component: VocabGosStandardEdit
                 }
             ]
 		},

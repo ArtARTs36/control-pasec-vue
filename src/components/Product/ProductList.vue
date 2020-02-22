@@ -13,6 +13,7 @@
                         <th class="border-top-0">Наименование</th>
                         <th class="border-top-0">Для документов</th>
                         <th class="border-top-0">Размер</th>
+                        <th class="border-top-0">ГОСТ</th>
                         <th class="border-top-0">Действия</th>
                     </tr>
                     </thead>
@@ -22,6 +23,7 @@
                         <td>{{ item.name }}</td>
                         <td>{{ item.name_for_document}}</td>
                         <td>{{ item.size }} {{ item.size_of_unit.short_name}}</td>
+                        <td>{{ item.gos_standard.name}}</td>
                         <td>
                             <a href="#" style="color:red" @click="removeWorker(item.id)" title="Удалить товар">
                                 <i class="material-icons">

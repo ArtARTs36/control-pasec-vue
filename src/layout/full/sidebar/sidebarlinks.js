@@ -1,5 +1,10 @@
 	export default [
 	{
+		url: "/starterkit",
+		name: "Домашняя страница",
+		icon: "home"
+	},
+	{
 		url: "/scores-for-payments",
 		name: "Счета",
 		icon: 'all_inbox',
@@ -85,9 +90,16 @@
 		]
 	},
 	{
-		url:"/starterkit",
-		name:"Starterkit",
-		icon:"favorite_border"
+		url: "",
+		name: "Справочники",
+		icon: 'shopping_cart',
+		children: [
+			{
+				url: "/vocab/gos-standards",
+				name: "ГОСТ",
+				icon: 'view_agenda'
+			},
+		]
 	},
 	{
 		url: "/alert",

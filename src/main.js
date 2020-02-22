@@ -33,6 +33,9 @@ new Vue({
 import '@/assets/scss/style.scss'
 
 window.API_URL = 'http://localhost:8000';
+window.API_VOCAB_URL = API_URL + '/vocab';
+window.API_VOCAB_GOS_STANDARDS_INDEX = API_VOCAB_URL + '-gos-standards/';
+
 window.duplicate = function (object) {
   return Object.assign({}, object);
 };
