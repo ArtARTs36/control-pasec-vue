@@ -141,7 +141,7 @@
                     });
             },
             loadCurrencies() {
-                axios.get(API_URL + '/vocab/currencies')
+                axios.get(API_VOCAB_CURRENCIES_INDEX)
                     .then(response => {
                         this.currencies = response.data.data;
                     });

@@ -99,6 +99,21 @@
 				name: "ГОСТ",
 				icon: 'view_agenda'
 			},
+			{
+				url: "/vocab/banks",
+				name: "Банки",
+				icon: 'attach_money'
+			},
+			{
+				url: "/vocab/quantities",
+				name: "Ед измерения количества",
+				icon: 'format_list_numbered'
+			},
+			{
+				url: "/vocab/currencies",
+				name: "Курсы валют",
+				icon: 'monetization_on'
+			},
 		]
 	},
 	{

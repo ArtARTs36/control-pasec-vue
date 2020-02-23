@@ -12,6 +12,12 @@ import ScoreForPaymentEdit from "./components/Product/ScoreForPaymentEdit";
 import ScoreForPaymentCreate from "./components/Product/ScoreForPaymentCreate";
 import VocabGosStandardList from "./components/Vocab/VocabGosStandardList";
 import VocabGosStandardEdit from "./components/Vocab/VocabGosStandardEdit";
+import VocabBankList from "./components/Vocab/VocabBankList";
+import VocabBankEdit from "./components/Vocab/VocabBankEdit";
+import VocabQuantityList from "./components/Vocab/VocabQuantityList";
+import VocabQuantityEdit from "./components/Vocab/VocabQuantityEdit";
+import VocabCurrencyList from "./components/Vocab/VocabCurrencyList";
+import VocabCurrencyEdit from "./components/Vocab/VocabCurrencyEdit";
 
 Vue.use(Router)
 
@@ -244,7 +250,52 @@ export default new Router({
                     path: '/vocab/gos-standards/create',
                     name: 'VocabGosStandardCreate',
                     component: VocabGosStandardEdit
-                }
+                },
+                {
+                    path: '/vocab/banks',
+                    name: 'VocabBankList',
+                    component: VocabBankList
+                },
+                {
+                    path: '/vocab/banks/:id/edit',
+                    name: 'VocabBankEdit',
+                    component: VocabBankEdit
+                },
+                {
+                    path: '/vocab/banks/create',
+                    name: 'VocabBankCreate',
+                    component: VocabBankEdit
+                },
+                {
+                    path: '/vocab/quantities',
+                    name: 'VocabQuantityList',
+                    component: VocabQuantityList
+                },
+                {
+                    path: '/vocab/quantities/:id/edit',
+                    name: 'VocabQuantityEdit',
+                    component: VocabQuantityEdit
+                },
+                {
+                    path: '/vocab/quantities/create',
+                    name: 'VocabQuantityCreate',
+                    component: VocabQuantityEdit
+                },
+                {
+                    path: '/vocab/currencies',
+                    name: 'VocabCurrencyList',
+                    component: VocabCurrencyList
+                },
+                {
+                    path: '/vocab/currencies/:id/edit',
+                    name: 'VocabCurrencyEdit',
+                    component: VocabCurrencyEdit
+                },
+                {
+                    path: '/vocab/currencies/create',
+                    name: 'VocabCurrencyCreate',
+                    component: VocabCurrencyEdit
+                },
             ]
 		},
     // Redirect to starterkit page, if no match found

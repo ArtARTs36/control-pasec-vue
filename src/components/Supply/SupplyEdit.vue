@@ -254,9 +254,9 @@
                     })
             },
             loadQuantityUnits() {
-                this.$axios.get(API_URL + '/vocab-quantity-units')
+                this.$axios.get(API_VOCAB_QUANTITIES_INDEX)
                     .then(response => {
-                        this.quantityUnits = response.data;
+                        this.quantityUnits = response.data.data;
                     });
             },
             loadContragents() {
