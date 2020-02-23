@@ -1,6 +1,6 @@
 	export default [
 	{
-		url: "/starterkit",
+		url: "/",
 		name: "Домашняя страница",
 		icon: "home"
 	},

@@ -2,34 +2,33 @@ import Vue from 'vue'
 import Vuesax from 'vuesax'
 import Axios from 'axios';
 
-
 import App from './App.vue'
 
-import 'vuesax/dist/vuesax.css' //Vuesax styles
+import 'vuesax/dist/vuesax.css';
 import 'material-icons/iconfont/material-icons.css';
 // Vuex Store
 import store from './store/store'
 
-
-// Theme Configurations
 import 'prismjs'
 import 'prismjs/themes/prism.css'
 import VsPrism from './components/prism/VsPrism.vue';
 Vue.component(VsPrism.name, VsPrism);
 
 Vue.prototype.$axios = Axios;
+console.log();
+Vue.use(Vuesax);
 
 // Vue Router
 import router from './router'
-Vue.config.productionTip = false
-Vue.config.devtools = true
-Vue.use(Vuesax)
+Vue.config.productionTip = false;
+Vue.config.devtools = true;
 
 new Vue({
   store,
   router,
   render: h => h(App),
-}).$mount('#app')
+}).$mount('#app');
+
 import '@/assets/scss/style.scss'
 
 window.API_URL = 'http://localhost:8000';
@@ -40,6 +39,8 @@ window.API_VOCAB_QUANTITIES_INDEX = API_VOCAB_URL + '-quantity-units/';
 window.API_VOCAB_CURRENCIES_INDEX = API_VOCAB_URL + '-currencies/';
 window.API_EXTERNAL_NEWS_INDEX = API_URL + '/external-news/';
 window.API_PRODUCTS_INDEX = API_URL + '/products';
+window.API_STAT_INDEX = API_URL + '/stat';
+window.API_STAT_GENERAL = API_URL + '/stat/general';
 
 Vue.prototype.$openModalResult = function (text) {
   this['isOpenModalResult'] = true;
@@ -79,6 +80,10 @@ Vue.prototype.$openNotifyToDocCreated = function (document) {
   })
 };
 
+Vue.filter('decOfNum', function (number, titles) {
+  return declOfNum(number, titles);
+});
+
 window.duplicate = function (object) {
   return Object.assign({}, object);
 };
@@ -86,4 +91,10 @@ window.duplicate = function (object) {
 window.downloadDocument = function (id) {
   return API_URL + '/documents/' + id + '/download';
 };
+
+function declOfNum(number, titles)
+{
+  let cases = [2, 0, 1, 1, 1, 2];
+  return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
+}
 
