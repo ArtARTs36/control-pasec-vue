@@ -38,6 +38,8 @@ window.API_VOCAB_GOS_STANDARDS_INDEX = API_VOCAB_URL + '-gos-standards/';
 window.API_VOCAB_BANKS_INDEX = API_VOCAB_URL + '-banks/';
 window.API_VOCAB_QUANTITIES_INDEX = API_VOCAB_URL + '-quantity-units/';
 window.API_VOCAB_CURRENCIES_INDEX = API_VOCAB_URL + '-currencies/';
+window.API_EXTERNAL_NEWS_INDEX = API_URL + '/external-news/';
+window.API_PRODUCTS_INDEX = API_URL + '/products';
 
 Vue.prototype.$openModalResult = function (text) {
   this['isOpenModalResult'] = true;
@@ -48,6 +50,12 @@ Vue.prototype.$closeModalResult = function () {
   this['isOpenModalResult'] = false;
   this['resultAction'] = 'empty';
 };
+
+Vue.filter('cutText', function (text, symbolsCount) {
+  return text.length > symbolsCount
+      ? text.slice(0, symbolsCount - 3) + '...'
+      : text;
+});
 
 window.duplicate = function (object) {
   return Object.assign({}, object);
