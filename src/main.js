@@ -57,6 +57,28 @@ Vue.filter('cutText', function (text, symbolsCount) {
       : text;
 });
 
+Vue.prototype.$openNotifyToDocCreate = function () {
+  this.$vs.notify({
+    title: 'Документ готовится',
+    text: 'Подождите некоторое время',
+    color: 'dark',
+    icon: 'access_time'
+  })
+};
+
+Vue.prototype.$openNotifyToDocCreated = function (document) {
+  this.$vs.notify({
+    title: 'Документ '+ document.title +' готов',
+    text: 'Что бы скачать нажмите на это сообщение',
+    color: 'primary',
+    icon:'check_box',
+    fixed: true,
+    click: () => {
+      window.open(document.download_url);
+    }
+  })
+};
+
 window.duplicate = function (object) {
   return Object.assign({}, object);
 };

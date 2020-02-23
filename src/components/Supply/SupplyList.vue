@@ -34,7 +34,13 @@
                 <table class="table v-middle border">
                     <thead>
                     <tr class="">
-                        <th class="border-top-0"></th>
+                        <th class="border-top-0">
+                            <vs-checkbox class="justify-content-start"
+                                         @change="selectedAllItems"
+                                         v-model="isAllSelected"
+                            >
+                            </vs-checkbox>
+                        </th>
                         <th class="border-top-0">#</th>
                         <th class="border-top-0">Заказчик</th>
                         <th class="border-top-0">Сумма</th>
@@ -111,7 +117,8 @@
                     key: 1,
                     title: 'Скачать счета для оплаты'
                 }
-            ]
+            ],
+            isAllSelected: false
         }),
 
         created() {
@@ -156,10 +163,12 @@
             },
             downloadScoreForPayment(supplyId)
             {
+                this.$openNotifyToDocCreate();
                 window.open(API_URL + '/score-for-payments/download-by-supply/' + supplyId);
             },
             downloadScoreForPayments(supplies)
             {
+                this.$openNotifyToDocCreate();
                 let url = API_URL + '/score-for-payments/check-document-of-many/';
                 let suppliesOfOptions = [];
 
@@ -174,8 +183,7 @@
                 this.$axios.post(url, options)
                 .then((response) => {
                     if (response.data) {
-                        console.log(response);
-                        window.open(response.data.data.download_url);
+                        this.$openNotifyToDocCreated(response.data.data);
                     } else {
                         this.resultSave = response.data.message;
                     }
@@ -183,11 +191,11 @@
             },
             downloadTorg12(supplyId)
             {
+                this.$openNotifyToDocCreate();
                 this.$axios.get(API_URL + '/supplies/' + supplyId +'/torg12')
                 .then((response) => {
                     if (response.data) {
-                        console.log(response);
-                        window.open(response.data.data.download_url);
+                        this.$openNotifyToDocCreated(response.data.data);
                     } else {
                         this.resultSave = response.data.message;
                     }
@@ -208,6 +216,13 @@
                     default:
                         return;
                 }
+            },
+            selectedAllItems()
+            {
+                console.log(this.isAllSelected);
+                this.supplies.forEach(function (supply) {
+                    supply.isSelected = this.isAllSelected;
+                }, this);
             }
         }
     };

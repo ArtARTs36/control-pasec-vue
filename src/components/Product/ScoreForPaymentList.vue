@@ -157,10 +157,12 @@
             },
             downloadScoreForPayment(supplyId)
             {
+                this.$openNotifyToDocCreate();
                 window.open(API_URL + '/score-for-payments/download-by-supply/' + supplyId);
             },
             downloadScoreForPayments(supplies)
             {
+                this.$openNotifyToDocCreate();
                 let url = API_URL + '/score-for-payments/check-document-of-many/';
                 let suppliesOfOptions = [];
 
