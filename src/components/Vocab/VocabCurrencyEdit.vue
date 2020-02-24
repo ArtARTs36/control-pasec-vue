@@ -42,7 +42,19 @@
                 <br/>
 
                 <div class="default-input d-flex align-items-center">
+                    <vs-input label-placeholder="Приоритет" v-model="currency.priority" style="width:100%" />
+                </div>
+
+                <br/>
+
+                <div class="default-input d-flex align-items-center">
                     <vs-input label-placeholder="ISO: Сокращенное название" v-model="currency.iso_short_name" style="width:100%" />
+                </div>
+
+                <br/>
+
+                <div class="default-input d-flex align-items-center">
+                    <vs-input label-placeholder="Символ" v-model="currency.symbol" style="width:100%" />
                 </div>
 
                 <br/>
@@ -79,7 +91,9 @@
                 name_en: null,
                 short_name_en: null,
                 iso_code: null,
-                iso_short_name: null
+                iso_short_name: null,
+                priority: null,
+                symbol: null
             };
 
             return {
@@ -151,8 +165,20 @@
                     this.formErrors.push('Не указан ISO код');
                 }
 
+                if (this.currency.priority) {
+                    if (parseInt(this.currency.priority) != this.currency.priority) {
+                        this.formErrors.push('Приоритет должен быть числом');
+                    }
+                } else {
+                    this.formErrors.push('Не указан приоритет');
+                }
+
                 if (!this.currency.iso_short_name) {
                     this.formErrors.push('Не указано ISO сокращенное название');
+                }
+
+                if (!this.currency.symbol) {
+                    this.formErrors.push('Не указано символ');
                 }
 
                 if (!this.formErrors.length) {

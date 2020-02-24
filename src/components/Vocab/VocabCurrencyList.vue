@@ -21,6 +21,8 @@
                         <th class="border-top-0">Сокращенное</th>
                         <th class="border-top-0">На английском</th>
                         <th class="border-top-0">Сокращенное</th>
+                        <th class="border-top-0">Приоритет</th>
+                        <th class="border-top-0">Символ</th>
                         <th class="border-top-0">ISO</th>
                         <th class="border-top-0">Действия</th>
                     </tr>
@@ -32,6 +34,8 @@
                         <td>{{ item.short_name }}</td>
                         <td>{{ item.name_en }}</td>
                         <td>{{ item.short_name_en }}</td>
+                        <td>{{ item.priority }}</td>
+                        <td>{{ item.symbol }}</td>
                         <td>{{ item.iso_code }} / {{ item.iso_short_name }}</td>
                         <td>
                             <a style="cursor: pointer; color:red" @click="removeCurrency(item.id)" title="Удалить банк">
