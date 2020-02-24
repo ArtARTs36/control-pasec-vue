@@ -8,8 +8,8 @@
       Template logo
       --> 
       <div slot="title" class="themelogo">
-        <img  width="32" height="32"
-                src="https://banner2.cleanpng.com/20180718/io/kisspng-honey-bee-insect-bumblebee-black-bee-clipart-5b4fe2dd5a33d8.4449645915319620773695.jpg"
+        <img width="32" height="32"
+                :src="require('@/assets/images/logo/logo.png')"
                 alt="Dashboard"/>
         <span class="logo-text" v-if="title">{{ title }}</span>
       </div>
