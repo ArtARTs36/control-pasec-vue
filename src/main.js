@@ -15,7 +15,7 @@ import VsPrism from './components/prism/VsPrism.vue';
 Vue.component(VsPrism.name, VsPrism);
 
 Vue.prototype.$axios = Axios;
-console.log();
+
 Vue.use(Vuesax);
 
 // Vue Router
@@ -31,7 +31,7 @@ new Vue({
 
 import '@/assets/scss/style.scss'
 
-window.API_URL = 'http://localhost:8000';
+window.API_URL = 'http://localhost:8000/api';
 window.API_VOCAB_URL = API_URL + '/vocab';
 window.API_VOCAB_GOS_STANDARDS_INDEX = API_VOCAB_URL + '-gos-standards/';
 window.API_VOCAB_BANKS_INDEX = API_VOCAB_URL + '-banks/';
@@ -41,6 +41,7 @@ window.API_EXTERNAL_NEWS_INDEX = API_URL + '/external-news/';
 window.API_PRODUCTS_INDEX = API_URL + '/products';
 window.API_STAT_INDEX = API_URL + '/stat';
 window.API_STAT_GENERAL = API_URL + '/stat/general';
+window.API_SUPPLY_INDEX = API_URL + '/supplies/';
 
 Vue.prototype.$openModalResult = function (text) {
   this['isOpenModalResult'] = true;

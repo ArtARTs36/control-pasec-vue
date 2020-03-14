@@ -94,6 +94,13 @@
                     </tbody>
                 </table>
             </div>
+
+            <vs-pagination
+                    color="#f91f43"
+                    :total="totalPages"
+                    v-model="currentPage"
+                    @change="loadSupplies"
+            ></vs-pagination>
         </vs-card>
     </vs-row>
 </template>
@@ -118,7 +125,8 @@
                     title: 'Скачать счета для оплаты'
                 }
             ],
-            isAllSelected: false
+            isAllSelected: false,
+            totalPages: null
         }),
 
         created() {
@@ -133,13 +141,14 @@
                     page = this.currentPage;
                 }
 
-                const URL = API_URL + '/supplies';
+                const URL = API_SUPPLY_INDEX + 'page-' + page;
 
                 this.$axios.get(URL)
                     .then(response => {
                         this.supplies = response.data.data;
-                        this.totalCount = response.data.total;
+                        this.totalCount = response.data.meta.total;
                         this.isLoadEntries = true;
+                        this.totalPages = response.data.meta.last_page;
 
                         this.currentPage = page;
                     });

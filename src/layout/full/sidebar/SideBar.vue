@@ -33,11 +33,11 @@
                              :key="`sidebarLink-${index}`" :index="index">
                 <span class="hide-in-minisidebar">{{ sidebarLink.name }}</span>
             </vs-sidebar-item>
-        </template>  
-        
-        <div class="footer-sidebar" slot="footer">
-            <vs-button icon="reply" color="danger" type="flat" href="https://www.wrappixel.com">Upgrade to Pro</vs-button>
-        </div>
+        </template>
+
+<!--        <div class="footer-sidebar" slot="footer">-->
+<!--            <vs-button icon="reply" color="danger" type="flat" href="">Вернуться на сайт</vs-button>-->
+<!--        </div>-->
 
     </vs-sidebar>
   </div>
@@ -78,8 +78,8 @@ export default {
       }
    },
    watch: {
-      
-   },   
+
+   },
    methods : {
       handleWindowResize(event) {
             this.windowWidth = event.currentTarget.innerWidth;
@@ -89,10 +89,10 @@ export default {
         if (this.windowWidth < 1170) {
           this.$store.commit('IS_SIDEBAR_ACTIVE', false);
           this.doNotClose= false
-        } 
+        }
         else {
           this.$store.commit('IS_SIDEBAR_ACTIVE', true);
-          this.doNotClose= true 
+          this.doNotClose= true
         }
       }
   },
