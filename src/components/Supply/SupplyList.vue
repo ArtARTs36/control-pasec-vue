@@ -46,6 +46,7 @@
                         <th class="border-top-0">Сумма</th>
                         <th class="border-top-0">Планируемая дата</th>
                         <th class="border-top-0">Фактическая дата</th>
+                        <th class="border-top-0">Документы</th>
                         <th class="border-top-0">Действия</th>
                     </tr>
                     </thead>
@@ -61,23 +62,30 @@
                         <td>{{ item.planned_date }}</td>
                         <td>{{ item.execute_date }}</td>
                         <td>
-                            <a @click="downloadScoreForPayment(item.id)"
-                               title="Скачать счет на оплату"
-                               style="cursor:pointer">
-                                <i class="material-icons">
-                                    cloud_download
-                                </i>
-                            </a>
+                            <vs-avatar
+                                    color="success"
+                                    text="ТОРГ 1 2"
+                                    size="small"
+                                    title="Скачать документ ТОРГ 12"
+                            />
 
+                            <vs-avatar
+                                    @click="downloadScoreForPayment(item.id)"
+                                    color="black"
+                                    text="Счет на оплату"
+                                    size="small"
+                                    title="Скачать счет на оплату"
+                            />
 
-                            <a @click="downloadTorg12(item.id)"
-                               title="Скачать ТОРГ-12"
-                               style="cursor:pointer">
-                                <i class="material-icons">
-                                    attachment
-                                </i>
-                            </a>
-
+                            <vs-avatar
+                                    @click="downloadTorg12(item.id)"
+                                    color="primary"
+                                    text="ТТ Т Н"
+                                    size="small"
+                                    title="Скачать ТТН"
+                            />
+                        </td>
+                        <td>
                             <a href="#" style="color:red" @click="removeSupply(item.id)" title="Удалить товар">
                                 <i class="material-icons">
                                     delete_forever
@@ -175,7 +183,7 @@
                 this.$openNotifyToDocCreate();
                 window.open(API_URL + '/score-for-payments/download-by-supply/' + supplyId);
             },
-            downloadScoreForPayments(supplies)
+            async downloadScoreForPayments(supplies)
             {
                 this.$openNotifyToDocCreate();
                 let url = API_URL + '/score-for-payments/check-document-of-many/';
@@ -189,7 +197,7 @@
                     'supplies': suppliesOfOptions
                 };
 
-                this.$axios.post(url, options)
+                await this.$axios.post(url, options)
                 .then((response) => {
                     if (response.data) {
                         this.$openNotifyToDocCreated(response.data.data);
@@ -210,7 +218,7 @@
                     }
                 });
             },
-            manyActionsExecute()
+            async manyActionsExecute()
             {
                 let supplies = [];
                 this.supplies.forEach(function (supply) {
@@ -219,16 +227,17 @@
                     }
                 });
 
+                let response;
                 switch (this.selectManyAction) {
                     case 1:
-                        return this.downloadScoreForPayments(supplies);
-                    default:
-                        return;
+                        response = await this.downloadScoreForPayments(supplies);
+                        break;
                 }
+
+                return response;
             },
             selectedAllItems()
             {
-                console.log(this.isAllSelected);
                 this.supplies.forEach(function (supply) {
                     supply.isSelected = this.isAllSelected;
                 }, this);
