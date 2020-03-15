@@ -63,6 +63,7 @@
                         <td>{{ item.execute_date }}</td>
                         <td>
                             <vs-avatar
+                                    @click="downloadTorg12(item.id)"
                                     color="success"
                                     text="ТОРГ 1 2"
                                     size="small"
@@ -78,7 +79,7 @@
                             />
 
                             <vs-avatar
-                                    @click="supplyServices.downloadTorg12(item.id)"
+                                    @click="downloadOneTForm(item.id)"
                                     color="primary"
                                     text="ТТ Т Н"
                                     size="small"
@@ -197,6 +198,30 @@
                 supplyServices.downloadScores(suppliesOfOptions)
                     .then(response => {
                         this.$openNotifyToDocCreated(response.data.data);
+                    });
+            },
+            downloadTorg12(supplyId)
+            {
+                this.$openNotifyToDocCreate();
+                supplyServices.downloadTorg12(supplyId)
+                    .then((response) => {
+                        if (response.data) {
+                            this.$openNotifyToDocCreated(response.data.data);
+                        } else {
+                            this.resultSave = response.data.message;
+                        }
+                    });
+            },
+            downloadOneTForm(supplyId)
+            {
+                this.$openNotifyToDocCreate();
+                supplyServices.downloadOneTForm(supplyId)
+                    .then((response) => {
+                        if (response.data) {
+                            this.$openNotifyToDocCreated(response.data.data);
+                        } else {
+                            this.resultSave = response.data.message;
+                        }
                     });
             },
             async manyActionsExecute()

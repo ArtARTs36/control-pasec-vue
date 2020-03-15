@@ -13,3 +13,7 @@ export const downloadScores = async function (suppliesIds) {
 
     return http.post(url, options);
 };
+
+export const downloadOneTForm = async function (supplyId) {
+    return http.get(API_URL + '/supplies/' + supplyId +'/oneTForm');
+};
