@@ -1,24 +1,19 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex)
-/* eslint-disable */
+import Vue from 'vue';
+import Vuex from 'vuex';
+import state from './state';
+import mutations from './mutations';
+import actions from './actions';
+import modules from './modules';
+import plugins from './plugins';
+import * as getters from './getters';
+
+Vue.use(Vuex);
+
 export default new Vuex.Store({
-  state: {
-    
-  	isSidebarActive: false,
-  	themeColor: "#2962ff"
-  },
-  mutations: {
-  	//This is for Sidbar trigger in mobile
-  	IS_SIDEBAR_ACTIVE(state, value) {
-        state.isSidebarActive = value;
-    },
-    
-  },  
-  actions: {
-  	
-  },
-  getters:{
-  	
-  }
-})
+    state,
+    mutations,
+    actions,
+    modules,
+    getters,
+    plugins,
+});

@@ -4,8 +4,8 @@
     <vs-sidebar default-index="1" :parent="parent" :hiddenBackground="doNotClose" color="primary" class="sidebarx" spacer v-model="isSidebarActive" :click-not-close="doNotClose" >
         <div class="header-sidebar text-center" slot="header">
             <vs-avatar size="70px" src="https://randomuser.me/api/portraits/men/85.jpg"/>
-            <h4>Name Family<br/>
-              <small>data</small>
+            <h4>{{ `${currentUser.name} ${currentUser.family}` }}<br/>
+              <small>{{ `${currentUser.position}` }}</small>
             </h4>
         </div>
 
@@ -46,7 +46,9 @@
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex';
+// eslint-disable-next-line no-unused-vars
+import {currentUser} from "../../../app/auth/vuex/getters";
 export default {
   name: "SideBar",
   props: {
@@ -67,7 +69,12 @@ export default {
     windowWidth: window.innerWidth,
   }),
   computed: {
-      //This is for mobile trigger
+      ...mapGetters([
+          'currentUser',
+          'isLogged',
+          'appSettings'
+      ]),
+
       isSidebarActive: {
         get() {
           return this.$store.state.isSidebarActive
@@ -76,9 +83,6 @@ export default {
           this.$store.commit('IS_SIDEBAR_ACTIVE', val)
         }
       }
-   },
-   watch: {
-
    },
    methods : {
       handleWindowResize(event) {

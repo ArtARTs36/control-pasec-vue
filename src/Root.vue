@@ -8,14 +8,14 @@
 
 
 export default {
-  name: 'app',
+  name: 'RouteApp',
   components: {
   },
   data:()=>({
   }),
   methods: {
-    
+
   }
-  
+
 }
 </script>

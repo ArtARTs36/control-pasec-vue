@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuesax from 'vuesax'
 import Axios from 'axios';
-
-import App from './App.vue'
+import RootApp from './Root.vue'
 
 import 'vuesax/dist/vuesax.css';
 import 'material-icons/iconfont/material-icons.css';
@@ -19,14 +18,14 @@ Vue.prototype.$axios = Axios;
 Vue.use(Vuesax);
 
 // Vue Router
-import router from './router'
+import index from './router/index'
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
 new Vue({
   store,
-  router,
-  render: h => h(App),
+  router: index,
+  render: h => h(RootApp),
 }).$mount('#app');
 
 import '@/assets/scss/style.scss'

@@ -496,7 +496,7 @@
         <p class="card-subtitle">
           You can send a string or object to directive
           <code>to</code>. This directive wrap a
-          <code>$router.push()</code> vue method, you can use all programmatic navigation on vue router.
+          <code>$index.push()</code> vue method, you can use all programmatic navigation on vue index.
         </p>
         <div class="btn-alignment">
           <vs-button color="primary" type="filled" to="/buttons">String literal</vs-button>
