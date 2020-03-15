@@ -23,7 +23,8 @@ export const attemptLogin = ({ dispatch }, payload) => {
 export const logout = ({ dispatch }) => {
   services.revokeToken();
   // call actions
-  return Promise.all([dispatch('setToken', null), dispatch('setUser', {})]);
+  return Promise.all([dispatch('setToken', null), dispatch('setUser', {})])
+      .then(() => {window.location.reload()});
 };
 
 export const loginAs = ({ dispatch }, id) =>

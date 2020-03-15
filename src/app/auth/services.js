@@ -15,5 +15,5 @@ export const loadUserData = () => http.get('/api/me')
   .then(getData);
 
 // revoke current token
-export const revokeToken = () => http.post('/auth/token/revoke')
+export const revokeToken = () => http.post('/api/auth/token/revoke')
   .then(getData);

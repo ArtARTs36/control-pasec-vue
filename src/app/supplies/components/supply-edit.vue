@@ -53,16 +53,36 @@
                 </div>
 
                 <br/>
-
-                <div class="default-input d-flex align-items-center">
-                    <vs-input label-placeholder="Планируемая дата" v-model="supply.planned_date" style="width:100%" />
-                </div>
-
                 <br/>
 
-                <div class="default-input d-flex align-items-center">
-                    <vs-input label-placeholder="Фактическая дата" v-model="supply.execute_date" style="width:100%" />
-                </div>
+                <datepicker v-model="supply.planned_date"
+                    format="yyyy-MM-d"
+                    inputClass="vs-inputx vs-input--input normal hasValue"
+                    style="width:100%;"
+                    :language="datePickerLang"
+                    >
+                    <span class="input-span-placeholder vs-input--placeholder normal normal vs-placeholder-label"
+                          slot="afterDateInput"
+                    >
+                        Планируемая дата
+                    </span>
+                </datepicker>
+
+                <br/>
+                <br/>
+
+                <datepicker v-model="supply.execute_date"
+                            format="yyyy-MM-d"
+                            inputClass="vs-inputx vs-input--input normal hasValue"
+                            style="width:100%;"
+                            :language="datePickerLang"
+                >
+                    <span class="input-span-placeholder vs-input--placeholder normal normal vs-placeholder-label"
+                          slot="afterDateInput"
+                    >
+                        Фактическая дата
+                    </span>
+                </datepicker>
 
                 <br/>
 
@@ -168,10 +188,13 @@
 </template>
 
 <script>
+    import {ru as datePickerLang} from 'vuejs-datepicker/dist/locale'
+    import Datepicker from 'vuejs-datepicker';
     import ModalResult from "../../../components/based/ModalResult";
     export default {
         components: {
-            ModalResult
+            ModalResult,
+            Datepicker
         },
         data() {
             let blankSupply = {
@@ -197,7 +220,8 @@
                 idProductInCreatedForm: 0,
                 contragents: null,
                 contracts: null,
-                quantityUnits: null
+                quantityUnits: null,
+                datePickerLang
             }
         },
 
