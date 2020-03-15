@@ -107,6 +107,7 @@
                     color="#f91f43"
                     :total="totalPages"
                     v-model="currentPage"
+                    prev-icon="arrow_back" next-icon="arrow_forward"
                     @change="loadSupplies"
             ></vs-pagination>
         </vs-card>

@@ -53,6 +53,7 @@
                         :total="totalPages"
                         v-model="currentPage"
                         @change="loadBanks"
+                        prev-icon="arrow_back" next-icon="arrow_forward"
                 ></vs-pagination>
             </div>
 

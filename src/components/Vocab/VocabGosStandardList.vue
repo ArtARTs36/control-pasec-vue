@@ -55,6 +55,7 @@
                         :total="totalPages"
                         v-model="currentPage"
                         @change="loadGosStandards"
+                        prev-icon="arrow_back" next-icon="arrow_forward"
                 ></vs-pagination>
             </div>
 
@@ -80,7 +81,7 @@
             gosStandards: [],
             error: null,
             totalCount: null,
-            totalPages: null,
+            totalPages: 0,
             maxCountEntriesForOnePage: 10,
             isLoadEntries: false,
             currentOffset: 0,

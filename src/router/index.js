@@ -157,123 +157,147 @@ const routes = [
             path: '/contragents',
             name: 'ContragentList',
             index: 30,
-            component: () => import('../components/Contragent/ContragentList.vue')
+            component: () => import('../components/Contragent/ContragentList.vue'),
+            meta: { requiresAuth: true },
         },
         {
             path: '/contragents/:id/edit',
             name: 'ContragentEdit',
             index: 30,
-            component: () => import('../components/Contragent/ContragentEdit.vue')
+            component: () => import('../components/Contragent/ContragentEdit.vue'),
+            meta: { requiresAuth: true },
         },
         {
             path: '/contragents/find-in-external-system',
             name: 'ContragentFindInExternalSystem',
-            component: ContragentFindInExternalSystem
+            component: ContragentFindInExternalSystem,
+            meta: { requiresAuth: true },
         },
         {
             path: '/products',
             name: 'ProductList',
-            component: ProductList
+            component: ProductList,
+            meta: { requiresAuth: true },
         },
         {
             path: '/products/create',
             name: 'ProductCreate',
-            component: ProductEdit
+            component: ProductEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/products/:id/edit',
             name: 'ProductEdit',
-            component: ProductEdit
+            component: ProductEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/contracts',
             name: 'ContractList',
-            component: ContractList
+            component: ContractList,
+            meta: { requiresAuth: true },
         },
         {
             path: '/contracts/:id/edit',
             name: 'ContractEdit',
-            component: ContractEdit
+            component: ContractEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/contracts/create',
             name: 'ContractCreate',
-            component: ContractEdit
+            component: ContractEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/scores-for-payments',
             name: 'ScoresForPaymentsList',
-            component: ScoreForPaymentList
+            component: ScoreForPaymentList,
+            meta: { requiresAuth: true },
         },
         {
             path: '/scores-for-payments/:id/edit',
             name: 'ScoreForPaymentEdit',
-            component: ScoreForPaymentEdit
+            component: ScoreForPaymentEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/scores-for-payments/create',
             name: 'ScoreForPaymentCreate',
-            component: ScoreForPaymentCreate
+            component: ScoreForPaymentCreate,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/gos-standards',
             name: 'VocabGosStandardList',
-            component: VocabGosStandardList
+            component: VocabGosStandardList,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/gos-standards/:id/edit',
             name: 'VocabGosStandardEdit',
-            component: VocabGosStandardEdit
+            component: VocabGosStandardEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/gos-standards/create',
             name: 'VocabGosStandardCreate',
-            component: VocabGosStandardEdit
+            component: VocabGosStandardEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/banks',
             name: 'VocabBankList',
-            component: VocabBankList
+            component: VocabBankList,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/banks/:id/edit',
             name: 'VocabBankEdit',
-            component: VocabBankEdit
+            component: VocabBankEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/banks/create',
             name: 'VocabBankCreate',
-            component: VocabBankEdit
+            component: VocabBankEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/quantities',
             name: 'VocabQuantityList',
-            component: VocabQuantityList
+            component: VocabQuantityList,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/quantities/:id/edit',
             name: 'VocabQuantityEdit',
-            component: VocabQuantityEdit
+            component: VocabQuantityEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/quantities/create',
             name: 'VocabQuantityCreate',
-            component: VocabQuantityEdit
+            component: VocabQuantityEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/currencies',
             name: 'VocabCurrencyList',
-            component: VocabCurrencyList
+            component: VocabCurrencyList,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/currencies/:id/edit',
             name: 'VocabCurrencyEdit',
-            component: VocabCurrencyEdit
+            component: VocabCurrencyEdit,
+            meta: { requiresAuth: true },
         },
         {
             path: '/vocab/currencies/create',
             name: 'VocabCurrencyCreate',
-            component: VocabCurrencyEdit
+            component: VocabCurrencyEdit,
+            meta: { requiresAuth: true },
         },
     ]
 },
