@@ -78,7 +78,7 @@
                             />
 
                             <vs-avatar
-                                    @click="downloadTorg12(item.id)"
+                                    @click="supplyServices.downloadTorg12(item.id)"
                                     color="primary"
                                     text="ТТ Т Н"
                                     size="small"
@@ -114,8 +114,9 @@
 </template>
 
 <script>
+    import * as supplyServices from '../services';
     export default {
-        name: "SupplyList",
+        name: "Supplies",
         data: () => ({
             supplies: [],
             error: null,
@@ -186,37 +187,16 @@
             async downloadScoreForPayments(supplies)
             {
                 this.$openNotifyToDocCreate();
-                let url = API_URL + '/score-for-payments/check-document-of-many/';
                 let suppliesOfOptions = [];
 
                 supplies.forEach(function (supply) {
                     suppliesOfOptions.push(supply.id);
                 });
 
-                let options = {
-                    'supplies': suppliesOfOptions
-                };
-
-                await this.$axios.post(url, options)
-                .then((response) => {
-                    if (response.data) {
+                supplyServices.downloadScores(suppliesOfOptions)
+                    .then(response => {
                         this.$openNotifyToDocCreated(response.data.data);
-                    } else {
-                        this.resultSave = response.data.message;
-                    }
-                });
-            },
-            downloadTorg12(supplyId)
-            {
-                this.$openNotifyToDocCreate();
-                this.$axios.get(API_URL + '/supplies/' + supplyId +'/torg12')
-                .then((response) => {
-                    if (response.data) {
-                        this.$openNotifyToDocCreated(response.data.data);
-                    } else {
-                        this.resultSave = response.data.message;
-                    }
-                });
+                    });
             },
             async manyActionsExecute()
             {

@@ -168,7 +168,7 @@
 </template>
 
 <script>
-    import ModalResult from "../based/ModalResult";
+    import ModalResult from "../../../components/based/ModalResult";
     export default {
         components: {
             ModalResult

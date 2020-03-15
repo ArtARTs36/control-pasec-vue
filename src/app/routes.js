@@ -1,5 +1,5 @@
-import { routes as auth } from './auth';
+import { routes as supplies } from './supplies';
 
 export default [
-  ...auth,
+  ...supplies,
 ];

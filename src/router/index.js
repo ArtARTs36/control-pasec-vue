@@ -3,8 +3,6 @@ import Router from 'vue-router'
 import ContragentFindInExternalSystem from "../components/Contragent/ContragentFindInExternalSystem";
 import ProductList from "../components/Product/ProductList";
 import ProductEdit from "../components/Product/ProductEdit";
-import SupplyList from "../components/Supply/SupplyList";
-import SupplyEdit from "../components/Supply/SupplyEdit";
 import ContractList from "../components/Contract/ContractList";
 import ContractEdit from "../components/Contract/ContractEdit";
 import ScoreForPaymentList from "../components/Product/ScoreForPaymentList";
@@ -21,16 +19,18 @@ import VocabCurrencyEdit from "../components/Vocab/VocabCurrencyEdit";
 import beforeEach from './beforeEach';
 
 import { routes as appRoutes } from '../app';
+import { routes as authRoutes } from '../app/auth';
 
 Vue.use(Router);
 
 const routes = [
-    ...appRoutes,
+    ...authRoutes,
 {
     path: '',
     component: () => import('../layout/full/MainContainer.vue'),
 
     children: [
+        ...appRoutes,
         {
             path: '/',
             name: 'Home',
@@ -184,21 +184,6 @@ const routes = [
             path: '/products/:id/edit',
             name: 'ProductEdit',
             component: ProductEdit
-        },
-        {
-            path: '/supplies',
-            name: 'SupplyList',
-            component: SupplyList
-        },
-        {
-            path: '/supplies/create',
-            name: 'SupplyCreate',
-            component: SupplyEdit
-        },
-        {
-            path: '/supplies/:id/edit',
-            name: 'SupplyEdit',
-            component: SupplyEdit
         },
         {
             path: '/contracts',
