@@ -1,5 +1,5 @@
 <template>
-    <vs-row>
+    <vs-row v-if="stat !== null">
         <vs-col vs-lg="3" vs-xs="12">
             <vs-card>
                 <h4 class="mb-1">{{ stat.contragentsCount }}</h4>

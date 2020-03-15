@@ -9,20 +9,20 @@
             </h4>
         </div>
 
-        <template v-for="(sidebarLink, index) in sidebarLinks" >
+        <template v-for="(sidebarLink, groupIndex) in sidebarLinks" >
             <vs-sidebar-group
                     v-if="sidebarLink.children"
                     :icon="sidebarLink.icon"
                     :to="sidebarLink.url"
-                    :key="`sidebarLink-${index}`"
+                    :key="`sidebarLinkGroup-${groupIndex}`"
                     :index="index"
                     :title="sidebarLink.name">
 
-                    <template v-for="children in sidebarLink.children">
+                    <template v-for="(children, index) in sidebarLink.children">
                         <vs-sidebar-item
                                 :icon="children.icon"
                                 :to="children.url"
-                                :key="`sidebarLink-${index}`"
+                                :key="`sidebarLinkInterGroup-${groupIndex}-${index}`"
                                 :index="index">
                             <span class="hide-in-minisidebar">{{ children.name }}</span>
                         </vs-sidebar-item>

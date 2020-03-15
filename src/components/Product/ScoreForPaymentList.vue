@@ -177,7 +177,6 @@
                 this.$axios.post(url, options)
                     .then((response) => {
                         if (response.data) {
-                            console.log(response);
                             window.open(response.data.data.download_url);
                         } else {
                             this.resultSave = response.data.message;

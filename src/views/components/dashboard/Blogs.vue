@@ -37,7 +37,7 @@
                     @closeModal="closeModalResult"
             />
         </vs-col>
-    </vs-row>    
+    </vs-row>
 </template>
 
 <script>
@@ -63,8 +63,6 @@ export default {
             this.$axios.get(API_EXTERNAL_NEWS_INDEX + 'chart')
                 .then(response => {
                     this.news = response.data.data;
-
-                    console.log(this.news);
                 })
         },
         openPost(post) {
