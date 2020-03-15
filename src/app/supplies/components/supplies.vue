@@ -80,6 +80,9 @@
                                         <vs-dropdown-item @click="downloadOneTForm(item.id)">
                                             1-Т
                                         </vs-dropdown-item>
+                                        <vs-dropdown-item @click="downloadQualityCertificate(item.id)">
+                                            Удостоверение качества
+                                        </vs-dropdown-item>
                                     </vs-dropdown-menu>
                                 </vs-dropdown>
                             </div>
@@ -202,6 +205,18 @@
             {
                 this.$openNotifyToDocCreate();
                 supplyServices.downloadTorg12(supplyId)
+                    .then((response) => {
+                        if (response.data) {
+                            this.$openNotifyToDocCreated(response.data.data);
+                        } else {
+                            this.resultSave = response.data.message;
+                        }
+                    });
+            },
+            downloadQualityCertificate(supplyId)
+            {
+                this.$openNotifyToDocCreate();
+                supplyServices.downloadQualityCertificate(supplyId)
                     .then((response) => {
                         if (response.data) {
                             this.$openNotifyToDocCreated(response.data.data);

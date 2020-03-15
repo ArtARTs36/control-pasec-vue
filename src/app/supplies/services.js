@@ -17,3 +17,7 @@ export const downloadScores = async function (suppliesIds) {
 export const downloadOneTForm = async function (supplyId) {
     return http.get(API_URL + '/supplies/' + supplyId +'/oneTForm');
 };
+
+export const downloadQualityCertificate = async function (supplyId) {
+    return http.get(API_URL + '/supplies/' + supplyId +'/qualityCertificate');
+};
