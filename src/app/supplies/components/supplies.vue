@@ -62,29 +62,27 @@
                         <td>{{ item.planned_date }}</td>
                         <td>{{ item.execute_date }}</td>
                         <td>
-                            <vs-avatar
-                                    @click="downloadTorg12(item.id)"
-                                    color="success"
-                                    text="ТОРГ 1 2"
-                                    size="small"
-                                    title="Скачать документ ТОРГ 12"
-                            />
-
-                            <vs-avatar
-                                    @click="downloadScoreForPayment(item.id)"
-                                    color="black"
-                                    text="Счет на оплату"
-                                    size="small"
-                                    title="Скачать счет на оплату"
-                            />
-
-                            <vs-avatar
-                                    @click="downloadOneTForm(item.id)"
-                                    color="primary"
-                                    text="ТТ Т Н"
-                                    size="small"
-                                    title="Скачать ТТН"
-                            />
+                            <div class="d-flex align-items-center dropdownbtn-alignment">
+                                <vs-button class="btnx" type="filled" size="small">
+                                    <i class="material-icons" style="font-size:8.5pt">
+                                        view_list
+                                    </i>
+                                </vs-button>
+                                <vs-dropdown>
+                                    <vs-button class="btn-drop" type="filled" icon="expand_more" size="small"></vs-button>
+                                    <vs-dropdown-menu>
+                                        <vs-dropdown-item @click="downloadTorg12(item.id)">
+                                            ТОРГ 12
+                                        </vs-dropdown-item>
+                                        <vs-dropdown-item @click="downloadScoreForPayment(item.id)">
+                                            Счет на оплату
+                                        </vs-dropdown-item>
+                                        <vs-dropdown-item @click="downloadOneTForm(item.id)">
+                                            1-Т
+                                        </vs-dropdown-item>
+                                    </vs-dropdown-menu>
+                                </vs-dropdown>
+                            </div>
                         </td>
                         <td>
                             <a href="#" style="color:red" @click="removeSupply(item.id)" title="Удалить товар">
