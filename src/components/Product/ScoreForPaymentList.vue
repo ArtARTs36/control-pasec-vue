@@ -83,6 +83,14 @@
                     </tbody>
                 </table>
             </div>
+
+            <vs-pagination
+                    color="#f91f43"
+                    :total="totalPages"
+                    v-model="currentPage"
+                    prev-icon="arrow_back" next-icon="arrow_forward"
+                    @change="loadScores"
+            ></vs-pagination>
         </vs-card>
     </vs-row>
 </template>
@@ -101,6 +109,7 @@
             isOpenModalResult: false,
             resultAction: '',
             selectManyAction: 0,
+            totalPages: null,
             manyActions: [
                 {
                     key: 1,
@@ -130,13 +139,14 @@
                     page = this.currentPage;
                 }
 
-                const URL = API_URL + '/score-for-payments';
+                const URL = API_URL + '/score-for-payments/page-' + page;
 
                 this.$axios.get(URL)
                     .then(response => {
                         this.supplies = response.data.data;
                         this.totalCount = response.data.total;
                         this.isLoadEntries = true;
+                        this.totalPages = response.data.last_page;
 
                         this.currentPage = page;
                     });
