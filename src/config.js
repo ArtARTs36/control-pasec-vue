@@ -1,4 +1,5 @@
 export const apiUrl = process.env.VUE_APP_ROOT_API;
+export const apiPath = process.env.VUE_APP_ROOT_API_PATH;
 export const appUrl = process.env.VUE_APP_URL_AUTH;
 export const appTestVar = process.env.VUE_APP_TEST;
 export const imagePath = process.env.VUE_APP_URL_IMAGE;

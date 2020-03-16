@@ -29,8 +29,9 @@ new Vue({
 }).$mount('#app');
 
 import '@/assets/scss/style.scss'
+import {apiPath} from "./config";
 
-window.API_URL = 'http://localhost:8000/api';
+window.API_URL = apiPath;
 window.API_VOCAB_URL = API_URL + '/vocab';
 window.API_VOCAB_GOS_STANDARDS_INDEX = API_VOCAB_URL + '-gos-standards/';
 window.API_VOCAB_BANKS_INDEX = API_VOCAB_URL + '-banks/';
