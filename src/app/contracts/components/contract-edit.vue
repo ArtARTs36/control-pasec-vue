@@ -47,26 +47,46 @@
                 </div>
 
                 <br/>
+                <br/>
 
-                <div class="default-input d-flex align-items-center">
-                    <vs-input label-placeholder="Планируемая дата" v-model="contract.planned_date" style="width:100%" />
-                </div>
+                <datepicker v-model="contract.planned_date"
+                            format="yyyy-MM-d"
+                            inputClass="vs-inputx vs-input--input normal hasValue"
+                            style="width:100%;"
+                            :language="datePickerLang"
+                >
+                    <span class="input-span-placeholder vs-input--placeholder normal normal vs-placeholder-label"
+                          slot="afterDateInput"
+                    >
+                        Планируемая дата
+                    </span>
+                </datepicker>
+
+                <br/>
+                <br/>
+
+                <datepicker v-model="contract.executed_date"
+                            format="yyyy-MM-d"
+                            inputClass="vs-inputx vs-input--input normal hasValue"
+                            style="width:100%;"
+                            :language="datePickerLang"
+                >
+                    <span class="input-span-placeholder vs-input--placeholder normal normal vs-placeholder-label"
+                          slot="afterDateInput"
+                    >
+                        Фактическая дата
+                    </span>
+                </datepicker>
 
                 <br/>
 
-                <div class="default-input d-flex align-items-center">
-                    <vs-input label-placeholder="Фактическая дата" v-model="contract.executed_date" style="width:100%" />
-                </div>
-
-                <br/>
-
-                <div v-if="contract.supplies.length > 0">
+                <div v-if="contract.supplies.length">
                     <vs-list>
                         <vs-list-header title="Поставки по договору" color="success"></vs-list-header>
                         <vs-list-item
                                 :title="renderSupplyTitle(item)"
                                 :subtitle="renderSupplySubTitle(item)"
-                                v-for="(item, key) in contract.supplies"
+                                v-for="item in contract.supplies"
                         >
                             <vs-chip color="warning">
                                 <router-link :to="{ name: 'SupplyEdit', params: { id: item.id }}">
@@ -99,18 +119,18 @@
 </template>
 
 <script>
-    import ModalResult from "../based/ModalResult";
+    import { http } from '@/plugins/http';
+    import {ru as datePickerLang} from 'vuejs-datepicker/dist/locale'
+    import Datepicker from 'vuejs-datepicker';
+    import ModalResult from "../../../components/based/ModalResult";
     export default {
         components: {
-            ModalResult
+            ModalResult,
+            Datepicker,
         },
         data() {
             const blankContract = {
-                id: 0,
-                firstName: null,
-                patronymic: null,
-                family: null,
-                phone: null,
+                id: null,
                 template_id: 0,
                 supplies: [],
                 executed_date: null
@@ -126,43 +146,46 @@
                 contract: blankContract,
                 typeAction: (this.$route.params.id > 0) ? 'put' : 'post',
                 contragents: null,
-                templates: null
+                templates: null,
+                datePickerLang,
             }
+        },
+
+        created() {
+            if (this.contractId > 0) {
+                this.loadContract();
+            } {
+                document.title = 'Добавить договор';
+            }
+
+            this.loadContragents();
+            this.loadTemplates();
         },
 
         methods: {
             save() {
                 this.resultSave = null;
 
-                let request;
-                if (this.typeAction === 'put') {
-                    request = this.$axios.put(API_URL + '/contracts/' + this.contractId, this.contract);
-                } else {
-                    request = this.$axios.post(API_URL + '/contracts/', this.contract);
-                }
+                let request = (this.typeAction === 'put') ?
+                    http.put(API_URL + '/contracts/' + this.contractId, this.contract) :
+                    http.post(API_URL + '/contracts/', this.contract);
 
                 request.then((response) => {
-                    if (response.data.success) {
-                        this.resultSave = 'Данные успешно сохранены!';
-                    } else {
-                        this.resultSave = response.data.message;
-                    }
-                })
-                    .catch((error) => {
+                    this.resultSave = (response.data.success) ? 'Данные успешно сохранены!' : response.data.message;
+                }).catch((error) => {
                         this.resultSave = error;
-                    })
-                    .finally(() => (this.isOpenModalResult = true));
+                }).finally(() => (this.isOpenModalResult = true));
             },
             loadContract() {
-                this.$axios.get(API_URL + '/contracts/' + this.contractId)
+                http.get(API_URL + '/contracts/' + this.contractId)
                     .then(response => this.contract = response.data)
                     .finally(() => (document.title = 'Договор #' + this.contract.id));
             },
             loadContragents() {
-                this.$axios.get(API_URL + '/contragents').then(response => this.contragents = response.data.data);
+                http.get(API_URL + '/contragents').then(response => this.contragents = response.data.data);
             },
             loadTemplates() {
-                this.$axios.get(API_URL + '/contract-templates').then(response => this.templates = response.data);
+                http.get(API_URL + '/contract-templates').then(response => this.templates = response.data);
             },
             checkForm(e) {
                 e.preventDefault();
@@ -193,15 +216,5 @@
                 return 'Выполнена ' + supply.execute_date + '. Заказчик: ' + supply.customer.title;
             }
         },
-        created() {
-            if (this.contractId > 0) {
-                this.loadContract();
-            } {
-                document.title = 'Добавить договор';
-            }
-
-            this.loadContragents();
-            this.loadTemplates();
-        }
     }
 </script>

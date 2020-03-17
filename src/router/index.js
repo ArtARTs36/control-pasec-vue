@@ -3,8 +3,6 @@ import Router from 'vue-router'
 import ContragentFindInExternalSystem from "../components/Contragent/ContragentFindInExternalSystem";
 import ProductList from "../components/Product/ProductList";
 import ProductEdit from "../components/Product/ProductEdit";
-import ContractList from "../components/Contract/ContractList";
-import ContractEdit from "../components/Contract/ContractEdit";
 import ScoreForPaymentList from "../components/Product/ScoreForPaymentList";
 import ScoreForPaymentEdit from "../components/Product/ScoreForPaymentEdit";
 import ScoreForPaymentCreate from "../components/Product/ScoreForPaymentCreate";
@@ -189,24 +187,6 @@ const routes = [
             path: '/products/:id/edit',
             name: 'ProductEdit',
             component: ProductEdit,
-            meta: { requiresAuth: true },
-        },
-        {
-            path: '/contracts',
-            name: 'ContractList',
-            component: ContractList,
-            meta: { requiresAuth: true },
-        },
-        {
-            path: '/contracts/:id/edit',
-            name: 'ContractEdit',
-            component: ContractEdit,
-            meta: { requiresAuth: true },
-        },
-        {
-            path: '/contracts/create',
-            name: 'ContractCreate',
-            component: ContractEdit,
             meta: { requiresAuth: true },
         },
         {

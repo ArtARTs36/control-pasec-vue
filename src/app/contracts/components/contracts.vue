@@ -42,17 +42,24 @@
                     </tr>
                     </tbody>
                 </table>
-        </div>
+            </div>
+
+            <vs-pagination
+                    color="#f91f43"
+                    :total="totalPages"
+                    v-model="currentPage"
+                    prev-icon="arrow_back" next-icon="arrow_forward"
+                    @change="loadContracts"
+            ></vs-pagination>
         </vs-card>
     </vs-row>
 </template>
 
 <script>
+    import { http } from '@/plugins/http';
     export default {
-        name: "textarea",
+        name: "ContractList",
         data: () => ({
-            title: "Textarea",
-
             contracts: [],
             error: null,
             totalCount: null,
@@ -61,9 +68,9 @@
             currentOffset: 0,
             currentPage: 1,
             isOpenModalResult: false,
-            resultAction: ''
+            resultAction: '',
+            totalPages: null
         }),
-
 
         created() {
             this.loadContracts(1);
@@ -77,14 +84,12 @@
                     page = this.currentPage;
                 }
 
-                const URL = API_URL + '/contracts';
-
-                this.$axios.get(URL)
+                http.get(window.API_URL + '/contracts/page-' + page)
                     .then(response => {
                         this.contracts = response.data.data;
                         this.totalCount = response.data.total;
                         this.isLoadEntries = true;
-
+                        this.totalPages = response.data.last_page;
                         this.currentPage = page;
                     })
                     .catch(e => {

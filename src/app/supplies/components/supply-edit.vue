@@ -231,9 +231,9 @@
 
                 let request;
                 if (this.typeAction === 'put') {
-                    request = this.$axios.put(API_URL + '/supplies/' + this.supplyId, this.supply);
+                    request = this.$axios.put(window.API_URL + '/supplies/' + this.supplyId, this.supply);
                 } else {
-                    request = this.$axios.post(API_URL + '/supplies/', this.supply);
+                    request = this.$axios.post(window.API_URL + '/supplies/', this.supply);
                 }
 
                 request.then((response) => {
@@ -247,7 +247,7 @@
                 }).finally(() => (this.isOpenModalResult = true));
             },
             loadSupply() {
-                this.$axios.get(API_URL + '/supplies/' + this.supplyId)
+                this.$axios.get(window.API_URL + '/supplies/' + this.supplyId)
                     .then(response => {
                         this.supply = response.data.data;
 
@@ -258,7 +258,7 @@
                     }).finally(() => (document.title = 'Поставка №' + this.supply.id));
             },
             loadProducts() {
-                this.$axios.get(API_URL + '/products/')
+                this.$axios.get(window.API_URL + '/products/')
                     .then(response => {
                         this.products = response.data.data;
 
@@ -272,19 +272,19 @@
                         if (this.supply.products === null) {
                             this.supply.products = [];
                             this.supply.products.push(
-                                duplicate(this.products[0])
+                                window.duplicate(this.products[0])
                             );
                         }
                     })
             },
             loadQuantityUnits() {
-                this.$axios.get(API_VOCAB_QUANTITIES_INDEX)
+                this.$axios.get(window.API_VOCAB_QUANTITIES_INDEX)
                     .then(response => {
                         this.quantityUnits = response.data.data;
                     });
             },
             loadContragents() {
-                this.$axios.get(API_URL + '/contragents')
+                this.$axios.get(window.API_URL + '/contragents')
                     .then(response => {
                         this.contragents = response.data.data;
                     });
@@ -294,7 +294,7 @@
                     return false;
                 }
 
-                this.$axios.get(API_URL + '/contracts/find-by-customer/' + this.supply.customer_id)
+                this.$axios.get(window.API_URL + '/contracts/find-by-customer/' + this.supply.customer_id)
                     .then(response => {
                         this.contracts = response.data.data;
                     });
@@ -322,7 +322,7 @@
             },
             addProductInSupply() {
                 this.supply.products.push(
-                    duplicate(this.products[this.idProductInCreatedForm])
+                    window.duplicate(this.products[this.idProductInCreatedForm])
                 );
             },
             closeModalResult() {
