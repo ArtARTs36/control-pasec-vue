@@ -116,4 +116,16 @@
 			},
 		]
 	},
+	{
+		url: "",
+		name: "Настройки",
+		icon: 'shopping_cart',
+		children: [
+			{
+				url: "/settings/variable-definitions",
+				name: "Определения переменных",
+				icon: 'flag'
+			},
+		]
+	},
 ]

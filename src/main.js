@@ -32,6 +32,7 @@ import '@/assets/scss/style.scss'
 import {apiPath} from "./config";
 
 window.API_URL = apiPath;
+window.API_VARIABLE_DEFINITION_INDEX = API_URL + '/variable-definitions/';
 window.API_VOCAB_URL = API_URL + '/vocab';
 window.API_VOCAB_GOS_STANDARDS_INDEX = API_VOCAB_URL + '-gos-standards/';
 window.API_VOCAB_BANKS_INDEX = API_VOCAB_URL + '-banks/';
