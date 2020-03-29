@@ -40,7 +40,7 @@ export const loginAs = ({ dispatch }, id) =>
 // eslint-disable-next-line no-unused-vars
 export const setUser = ({ dispatch, commit }, user) => {
   commit(TYPES.SET_USER, user);
-  // dispatch('setUserRoles', user.roles);
+  dispatch('setUserRoles', user.roles);
   Promise.resolve(user); // keep promise chain
 };
 

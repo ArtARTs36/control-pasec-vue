@@ -90,6 +90,23 @@
 		]
 	},
 	{
+		url: "/users",
+		name: "Пользователи",
+		icon: 'face',
+		children: [
+			{
+				url: "/users",
+				name: "Список",
+				icon: 'view_agenda'
+			},
+			{
+				url: "/users/create",
+				name: "Создать",
+				icon: 'note_add'
+			}
+		]
+	},
+	{
 		url: "",
 		name: "Справочники",
 		icon: 'shopping_cart',

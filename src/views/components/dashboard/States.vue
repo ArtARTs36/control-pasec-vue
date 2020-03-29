@@ -29,7 +29,7 @@
                 <h4 class="mb-1">{{ stat.usersCount }}</h4>
                 <span>
                     {{ stat.usersCount | decOfNum([
-                        'Пользователь', 'Пользоввателя', 'Пользователей'
+                        'Пользователь', 'Пользователя', 'Пользователей'
                     ]) }}
                 </span>
                 <vs-divider icon="face" position="center" color="danger"></vs-divider>
