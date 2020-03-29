@@ -99,6 +99,10 @@ Authorize
             <button class="login100-form-btn">
               Войти
             </button>
+
+              <router-link :to="{'name': 'RegistrationForm'}">
+                  Зарегистрироваться
+              </router-link>
           </div>
         </form>
       </div>

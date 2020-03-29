@@ -8,6 +8,12 @@ export default [
     meta: { requiresAuth: false },
   },
   {
+    name: 'RegistrationForm',
+    path: '/signup',
+    component: () => import(/* webpackPrefetch: true */ './components/registration'),
+    meta: { requiresAuth: false },
+  },
+  {
     path: '/authenticate', // dirty hack remove after old portal is dead
     beforeEnter: (to, from, next) => {
       const { token } = to.query;
