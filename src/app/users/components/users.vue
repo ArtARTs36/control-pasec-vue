@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(item, index) in contracts">
+                    <tr v-for="(item, index) in users">
                         <td>{{ item.id }}</td>
                         <td>{{ item.family }}</td>
                         <td>{{ item.name }}</td>
@@ -45,6 +45,11 @@
                                     lock
                                 </i>
                             </a>
+                            <router-link :to="{ name: 'UserEdit', params: { id: item.id }}">
+                                <i class="material-icons" title="Редактировать">
+                                    edit
+                                </i>
+                            </router-link>
                         </td>
                     </tr>
                     </tbody>
@@ -56,7 +61,7 @@
                     :total="totalPages"
                     v-model="currentPage"
                     prev-icon="arrow_back" next-icon="arrow_forward"
-                    @change="loadContracts"
+                    @change="loadUsers"
             ></vs-pagination>
         </vs-card>
     </vs-row>
@@ -67,7 +72,7 @@
     export default {
         name: "UsersList",
         data: () => ({
-            contracts: [],
+            users: [],
             error: null,
             totalCount: null,
             maxCountEntriesForOnePage: 10,
@@ -80,20 +85,20 @@
         }),
 
         created() {
-            this.loadContracts(1);
+            this.loadUsers(1);
 
             document.title = 'Список пользователей';
         },
 
         methods: {
-            loadContracts(page) {
+            loadUsers(page) {
                 if (page === undefined) {
                     page = this.currentPage;
                 }
 
                 http.get(window.API_URL + '/users/page-' + page)
                     .then(response => {
-                        this.contracts = response.data.data;
+                        this.users = response.data.data;
                         this.totalCount = response.data.total;
                         this.isLoadEntries = true;
                         this.totalPages = response.data.last_page;
@@ -131,7 +136,7 @@
             {
                 let find = null;
 
-                this.contracts.forEach(function (user) {
+                this.users.forEach(function (user) {
                     if (user.id === id) {
                         find = user;
                     }
