@@ -88,13 +88,17 @@
                             </div>
                         </td>
                         <td>
-                            <a href="#" style="color:red" @click="removeSupply(item.id)" title="Удалить товар">
+                            <a href="#" style="color:red" @click="removeSupply(item.id)" title="Удалить товар"
+                                v-if="isGrantedSuppliesDelete"
+                            >
                                 <i class="material-icons">
                                     delete_forever
                                 </i>
                             </a>
 
-                            <router-link :to="{ name: 'SupplyEdit', params: { id: item.id }}">
+                            <router-link :to="{ name: 'SupplyEdit', params: { id: item.id }}"
+                                v-if="isGrantedSuppliesEdit"
+                            >
                                 <i class="material-icons" title="Редактировать">
                                     edit
                                 </i>
@@ -117,6 +121,7 @@
 </template>
 
 <script>
+    import { mapState, mapGetters } from 'vuex';
     import * as supplyServices from '../services';
     export default {
         name: "Supplies",
@@ -147,13 +152,33 @@
             document.title = 'Список поставок';
         },
 
+        computed: {
+            ...mapState(['admin', 'overlay', 'fetching']),
+            ...mapGetters([
+                'currentUser',
+                'currentUserPermissions',
+                'currentUserRoles',
+            ]),
+            isAdmin() {
+                return this.currentUserRoles.includes(window.ROLE_ADMIN);
+            },
+            isGrantedSuppliesEdit() {
+                return this.isAdmin ||
+                    this.currentUserPermissions.includes(window.PERMISSION_SUPPLIES_EDIT);
+            },
+            isGrantedSuppliesDelete() {
+                return this.isAdmin ||
+                    this.currentUserPermissions.includes(window.PERMISSION_SUPPLIES_DELETE);
+            },
+        },
+
         methods: {
             loadSupplies(page) {
                 if (page === undefined) {
                     page = this.currentPage;
                 }
 
-                const URL = API_SUPPLY_INDEX + 'page-' + page;
+                const URL = window.API_SUPPLY_INDEX + 'page-' + page;
 
                 this.$axios.get(URL)
                     .then(response => {

@@ -11,8 +11,12 @@ export default {
     state.user = value;
   },
   [TYPES.SET_USER_ROLES](state, values) {
-    const roles = values.map(value => value.role);
+    const roles = values.map(value => value.name);
     state.roles = roles;
+  },
+  [TYPES.SET_USER_PERMISSIONS](state, values) {
+    const permissions = values.map(value => value.name);
+    state.permissions = permissions;
   },
   [TYPES.SET_SETTINGS](state, settings) {
     const data = {};

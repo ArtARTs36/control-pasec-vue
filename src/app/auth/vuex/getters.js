@@ -10,3 +10,4 @@ export const getToken = ({ token }) => token;
 // get settings
 export const appSettings = ({ settings }) => settings;
 export const currentUserRoles = ({ roles }) => roles;
+export const currentUserPermissions = ({ permissions }) => permissions;

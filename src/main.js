@@ -44,6 +44,10 @@ window.API_STAT_INDEX = API_URL + '/stat';
 window.API_STAT_GENERAL = API_URL + '/stat/general';
 window.API_SUPPLY_INDEX = API_URL + '/supplies/';
 
+window.PERMISSION_SUPPLIES_EDIT = 'supplies_edit';
+window.PERMISSION_SUPPLIES_DELETE = 'supplies_delete';
+window.ROLE_ADMIN = 'admin';
+
 Vue.prototype.$openModalResult = function (text) {
   this['isOpenModalResult'] = true;
   this['resultAction'] = text;

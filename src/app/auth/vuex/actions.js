@@ -41,12 +41,18 @@ export const loginAs = ({ dispatch }, id) =>
 export const setUser = ({ dispatch, commit }, user) => {
   commit(TYPES.SET_USER, user);
   dispatch('setUserRoles', user.roles ? user.roles : []);
+  dispatch('setUserPermissions', user.permissions ? user.permissions : []);
   Promise.resolve(user); // keep promise chain
 };
 
 export const setUserRoles = ({ commit }, roles) => {
   commit(TYPES.SET_USER_ROLES, roles);
   Promise.resolve(roles);
+};
+
+export const setUserPermissions = ({ commit }, permissions) => {
+  commit(TYPES.SET_USER_PERMISSIONS, permissions);
+  Promise.resolve(permissions);
 };
 
 export const setSettings = ({ commit }, settings) => {
