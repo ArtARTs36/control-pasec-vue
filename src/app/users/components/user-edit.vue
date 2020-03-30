@@ -37,8 +37,16 @@
 
                 <br/>
 
-                <div class="default-input d-flex align-items-c">
+                <div class="default-input d-flex align-items-c" v-if="!userId">
                     <vs-input label-placeholder="Пароль" v-model="user.password" style="width:100%" />
+                </div>
+
+                <br/>
+
+                <div class="default-input d-flex align-items-c">
+                    <vs-checkbox class="justify-content-start" v-model="user.is_active">
+                        Активность профиля
+                    </vs-checkbox>
                 </div>
 
                 <br/>
