@@ -20,7 +20,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="item in workers">
+                <tr v-for="item in contragents">
                     <td>{{ item.id }}</td>
                     <td :title="item.full_title">{{ item.title }}</td>
                     <td>
@@ -48,7 +48,7 @@
                         <span v-else>не указан</span>
                     </td>
                     <td>
-                        <a href="#" style="color:red" @click="removeWorker(item.id)" title="Удалить контрагента">
+                        <a href="#" style="color:red" @click="removeContragent(item.id)" title="Удалить контрагента">
                             <i class="material-icons">
                                 delete_forever
                             </i>
@@ -64,6 +64,15 @@
                 </tbody>
             </table>
         </div>
+
+        <vs-pagination
+                color="#f91f43"
+                :total="totalPages"
+                v-model="currentPage"
+                prev-icon="arrow_back" next-icon="arrow_forward"
+                @change="loadContragents"
+        ></vs-pagination>
+
         </vs-card>
     </vs-row>
 </template>
@@ -83,7 +92,7 @@
             widthtextarea: false,
             heighttextarea: false,
 
-            workers: [],
+            contragents: [],
             error: null,
             totalCount: null,
             maxCountEntriesForOnePage: 10,
@@ -91,29 +100,32 @@
             currentOffset: 0,
             currentPage: 1,
             isOpenModalResult: false,
-            resultAction: ''
+            resultAction: '',
+            totalPages: null,
         }),
 
 
         created() {
-            this.loadWorkers(1);
+            this.loadContragents(1);
 
             document.title = 'Список контрагентов';
         },
 
         methods: {
-            loadWorkers(page) {
+            loadContragents(page) {
                 if (page === undefined) {
                     page = this.currentPage;
                 }
 
-                const URL = API_URL + '/contragents';
+                const URL = API_URL + '/contragents/page-' + page;
 
                 this.$axios.get(URL)
                     .then(response => {
-                        this.workers = response.data.data;
+                        this.contragents = response.data.data;
                         this.totalCount = response.data.total;
                         this.isLoadEntries = true;
+
+                        this.totalPages = response.data.last_page;
 
                         this.currentPage = page;
                     })
@@ -121,14 +133,14 @@
                         this.error=e;
                     });
             },
-            refreshWorkers(page) {
-                this.loadWorkers(page);
+            refreshContragents(page) {
+                this.loadContragents(page);
             },
-            removeWorker(id) {
+            removeContragent(id) {
                 this.$axios.delete(API_URL + '/contragents/' + id)
                     .then(response => {
                         this.openModalResult('Контрагент удален!');
-                        this.refreshWorkers();
+                        this.refreshContragents();
                     })
                     .catch(e => {
                         this.error=e;

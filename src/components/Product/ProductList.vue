@@ -18,14 +18,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="item in workers">
+                    <tr v-for="item in products">
                         <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.name_for_document}}</td>
                         <td>{{ item.size }} {{ item.size_of_unit.short_name}}</td>
                         <td>{{ item.gos_standard.name}}</td>
                         <td>
-                            <a href="#" style="color:red" @click="removeWorker(item.id)" title="Удалить товар">
+                            <a href="#" style="color:red" @click="removeProduct(item.id)" title="Удалить товар">
                                 <i class="material-icons">
                                     delete_forever
                                 </i>
@@ -41,6 +41,14 @@
                     </tbody>
                 </table>
             </div>
+
+            <vs-pagination
+                    color="#f91f43"
+                    :total="totalPages"
+                    v-model="currentPage"
+                    prev-icon="arrow_back" next-icon="arrow_forward"
+                    @change="loadProducts"
+            ></vs-pagination>
         </vs-card>
     </vs-row>
 </template>
@@ -49,7 +57,7 @@
     export default {
         name: "ProductList",
         data: () => ({
-            workers: [],
+            products: [],
             error: null,
             totalCount: null,
             maxCountEntriesForOnePage: 10,
@@ -57,44 +65,46 @@
             currentOffset: 0,
             currentPage: 1,
             isOpenModalResult: false,
-            resultAction: ''
+            resultAction: '',
+            totalPages: null,
         }),
 
 
         created() {
-            this.loadWorkers(1);
+            this.loadProducts(1);
 
             document.title = 'Список товаров';
         },
 
         methods: {
-            loadWorkers(page) {
+            loadProducts(page) {
                 if (page === undefined) {
                     page = this.currentPage;
                 }
 
-                const URL = API_URL + '/products';
+                const URL = API_URL + '/products/page-' + page;
 
                 this.$axios.get(URL)
                     .then(response => {
-                        this.workers = response.data.data;
+                        this.products = response.data.data;
                         this.totalCount = response.data.total;
                         this.isLoadEntries = true;
 
                         this.currentPage = page;
+                        this.totalPages = response.data.last_page;
                     })
                     .catch(e => {
                         this.error=e;
                     });
             },
-            refreshWorkers(page) {
-                this.loadWorkers(page);
+            refreshProducts(page) {
+                this.loadProducts(page);
             },
-            removeWorker(id) {
-                this.$axios.delete(API_URL + '/contragents/' + id)
+            removeProduct(id) {
+                this.$axios.delete(API_URL + '/products/' + id)
                     .then(response => {
                         this.openModalResult('Контрагент удален!');
-                        this.refreshWorkers();
+                        this.refreshProducts();
                     })
                     .catch(e => {
                         this.error=e;
