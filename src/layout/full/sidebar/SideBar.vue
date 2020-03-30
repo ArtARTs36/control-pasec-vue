@@ -11,27 +11,33 @@
 
         <template v-for="(sidebarLink, groupIndex) in sidebarLinks" >
             <vs-sidebar-group
-                    v-if="sidebarLink.children"
+                    v-if="checkGrant(sidebarLink.permission) && sidebarLink.children"
                     :icon="sidebarLink.icon"
                     :to="sidebarLink.url"
                     :key="`sidebarLinkGroup-${groupIndex}`"
                     :index="index"
-                    :title="sidebarLink.name">
+                    :title="sidebarLink.name"
+            >
 
                     <template v-for="(children, index) in sidebarLink.children">
                         <vs-sidebar-item
                                 :icon="children.icon"
                                 :to="children.url"
                                 :key="`sidebarLinkInterGroup-${groupIndex}-${index}`"
-                                :index="index">
+                                :index="index"
+                                v-if="checkGrant(children.permission)"
+                        >
                             <span class="hide-in-minisidebar">{{ children.name }}</span>
                         </vs-sidebar-item>
                     </template>
             </vs-sidebar-group>
 
-            <vs-sidebar-item v-else :icon="sidebarLink.icon" :to="sidebarLink.url"
-                             :key="`sidebarLink-${index}`" :index="index">
-                <span class="hide-in-minisidebar">{{ sidebarLink.name }}</span>
+            <vs-sidebar-item v-else-if="checkGrant(sidebarLink.permission)" :icon="sidebarLink.icon" :to="sidebarLink.url"
+                             :key="`sidebarLink-${index}`" :index="index"
+            >
+                <span class="hide-in-minisidebar">
+                    {{ sidebarLink.name }}
+                </span>
             </vs-sidebar-item>
         </template>
 
@@ -72,8 +78,15 @@ export default {
       ...mapGetters([
           'currentUser',
           'isLogged',
-          'appSettings'
+          'appSettings',
+          'currentUser',
+          'currentUserPermissions',
+          'currentUserRoles',
       ]),
+
+      isAdmin() {
+          return this.currentUserRoles.includes(window.ROLE_ADMIN);
+      },
 
       isSidebarActive: {
         get() {
@@ -85,6 +98,9 @@ export default {
       }
    },
    methods : {
+      checkGrant(permission) {
+          return permission === undefined || this.currentUserPermissions.includes(permission);
+      },
       handleWindowResize(event) {
             this.windowWidth = event.currentTarget.innerWidth;
             this.setSidebar();

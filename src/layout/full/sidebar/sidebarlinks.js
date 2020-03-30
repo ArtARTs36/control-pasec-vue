@@ -2,7 +2,7 @@
 	{
 		url: "/",
 		name: "Домашняя страница",
-		icon: "home"
+		icon: "home",
 	},
 	{
 		url: "/scores-for-payments",
@@ -12,7 +12,7 @@
 			{
 				url: "/scores-for-payments",
 				name: "Список счетов",
-				icon: 'all_inbox'
+				icon: 'all_inbox',
 			},
 			{
 				url: "/scores-for-payments/create",
@@ -63,12 +63,14 @@
 			{
 				url: "/supplies",
 				name: "Список",
-				icon: 'shopping_cart'
+				icon: 'shopping_cart',
+				permission: window.PERMISSION_SUPPLIES_VIEW,
 			},
 			{
 				url: "/supplies/create",
 				name: "Создать",
-				icon: 'note_add'
+				icon: 'note_add',
+				permission: window.PERMISSION_SUPPLIES_CREATE,
 			}
 		]
 	},
