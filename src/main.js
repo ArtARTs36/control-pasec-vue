@@ -50,6 +50,9 @@ window.PERMISSION_SUPPLIES_CREATE = 'supplies_create';
 window.PERMISSION_SUPPLIES_DELETE = 'supplies_delete';
 window.ROLE_ADMIN = 'admin';
 
+window.USER_GENDER_MALE = 1;
+window.USER_GENDER_FEMALE = 2;
+
 Vue.prototype.$openModalResult = function (text) {
   this['isOpenModalResult'] = true;
   this['resultAction'] = text;

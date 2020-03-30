@@ -19,7 +19,19 @@
                 family: '',
                 password: '',
                 role_id: '',
+                gender: window.USER_GENDER_MALE,
             };
+
+            let genders = [
+                {
+                    value: window.USER_GENDER_MALE,
+                    text: 'Мужской',
+                },
+                {
+                    value: window.USER_GENDER_FEMALE,
+                    text: 'Женский',
+                },
+            ];
 
             return {
                 version,
@@ -29,6 +41,7 @@
                 roles: [],
                 user: blankUser,
                 resultAction: '',
+                genders,
             };
         },
         computed: {
@@ -136,6 +149,21 @@
                           </i>
                         </span>
                     </div>
+
+                    <vs-select
+                            v-model="user.gender"
+                            style="width:100%"
+                            autocomplete
+                    >
+                        <vs-select-item v-for="(unit, index) in genders"
+                                        :value="unit.value"
+                                        :text="unit.text"
+                                        :key="index"
+                        >
+                        </vs-select-item>
+                    </vs-select>
+
+                    <br/>
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                         <input class="input100" type="text" v-model="user.email" placeholder="Адрес электронной почты">

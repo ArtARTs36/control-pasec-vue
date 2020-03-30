@@ -3,9 +3,9 @@
    <div id="parentx">
     <vs-sidebar default-index="1" :parent="parent" :hiddenBackground="doNotClose" color="primary" class="sidebarx" spacer v-model="isSidebarActive" :click-not-close="doNotClose" >
         <div class="header-sidebar text-center" slot="header">
-            <vs-avatar size="70px" src="https://randomuser.me/api/portraits/men/85.jpg"/>
+            <vs-avatar size="70px" :src="currentUser.avatar_url"/>
             <h4>{{ `${currentUser.name} ${currentUser.family}` }}<br/>
-              <small>{{ `${currentUser.position}` }}</small>
+              <small v-if="currentUser.position">{{ `${currentUser.position}` }}</small>
             </h4>
         </div>
 
