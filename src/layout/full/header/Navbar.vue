@@ -22,18 +22,7 @@
 
       <vs-spacer></vs-spacer>
 
-      <!---
-      Craete new dd
-      -->
-      <vs-dropdown  vs-trigger-click left class="cursor-pointer pr-2 pl-2 ml-1 mr-1">
-         <a class="text-white-dark" href="#"><vs-icon icon="notifications"></vs-icon></a>
-        <vs-dropdown-menu class="topbar-dd">
-          <vs-dropdown-item>Action</vs-dropdown-item>
-          <vs-dropdown-item>Another Action</vs-dropdown-item>
-          <vs-dropdown-item>Something</vs-dropdown-item>
-          <vs-dropdown-item>Here</vs-dropdown-item>
-        </vs-dropdown-menu>
-      </vs-dropdown>
+      <user-notification></user-notification>
       <!---
       Craete new dd
       -->
@@ -78,9 +67,11 @@
 import store from '../../../store/store';
 import { logout } from '@/app/auth/vuex/actions';
 import {mapGetters} from "vuex";
+import UserNotification from "./UserNotification";
 export default {
 	name : 'Navbar',
-  props: {
+    components: {UserNotification},
+    props: {
       topbarColor: {
           type: String,
           default: "#2962ff",
@@ -110,7 +101,7 @@ export default {
 
       logoutUser() {
             store.dispatch('logout');
-      }
+      },
   }
 }
 </script>

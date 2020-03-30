@@ -72,6 +72,8 @@ window.ROLE_ADMIN = 'admin';
 window.USER_GENDER_MALE = 1;
 window.USER_GENDER_FEMALE = 2;
 
+window.USER_NOTIFICATION_TYPE_USER_REGISTERED = 'user_registered';
+
 Vue.prototype.$openModalResult = function (text) {
   this['isOpenModalResult'] = true;
   this['resultAction'] = text;
