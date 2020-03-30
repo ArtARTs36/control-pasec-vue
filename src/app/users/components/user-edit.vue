@@ -1,8 +1,9 @@
 <template>
     <vs-row vs-justify="center">
-        <vs-card v-if="user">
+        <vs-card>
             <div slot="header">
-                <h4>Пользователь №{{ user.id }}</h4>
+                <h4 v-if="user.id">Пользователь №{{ user.id }}</h4>
+                <h4 v-else>Создать пользователя</h4>
             </div>
 
             <form>
@@ -26,6 +27,18 @@
 
                 <div class="default-input d-flex align-items-c">
                     <vs-input label-placeholder="Главная роль" v-model="user.position" style="width:100%" />
+                </div>
+
+                <br/>
+
+                <div class="default-input d-flex align-items-c">
+                    <vs-input label-placeholder="Email" v-model="user.email" style="width:100%" />
+                </div>
+
+                <br/>
+
+                <div class="default-input d-flex align-items-c">
+                    <vs-input label-placeholder="Пароль" v-model="user.password" style="width:100%" />
                 </div>
 
                 <br/>
@@ -81,10 +94,6 @@
             ModalResult,
         },
         data() {
-            const blankUser = {
-                id: null,
-            };
-
             return {
                 error: null,
                 isOpenModalResult: false,
@@ -92,7 +101,7 @@
                 formErrors: [],
                 linkList: '/users',
                 userId: this.$route.params.id,
-                user: blankUser,
+                user: {},
                 typeAction: (this.$route.params.id > 0) ? 'put' : 'post',
             }
         },
@@ -100,6 +109,8 @@
         created() {
             if (this.userId > 0) {
                 this.loadUser();
+            } else {
+                window.document.title = 'Создать пользователя';
             }
         },
 
