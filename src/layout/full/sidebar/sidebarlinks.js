@@ -25,6 +25,7 @@
 		url: "/contragents",
 		name: "Контрагенты",
 		icon: 'face',
+		permission: window.CONTRAGENTS_LIST_VIEW,
 		children: [
 			{
 				url: "/contragents",
@@ -34,7 +35,8 @@
 			{
 				url: "/contragents/find-in-external-system",
 				name: "Найти контрагента",
-				icon: 'search'
+				icon: 'search',
+				permission: window.CONTRAGENTS_FIND_EXTERNAL_SYSTEM,
 			}
 		]
 	},
@@ -95,6 +97,7 @@
 		url: "/users",
 		name: "Пользователи",
 		icon: 'face',
+		permission: window.PERMISSION_USERS_LIST_VIEW,
 		children: [
 			{
 				url: "/users",
@@ -104,7 +107,20 @@
 			{
 				url: "/users/create",
 				name: "Создать",
-				icon: 'note_add'
+				icon: 'note_add',
+				permission: window.PERMISSION_USER_CREATE,
+			},
+			{
+				url: "/roles/",
+				name: "Справочник ролей",
+				icon: 'perm_identity',
+				permission: window.PERMISSION_ROLE_LIST_VIEW,
+			},
+			{
+				url: "/permissions/",
+				name: "Справочник прав",
+				icon: 'perm_identity',
+				permission: window.PERMISSION_PERMISSIONS_LIST_VIEW,
 			}
 		]
 	},
@@ -112,16 +128,19 @@
 		url: "",
 		name: "Справочники",
 		icon: 'shopping_cart',
+		permission: window.VOCABS_VIEW,
 		children: [
 			{
 				url: "/vocab/gos-standards",
 				name: "ГОСТ",
-				icon: 'view_agenda'
+				icon: 'view_agenda',
+				permission: window.VOCAB_GOS_STANDARD_LIST_VIEW,
 			},
 			{
 				url: "/vocab/banks",
 				name: "Банки",
-				icon: 'attach_money'
+				icon: 'attach_money',
+				permission: window.VOCAB_BANKS_LIST_VIEW,
 			},
 			{
 				url: "/vocab/quantities",
@@ -139,11 +158,13 @@
 		url: "",
 		name: "Настройки",
 		icon: 'shopping_cart',
+		permission: window.SETTINGS_VIEW,
 		children: [
 			{
 				url: "/settings/variable-definitions",
 				name: "Определения переменных",
-				icon: 'flag'
+				icon: 'flag',
+				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
 			},
 		]
 	},

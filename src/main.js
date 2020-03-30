@@ -48,6 +48,25 @@ window.PERMISSION_SUPPLIES_EDIT = 'supplies_edit';
 window.PERMISSION_SUPPLIES_VIEW = 'supplies_view';
 window.PERMISSION_SUPPLIES_CREATE = 'supplies_create';
 window.PERMISSION_SUPPLIES_DELETE = 'supplies_delete';
+
+window.PERMISSION_USERS_LIST_VIEW = 'users_list_view';
+window.PERMISSION_USER_CREATE = 'users_create';
+
+window.PERMISSION_ROLE_LIST_VIEW = 'role_list_view';
+
+window.PERMISSION_PERMISSIONS_LIST_VIEW = 'permissions_list_view';
+
+window.CONTRAGENTS_LIST_VIEW = 'contragents_list_view';
+window.CONTRAGENTS_FIND_EXTERNAL_SYSTEM = 'contragents_find_external_system';
+window.VARIABLE_DEFINITIONS_LIST_VIEW = 'variable_definitions_list_view';
+window.SETTINGS_VIEW = 'settings_view';
+
+window.VOCABS_VIEW = 'vocabs_view';
+
+window.VOCAB_GOS_STANDARD_LIST_VIEW = 'vocab_gos_standard_list_view';
+
+window.VOCAB_BANKS_LIST_VIEW = 'vocab_banks_list_view';
+
 window.ROLE_ADMIN = 'admin';
 
 window.USER_GENDER_MALE = 1;

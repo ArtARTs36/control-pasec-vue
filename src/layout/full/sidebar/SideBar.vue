@@ -79,7 +79,6 @@ export default {
           'currentUser',
           'isLogged',
           'appSettings',
-          'currentUser',
           'currentUserPermissions',
           'currentUserRoles',
       ]),

@@ -50,7 +50,7 @@
       Craete new dd
       -->
       <vs-dropdown  vs-trigger-click left class="cursor-pointer pr-2 pl-2 ml-1 mr-md-3">
-         <a class="text-white-dark user-image" href="#"><img src="@/assets/images/users/3.jpg" alt="User"/></a>
+         <a class="text-white-dark user-image" href="#"><img :src="currentUser.avatar_url" alt="User"/></a>
         <vs-dropdown-menu class="topbar-dd">
             <vs-dropdown-item><vs-icon icon="person_outline" class="mr-1"></vs-icon> My Profile</vs-dropdown-item>
             <vs-dropdown-item><vs-icon icon="sentiment_very_satisfied" class="mr-1"></vs-icon> My Balance</vs-dropdown-item>
@@ -77,6 +77,7 @@
 <script>
 import store from '../../../store/store';
 import { logout } from '@/app/auth/vuex/actions';
+import {mapGetters} from "vuex";
 export default {
 	name : 'Navbar',
   props: {
@@ -96,7 +97,11 @@ export default {
     showToggle: false
 
   }),
-
+    computed: {
+        ...mapGetters([
+            'currentUser',
+        ]),
+    },
   methods: {
       //This is for sidebar trigger in mobile
       activeSidebar() {

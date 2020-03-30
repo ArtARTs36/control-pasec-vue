@@ -17,4 +17,16 @@ export default [
     component: () => import('./components/user-edit'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/roles/',
+    name: 'RolesList',
+    component: () => import('./components/roles'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/permissions/',
+    name: 'PermissionsList',
+    component: () => import('./components/permissions'),
+    meta: { requiresAuth: true },
+  },
 ];
