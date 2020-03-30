@@ -74,6 +74,11 @@ window.USER_GENDER_FEMALE = 2;
 
 window.USER_NOTIFICATION_TYPE_USER_REGISTERED = 'user_registered';
 
+window.DOCUMENT_TYPE_SCORE_FOR_PAYMENT_ID = 1;
+window.DOCUMENT_TYPE_TORG_12_ID = 3;
+window.DOCUMENT_TYPE_ONE_T_FORM_ID = 6;
+window.DOCUMENT_TYPE_QUALITY_CERTIFICATE_ID = 4;
+
 Vue.prototype.$openModalResult = function (text) {
   this['isOpenModalResult'] = true;
   this['resultAction'] = text;
@@ -89,6 +94,19 @@ Vue.filter('cutText', function (text, symbolsCount) {
       ? text.slice(0, symbolsCount - 3) + '...'
       : text;
 });
+
+Vue.prototype.$genDocument = function(supplyId, typeId) {
+  this.$openNotifyToDocCreate();
+
+  this.$axios.get(API_URL + '/generate-document/' + supplyId + '/' + typeId)
+      .then((response) => {
+        if (response.data) {
+          this.$openNotifyToDocCreated(response.data.data);
+        } else {
+          this.resultSave = response.data.message;
+        }
+      });
+};
 
 Vue.prototype.$openNotifyToDocCreate = function () {
   this.$vs.notify({

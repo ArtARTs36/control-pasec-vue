@@ -209,8 +209,7 @@
             },
             downloadScoreForPayment(supplyId)
             {
-                this.$openNotifyToDocCreate();
-                window.open(API_URL + '/score-for-payments/download-by-supply/' + supplyId);
+                this.$genDocument(supplyId, window.DOCUMENT_TYPE_SCORE_FOR_PAYMENT_ID);
             },
             async downloadScoreForPayments(supplies)
             {
@@ -228,39 +227,15 @@
             },
             downloadTorg12(supplyId)
             {
-                this.$openNotifyToDocCreate();
-                supplyServices.downloadTorg12(supplyId)
-                    .then((response) => {
-                        if (response.data) {
-                            this.$openNotifyToDocCreated(response.data.data);
-                        } else {
-                            this.resultSave = response.data.message;
-                        }
-                    });
+                this.$genDocument(supplyId, window.DOCUMENT_TYPE_TORG_12_ID);
             },
             downloadQualityCertificate(supplyId)
             {
-                this.$openNotifyToDocCreate();
-                supplyServices.downloadQualityCertificate(supplyId)
-                    .then((response) => {
-                        if (response.data) {
-                            this.$openNotifyToDocCreated(response.data.data);
-                        } else {
-                            this.resultSave = response.data.message;
-                        }
-                    });
+                this.$genDocument(supplyId, window.DOCUMENT_TYPE_QUALITY_CERTIFICATE_ID);
             },
             downloadOneTForm(supplyId)
             {
-                this.$openNotifyToDocCreate();
-                supplyServices.downloadOneTForm(supplyId)
-                    .then((response) => {
-                        if (response.data) {
-                            this.$openNotifyToDocCreated(response.data.data);
-                        } else {
-                            this.resultSave = response.data.message;
-                        }
-                    });
+                this.$genDocument(supplyId, window.DOCUMENT_TYPE_ONE_T_FORM_ID);
             },
             async manyActionsExecute()
             {
