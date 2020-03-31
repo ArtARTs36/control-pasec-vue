@@ -13,8 +13,6 @@
         <div class="con-exemple-prompt">
             Введите имя/фамилию/отчество/должность
             <vs-input v-model="query" style="width: 100%"
-                      @keydown="searchProfiles"
-                      @keyup="searchProfiles"
                       @keypress="searchProfiles"
             >
 
@@ -72,8 +70,9 @@
         data: () => ({
             indexActive: 0,
             showToggle: false,
-            query: '',
+            lastQuery: '',
             profiles: [],
+            query: '',
         }),
 
         props: [
@@ -87,9 +86,11 @@
             },
             searchProfiles(e) {
                 let query = e.target.value;
-                if (!query) {
+                if (!query || query === '' || this.lastQuery === query) {
                     return;
                 }
+
+                this.lastQuery = query;
 
                 let url = API_URL + '/profiles/search/' + query + '';
 
