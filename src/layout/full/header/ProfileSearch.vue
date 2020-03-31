@@ -33,13 +33,23 @@
                         </div>
                         <div class="list-titles">
                             <div class="vs-list--title">
-                                {{ profile.family }}
-                                {{ profile.name }}
-                                {{ profile.patronymic }}
+                                <high-light v-bind:query="query" v-bind:given="profile.family">
+
+                                </high-light>
+
+                                <high-light v-bind:query="query" v-bind:given="profile.name">
+
+                                </high-light>
+
+                                <high-light v-bind:query="query" v-bind:given="profile.patronymic">
+
+                                </high-light>
                             </div>
 
                             <div class="vs-list--subtitle">
-                                {{ profile.position }}
+                                <high-light v-bind:query="query" v-bind:given="profile.position">
+
+                                </high-light>
                             </div>
                         </div>
                         <div class="vs-list--slot"></div></div>
@@ -53,8 +63,12 @@
 </template>
 
 <script>
+    import HighLight from '@/layout/full/HighLight.vue';
     export default {
         name: 'UserMessages',
+        components: {
+            HighLight,
+        },
         data: () => ({
             indexActive: 0,
             showToggle: false,
