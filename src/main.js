@@ -68,6 +68,16 @@ window.VOCAB_GOS_STANDARD_LIST_VIEW = 'vocab_gos_standard_list_view';
 
 window.VOCAB_BANKS_LIST_VIEW = 'vocab_banks_list_view';
 
+window.VOCAB_PACKAGE_TYPES_LIST_VIEW = 'vocab_package_types_list_view';
+
+window.VOCAB_QUANTITY_UNITS_LIST_VIEW = 'vocab_package_quantity_units_list_view';
+
+window.VOCAB_CURRENCIES_LIST_VIEW = 'vocab_currencies_list_view';
+
+window.VOCAB_WORDS_LIST_VIEW = 'vocab_words_list_view';
+
+window.VOCAB_SIZE_OF_UNIT_LIST_VIEW = 'vocab_size_of_unit_list_view';
+
 window.ROLE_ADMIN = 'admin';
 
 window.USER_GENDER_MALE = 1;
@@ -79,6 +89,30 @@ window.DOCUMENT_TYPE_SCORE_FOR_PAYMENT_ID = 1;
 window.DOCUMENT_TYPE_TORG_12_ID = 3;
 window.DOCUMENT_TYPE_ONE_T_FORM_ID = 6;
 window.DOCUMENT_TYPE_QUALITY_CERTIFICATE_ID = 4;
+
+window.CONTRACTS_LIST_VIEW = 'contracts_list_view';
+window.CONTRACTS_VIEW = 'contracts_view';
+window.CONTRACTS_CREATE = 'contracts_create';
+window.CONTRACTS_EDIT = 'contracts_edit';
+window.CONTRACTS_DELETE = 'contracts_delete';
+
+window.PRODUCTS_LIST_VIEW = 'products_list_view';
+window.PRODUCTS_VIEW = 'products_view';
+window.PRODUCTS_CREATE = 'products_create';
+window.PRODUCTS_EDIT = 'products_edit';
+window.PRODUCTS_DELETE = 'products_delete';
+
+window.EXTERNAL_NEWS_LIST_VIEW = 'external_news_list_view';
+window.EXTERNAL_NEWS_VIEW = 'external_news_view';
+window.EXTERNAL_NEWS_CREATE = 'external_news_create';
+window.EXTERNAL_NEWS_EDIT = 'external_news_edit';
+window.EXTERNAL_NEWS_DELETE = 'external_news_delete';
+
+window.SCORE_FOR_PAYMENTS_LIST_VIEW = 'score_for_payments_list_view';
+window.SCORE_FOR_PAYMENTS_VIEW = 'score_for_payments_view';
+window.SCORE_FOR_PAYMENTS_CREATE = 'score_for_payments_create';
+window.SCORE_FOR_PAYMENTS_EDIT = 'score_for_payments_edit';
+window.SCORE_FOR_PAYMENTS_DELETE = 'score_for_payments_delete';
 
 Vue.prototype.$openModalResult = function (text) {
   this['isOpenModalResult'] = true;

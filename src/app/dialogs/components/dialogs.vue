@@ -7,7 +7,7 @@
 
             <div class="table-responsive">
                 <vs-list>
-                    <div v-for="item in contracts" @click="openDialog(item.id)">
+                    <div v-for="item in contracts" class="cursor-pointer" @click="openDialog(item.id)">
                         <vs-list-item
                                 :title="item.inter_user.full_name"
                                 :subtitle="item.last_message.text|cutText(120)"

@@ -8,6 +8,7 @@
 		url: "/scores-for-payments",
 		name: "Счета",
 		icon: 'all_inbox',
+		permission: window.SCORE_FOR_PAYMENTS_LIST_VIEW,
 		children: [
 			{
 				url: "/scores-for-payments",
@@ -17,7 +18,8 @@
 			{
 				url: "/scores-for-payments/create",
 				name: "Выставить счет",
-				icon: 'search'
+				icon: 'search',
+				permission: window.SCORE_FOR_PAYMENTS_CREATE,
 			}
 		]
 	},
@@ -44,6 +46,7 @@
 		url: "/products",
 		name: "Товары",
 		icon: 'shopping_cart',
+		permission: window.PRODUCTS_LIST_VIEW,
 		children: [
 			{
 				url: "/products",
@@ -53,7 +56,8 @@
 			{
 				url: "/products/create",
 				name: "Создать",
-				icon: 'note_add'
+				icon: 'note_add',
+				permission: window.PRODUCTS_CREATE,
 			}
 		]
 	},
@@ -80,6 +84,7 @@
 		url: "/contracts",
 		name: "Договоры",
 		icon: 'shopping_cart',
+		permission: window.CONTRACTS_LIST_VIEW,
 		children: [
 			{
 				url: "/contracts",
@@ -89,7 +94,8 @@
 			{
 				url: "/contracts/create",
 				name: "Создать",
-				icon: 'note_add'
+				icon: 'note_add',
+				permission: window.CONTRACTS_CREATE,
 			}
 		]
 	},
@@ -145,12 +151,14 @@
 			{
 				url: "/vocab/quantities",
 				name: "Ед измерения количества",
-				icon: 'format_list_numbered'
+				icon: 'format_list_numbered',
+				permission: window.VOCAB_QUANTITY_UNITS_LIST_VIEW,
 			},
 			{
 				url: "/vocab/currencies",
 				name: "Курсы валют",
-				icon: 'monetization_on'
+				icon: 'monetization_on',
+				permission: window.VOCAB_CURRENCIES_LIST_VIEW,
 			},
 		]
 	},

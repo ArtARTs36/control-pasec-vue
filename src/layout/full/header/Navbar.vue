@@ -33,11 +33,9 @@
         <vs-dropdown-menu class="topbar-dd">
             <vs-dropdown-item><vs-icon icon="person_outline" class="mr-1"></vs-icon> Мой профиль</vs-dropdown-item>
 
-            <router-link :to="{ name: 'DialogsList' }">
-                <vs-dropdown-item>
-                    <vs-icon icon="mail_outline" class="mr-1"></vs-icon>
-                    Диалоги
-                </vs-dropdown-item>
+            <router-link :to="{ name: 'DialogsList' }" tag="vs-dropdown-item">
+                <vs-icon icon="mail_outline" class="mr-1"></vs-icon>
+                Диалоги
             </router-link>
 
             <hr class="mb-1" />
