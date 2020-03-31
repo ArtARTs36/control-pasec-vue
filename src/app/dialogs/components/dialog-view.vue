@@ -9,11 +9,9 @@
                 <form>
                     <vs-textarea label="Набирайте сообщение..." v-model="newMessage.text" />
 
-                    <div @click="sendMessage">
-                    <vs-button color="success" type="filled">
+                    <vs-button color="success" type="filled" @click="sendMessage">
                         Отправить
                     </vs-button>
-                    </div>
                 </form>
             </div>
 
