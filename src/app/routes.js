@@ -3,6 +3,7 @@ import { routes as textDataParsers } from './textDataParsers';
 import { routes as variableDefinitions } from './variableDefinitions';
 import { routes as contracts } from './contracts';
 import { routes as users } from './users';
+import { routes as dialogs } from './dialogs';
 
 export default [
   ...supplies,
@@ -10,4 +11,5 @@ export default [
   ...variableDefinitions,
   ...contracts,
   ...users,
+  ...dialogs,
 ];

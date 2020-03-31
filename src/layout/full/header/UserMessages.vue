@@ -32,7 +32,7 @@
                 </div>
             </vs-list>
             <div v-else>
-                Нет уведомлений
+                Нет сообщений
             </div>
         </vs-dropdown-menu>
     </vs-dropdown>

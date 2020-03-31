@@ -31,7 +31,15 @@
       <vs-dropdown  vs-trigger-click left class="cursor-pointer pr-2 pl-2 ml-1 mr-md-3">
          <a class="text-white-dark user-image" href="#"><img :src="currentUser.avatar_url" alt="User"/></a>
         <vs-dropdown-menu class="topbar-dd">
-            <vs-dropdown-item><vs-icon icon="person_outline" class="mr-1"></vs-icon> My Profile</vs-dropdown-item>
+            <vs-dropdown-item><vs-icon icon="person_outline" class="mr-1"></vs-icon> Мой профиль</vs-dropdown-item>
+
+            <router-link :to="{ name: 'DialogsList' }">
+                <vs-dropdown-item>
+                    <vs-icon icon="mail_outline" class="mr-1"></vs-icon>
+                    Диалоги
+                </vs-dropdown-item>
+            </router-link>
+
             <hr class="mb-1" />
 
             <vs-dropdown-item @click="logoutUser">
