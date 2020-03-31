@@ -127,7 +127,8 @@
 
                 this.$http.post(window.API_URL + '/dialog-messages/create-by-dialog/' + this.dialog.id, this.newMessage)
                     .then(response => {
-                        this.dialog.messages.unshift(response.data.data)
+                        this.$messageSendNotify();
+                        this.dialog.messages.unshift(response.data.data);
                     });
             },
         }

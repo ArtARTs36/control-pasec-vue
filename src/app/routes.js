@@ -4,6 +4,7 @@ import { routes as variableDefinitions } from './variableDefinitions';
 import { routes as contracts } from './contracts';
 import { routes as users } from './users';
 import { routes as dialogs } from './dialogs';
+import { routes as profiles } from './profiles';
 
 export default [
   ...supplies,
@@ -12,4 +13,5 @@ export default [
   ...contracts,
   ...users,
   ...dialogs,
+  ...profiles,
 ];

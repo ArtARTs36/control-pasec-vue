@@ -31,7 +31,10 @@
       <vs-dropdown  vs-trigger-click left class="cursor-pointer pr-2 pl-2 ml-1 mr-md-3">
          <a class="text-white-dark user-image" href="#"><img :src="currentUser.avatar_url" alt="User"/></a>
         <vs-dropdown-menu class="topbar-dd">
-            <vs-dropdown-item><vs-icon icon="person_outline" class="mr-1"></vs-icon> Мой профиль</vs-dropdown-item>
+
+            <router-link :to="{ name: 'Profile', params: { id: currentUser.id }}" tag="vs-dropdown-item">
+                <vs-icon icon="person_outline" class="mr-1"></vs-icon> Мой профиль
+            </router-link>
 
             <router-link :to="{ name: 'DialogsList' }" tag="vs-dropdown-item">
                 <vs-icon icon="mail_outline" class="mr-1"></vs-icon>
@@ -39,6 +42,11 @@
             </router-link>
 
             <hr class="mb-1" />
+
+            <vs-dropdown-item @click="isSearchModalActive = true">
+                <vs-icon icon="face" class="mr-1"></vs-icon>
+                Найти пользователя
+            </vs-dropdown-item>
 
             <vs-dropdown-item @click="logoutUser">
                 <vs-icon icon="arrow_back"
@@ -52,6 +60,11 @@
 
     </vs-navbar>
 
+    <profile-search v-bind:is-active="isSearchModalActive"
+       @closeModal="isSearchModalActive = false"
+    >
+    </profile-search>
+
 	</header>
 
 </template>
@@ -62,9 +75,10 @@ import { logout } from '@/app/auth/vuex/actions';
 import {mapGetters} from "vuex";
 import UserNotification from "./UserNotification";
 import UserMessages from "./UserMessages";
+import ProfileSearch from "./ProfileSearch";
 export default {
 	name : 'Navbar',
-    components: {UserNotification, UserMessages},
+    components: {UserNotification, UserMessages, ProfileSearch},
     props: {
       topbarColor: {
           type: String,
@@ -79,8 +93,8 @@ export default {
   },
   data:()=>({
     indexActive: 0,
-    showToggle: false
-
+    showToggle: false,
+    isSearchModalActive: false,
   }),
     computed: {
         ...mapGetters([
@@ -95,6 +109,9 @@ export default {
 
       logoutUser() {
             store.dispatch('logout');
+      },
+      closeSearchModal() {
+          this.isOpenModalResult = false;
       },
   }
 }

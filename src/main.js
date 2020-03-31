@@ -164,6 +164,14 @@ Vue.prototype.$openNotifyToDocCreated = function (document) {
     }
   })
 };
+Vue.prototype.$messageSendNotify = function () {
+  this.$vs.notify({
+    title: 'Успех',
+    text: 'Сообщение успешно отправлено',
+    color: 'success',
+    icon:'check_box',
+  })
+};
 
 Vue.filter('decOfNum', function (number, titles) {
   return declOfNum(number, titles);
