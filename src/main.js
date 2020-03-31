@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuesax from 'vuesax'
 import Axios from 'axios';
 import RootApp from './Root.vue'
-
+import httpPlugin from './plugins/http';
 import 'vuesax/dist/vuesax.css';
 import 'material-icons/iconfont/material-icons.css';
 // Vuex Store
@@ -14,13 +14,14 @@ import VsPrism from './components/prism/VsPrism.vue';
 Vue.component(VsPrism.name, VsPrism);
 
 Vue.prototype.$axios = Axios;
-
 Vue.use(Vuesax);
 
 // Vue Router
 import index from './router/index'
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
+
+Vue.use(httpPlugin, { store, index });
 
 new Vue({
   store,

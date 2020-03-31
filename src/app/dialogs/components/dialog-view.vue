@@ -2,7 +2,7 @@
     <vs-row vs-justify="center">
         <vs-card>
             <div slot="header">
-                <h4>Диалог с: </h4>
+                <h4>Диалог с: {{ dialog.inter_user.full_name }}</h4>
             </div>
 
             <div>
@@ -60,7 +60,6 @@
 </template>
 
 <script>
-    import { http } from '@/plugins/http';
     import {mapGetters} from "vuex";
     export default {
         name: "DialogView",
@@ -99,7 +98,7 @@
                     page = this.currentPage;
                 }
 
-                http.get(window.API_URL + '/dialogs/' + this.$route.params.id + '/page-' + page)
+                this.$http.get(window.API_URL + '/dialogs/' + this.$route.params.id + '/page-' + page)
                     .then(response => {
                         this.dialog = response.data.data;
                         this.totalCount = response.data.data.meta.total;
@@ -128,7 +127,7 @@
             sendMessage() {
                 this.newMessage.to_user_id = this.dialog.inter_user.id;
 
-                http.post(API_URL + '/dialog-messages/create-by-dialog/' + this.dialog.id, this.newMessage)
+                this.$http.post(window.API_URL + '/dialog-messages/create-by-dialog/' + this.dialog.id, this.newMessage)
                     .then(response => {
                         this.dialog.messages.unshift(response.data.data)
                     });

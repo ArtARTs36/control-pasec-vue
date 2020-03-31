@@ -15,7 +15,7 @@ export function setToken(token) {
 }
 
 export default function install(Vue, { store, router }) {
-  interceptors(http, store, router);
+  interceptors(http, store, router, Vue);
   Object.defineProperty(Vue.prototype, '$http', {
     get() {
       return http;

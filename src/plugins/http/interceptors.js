@@ -1,6 +1,6 @@
 import { isArray } from 'lodash';
 
-export default (http, store, router) => {
+export default (http, store, router, Vue) => {
   // https://github.com/mzabriskie/axios#interceptors
   http.interceptors.response.use(
     response => response,
@@ -21,11 +21,7 @@ export default (http, store, router) => {
         //   icon: 'error',
         // });
       } else if (response.status === 409) {
-        swal({
-          title: 'Ошибка',
-          text: response.data,
-          icon: 'error',
-        });
+          openAlert(Vue, response.message ? response.message : response.data.message);
       }
       if (isArray(response.data)) {
         store.dispatch('setMessage', {
@@ -44,3 +40,14 @@ export default (http, store, router) => {
     },
   );
 };
+
+function openAlert(Vue, text, title, color){
+    color = color ? color : 'red';
+    title = title ? title : 'Ошибка';
+
+    Vue.prototype.$vs.dialog({
+        color, title, text,
+        'accept-text': 'Закрыть',
+        'cancel-text': 'Закрыть',
+    })
+}
