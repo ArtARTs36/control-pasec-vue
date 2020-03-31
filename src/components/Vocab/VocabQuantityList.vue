@@ -56,7 +56,7 @@
                         color="#f91f43"
                         :total="totalPages"
                         v-model="currentPage"
-                        @change="loadQuantities",
+                        @change="loadQuantities"
                         prev-icon="arrow_back" next-icon="arrow_forward"
                 ></vs-pagination>
             </div>

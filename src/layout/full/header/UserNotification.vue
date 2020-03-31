@@ -1,5 +1,5 @@
 <template>
-    <vs-dropdown vs-custom-content vs-trigger-click left class="cursor-pointer pr-2 pl-2 ml-1 mr-1">
+    <vs-dropdown vs-custom-content vs-trigger-click left class="cursor-pointer pr-2 pl-2">
         <a class="text-white-dark" href="#">
             <vs-avatar :badge="currentUser.notifications_unread_count"
                        color="primary" icon="notifications"
@@ -11,7 +11,7 @@
         </a>
 
         <vs-dropdown-menu style="width:20%">
-            <vs-list style="overflow-y: auto;max-height:300px">
+            <vs-list style="overflow-y: auto;max-height:300px" v-if="currentUser.notifications.length > 0">
                 <div v-for="(item, index) in currentUser.notifications">
                     <div class="vs-list--header vs-header-list-primary">
                         <div class="list-titles">
@@ -37,6 +37,9 @@
                     </router-link>
                 </div>
             </vs-list>
+            <div v-else>
+                Нет уведомлений
+            </div>
         </vs-dropdown-menu>
     </vs-dropdown>
 </template>

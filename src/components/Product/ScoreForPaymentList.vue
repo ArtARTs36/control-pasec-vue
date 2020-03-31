@@ -167,8 +167,7 @@
             },
             downloadScoreForPayment(supplyId)
             {
-                this.$openNotifyToDocCreate();
-                window.open(API_URL + '/score-for-payments/download-by-supply/' + supplyId);
+                this.$genDocument(supplyId, window.DOCUMENT_TYPE_SCORE_FOR_PAYMENT_ID);
             },
             downloadScoreForPayments(supplies)
             {
