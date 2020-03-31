@@ -7,16 +7,18 @@
 
             <div class="table-responsive">
                 <vs-list>
-                    <vs-list-item
-                            v-for="item in contracts"
-                            :title="item.inter_user.full_name" :subtitle="item.last_message.text|cutText(120)"
-                    >
-                        <template slot="avatar">
-                            <vs-avatar :src="item.inter_user.avatar_url" />
-                        </template>
+                    <div v-for="item in contracts" @click="openDialog(item.id)">
+                        <vs-list-item
+                                :title="item.inter_user.full_name"
+                                :subtitle="item.last_message.text|cutText(120)"
+                        >
+                            <template slot="avatar">
+                                <vs-avatar :src="item.inter_user.avatar_url"/>
+                            </template>
 
-                        {{ item.last_message.updated_at }}
-                    </vs-list-item>
+                            {{ item.last_message.updated_at }}
+                        </vs-list-item>
+                    </div>
                 </vs-list>
             </div>
 
@@ -80,7 +82,10 @@
             openModalResult(result) {
                 this.isOpenModalResult = true;
                 this.resultAction = result;
-            }
+            },
+            openDialog(id) {
+                this.$router.push('/dialogs/' + id + '/view');
+            },
         }
     };
 </script>
