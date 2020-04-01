@@ -83,6 +83,9 @@
                                         <vs-dropdown-item @click="downloadQualityCertificate(item.id)">
                                             Удостоверение качества
                                         </vs-dropdown-item>
+                                        <vs-dropdown-item @click="downloadAllDocuments(item.id)">
+                                            Все одним архивом
+                                        </vs-dropdown-item>
                                     </vs-dropdown-menu>
                                 </vs-dropdown>
                             </div>
@@ -236,6 +239,15 @@
             downloadOneTForm(supplyId)
             {
                 this.$genDocument(supplyId, window.DOCUMENT_TYPE_ONE_T_FORM_ID);
+            },
+            downloadAllDocuments(supplyId)
+            {
+                this.$genDocumentManyTypes(supplyId, [
+                    window.DOCUMENT_TYPE_SCORE_FOR_PAYMENT_ID,
+                    window.DOCUMENT_TYPE_TORG_12_ID,
+                    window.DOCUMENT_TYPE_ONE_T_FORM_ID,
+                    window.DOCUMENT_TYPE_QUALITY_CERTIFICATE_ID,
+                ]);
             },
             async manyActionsExecute()
             {

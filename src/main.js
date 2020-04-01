@@ -143,6 +143,19 @@ Vue.prototype.$genDocument = function(supplyId, typeId) {
       });
 };
 
+Vue.prototype.$genDocumentManyTypes = function(supplyId, types) {
+  this.$openNotifyToDocCreate();
+
+  this.$axios.post(API_URL + '/generate-documents/' + supplyId, {'types': types})
+      .then((response) => {
+        if (response.data) {
+          this.$openNotifyToDocCreated(response.data.data);
+        } else {
+          this.resultSave = response.data.message;
+        }
+      });
+};
+
 Vue.prototype.$openNotifyToDocCreate = function () {
   this.$vs.notify({
     title: 'Документ готовится',
