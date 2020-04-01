@@ -23,14 +23,26 @@
                 </div>
 
                 <br/>
+                <br/>
 
                 <div class="default-input d-flex align-items-center">
-                    <vs-input label-placeholder="Дата" v-model="score.date" style="width:100%" />
+                    <datepicker v-model="score.date"
+                                format="yyyy-MM-d"
+                                inputClass="vs-inputx vs-input--input normal hasValue"
+                                style="width:100%;"
+                                :language="datePickerLang"
+                    >
+                    <span class="input-span-placeholder vs-input--placeholder normal normal vs-placeholder-label"
+                          slot="afterDateInput"
+                    >
+                        Дата
+                    </span>
+                    </datepicker>
                 </div>
 
                 <br/>
 
-                <div v-if="contracts !== null">
+                <div v-if="contracts !== null && contracts.length > 0">
                     <vs-select
                             v-model="score.contract_id"
                             style="width:100%"
@@ -47,6 +59,12 @@
                     </vs-select>
                 </div>
 
+                <div v-else>
+                    <vs-alert title="Предупреждение" active="true" color="danger">
+                        Нет договоров по поставке
+                    </vs-alert>
+                </div>
+
                 <br/>
 
                 <vs-button color="success" style="width:100%" type="filled" @click="checkForm">Сохранить</vs-button>
@@ -57,21 +75,31 @@
             <router-link v-bind:to="linkList">
                 <vs-button style="width:100%" color="primary">Открыть список счетов</vs-button>
             </router-link>
+
+            <ModalResult
+                    v-if="isOpenModalResult"
+                    v-bind:result="resultSave"
+                    @closeModal="closeModalResult"
+                    v-bind:form-errors="formErrors"
+            />
         </vs-card>
     </vs-row>
 </template>
 
 <script>
+    import {ru as datePickerLang} from 'vuejs-datepicker/dist/locale'
+    import Datepicker from 'vuejs-datepicker';
+    import ModalResult from "../based/ModalResult";
     export default {
+        components: {
+            Datepicker,
+            ModalResult,
+        },
+
         data() {
             const blankScore = {
-                id: 0,
-                name: null,
-                name_for_document: null,
-                price: null,
-                currency_id: null,
-                size_of_unit_id: null,
-                size: null
+                id: null,
+                date: new Date(),
             };
 
             return {
@@ -85,7 +113,8 @@
                 typeAction: (this.$route.params.id > 0) ? 'put' : 'post',
                 sizeOfUnits: null,
                 currencies: null,
-                contracts: null
+                contracts: null,
+                datePickerLang,
             }
         },
 
@@ -93,27 +122,15 @@
             save() {
                 this.resultSave = null;
 
-                let request;
-                if (this.typeAction === 'put') {
-                    request = this.$http.put(API_URL + '/score-for-payments/' + this.scoreId, this.score);
-                } else {
-                    request = this.$http.post(API_URL + '/score-for-payments/', this.score);
-                }
-
-                request.then((response) => {
-                    if (response.data.success) {
-                        this.resultSave = 'Данные успешно сохранены!';
-                    } else {
-                        this.resultSave = response.data.message;
-                    }
-                })
-                    .catch((error) => {
+                this.$http.put(window.API_URL + '/score-for-payments/' + this.scoreId, this.score)
+                    .then((response) => {
+                        this.resultSave = (response.data.success) ? 'Данные успешно сохранены!': response.data.message;
+                    }).catch((error) => {
                         this.resultSave = error;
-                    })
-                    .finally(() => (this.isOpenModalResult = true));
+                    }).finally(() => (this.isOpenModalResult = true));
             },
             loadScore() {
-                this.$http.get(API_URL + '/score-for-payments/' + this.scoreId)
+                this.$http.get(window.API_URL + '/score-for-payments/' + this.scoreId)
                     .then(response => {
                         this.score = response.data;
 
@@ -127,22 +144,6 @@
                 e.preventDefault();
                 this.formErrors = [];
                 this.resultSave = '';
-
-                if (!this.score.name) {
-                    this.formErrors.push('Не указано наименование');
-                }
-                //
-                // if (!this.contragent.patronymic) {
-                //     this.formErrors.push('Не указано отчество');
-                // }
-                //
-                // if (!this.contragent.family) {
-                //     this.formErrors.push('Не указана фамилия');
-                // }
-                //
-                // if (!this.isValidPhone()) {
-                //     this.formErrors.push('Не корректно указан номер');
-                // }
 
                 if (!this.formErrors.length) {
                     this.save();
@@ -159,13 +160,13 @@
                 return "Поставка №" + id;
             },
             loadSupplies(customerId) {
-                this.$http.get(API_URL + '/supplies/find-by-customer/' + customerId)
+                this.$http.get(window.API_URL + '/supplies/find-by-customer/' + customerId)
                     .then(response => {
                         this.supplies = response.data.data;
                     });
             },
             loadContracts(customerId) {
-                this.$http.get(API_URL + '/contracts/find-by-customer/' + customerId)
+                this.$http.get(window.API_URL + '/contracts/find-by-customer/' + customerId)
                     .then(response => {
                         this.contracts = response.data.data;
                     });

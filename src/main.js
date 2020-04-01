@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Vuesax from 'vuesax'
-import Axios from 'axios';
 import RootApp from './Root.vue'
 import httpPlugin from './plugins/http';
 import documentPlugin from './plugins/document';
 import 'vuesax/dist/vuesax.css';
 import 'material-icons/iconfont/material-icons.css';
+import '@/assets/scss/style.scss'
+import {apiPath} from "./config";
 // Vuex Store
 import store from './store/store'
 
@@ -14,7 +15,6 @@ import 'prismjs/themes/prism.css'
 import VsPrism from './components/prism/VsPrism.vue';
 Vue.component(VsPrism.name, VsPrism);
 
-Vue.prototype.$axios = Axios;
 Vue.use(Vuesax);
 
 // Vue Router
@@ -31,21 +31,18 @@ new Vue({
   render: h => h(RootApp),
 }).$mount('#app');
 
-import '@/assets/scss/style.scss'
-import {apiPath} from "./config";
-
 window.API_URL = apiPath;
-window.API_VARIABLE_DEFINITION_INDEX = API_URL + '/variable-definitions/';
-window.API_VOCAB_URL = API_URL + '/vocab';
-window.API_VOCAB_GOS_STANDARDS_INDEX = API_VOCAB_URL + '-gos-standards/';
-window.API_VOCAB_BANKS_INDEX = API_VOCAB_URL + '-banks/';
-window.API_VOCAB_QUANTITIES_INDEX = API_VOCAB_URL + '-quantity-units/';
-window.API_VOCAB_CURRENCIES_INDEX = API_VOCAB_URL + '-currencies/';
-window.API_EXTERNAL_NEWS_INDEX = API_URL + '/external-news/';
-window.API_PRODUCTS_INDEX = API_URL + '/products';
-window.API_STAT_INDEX = API_URL + '/stat';
-window.API_STAT_GENERAL = API_URL + '/stat/general';
-window.API_SUPPLY_INDEX = API_URL + '/supplies/';
+window.API_VARIABLE_DEFINITION_INDEX = window.API_URL + '/variable-definitions/';
+window.API_VOCAB_URL = window.API_URL + '/vocab';
+window.API_VOCAB_GOS_STANDARDS_INDEX = window.API_VOCAB_URL + '-gos-standards/';
+window.API_VOCAB_BANKS_INDEX = window.API_VOCAB_URL + '-banks/';
+window.API_VOCAB_QUANTITIES_INDEX = window.API_VOCAB_URL + '-quantity-units/';
+window.API_VOCAB_CURRENCIES_INDEX = window.API_VOCAB_URL + '-currencies/';
+window.API_EXTERNAL_NEWS_INDEX = window.API_URL + '/external-news/';
+window.API_PRODUCTS_INDEX = window.API_URL + '/products';
+window.API_STAT_INDEX = window.API_URL + '/stat';
+window.API_STAT_GENERAL = window.API_URL + '/stat/general';
+window.API_SUPPLY_INDEX = window.API_URL + '/supplies/';
 
 window.PERMISSION_SUPPLIES_EDIT = 'supplies_edit';
 window.PERMISSION_SUPPLIES_VIEW = 'supplies_view';
@@ -149,12 +146,7 @@ window.duplicate = function (object) {
   return Object.assign({}, object);
 };
 
-window.downloadDocument = function (id) {
-  return API_URL + '/documents/' + id + '/download';
-};
-
-function declOfNum(number, titles)
-{
+function declOfNum(number, titles) {
   let cases = [2, 0, 1, 1, 1, 2];
   return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
 }

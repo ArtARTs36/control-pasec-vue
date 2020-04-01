@@ -47,9 +47,21 @@
                 </vs-select>
 
                 <br/>
+                <br/>
 
                 <div class="default-input d-flex align-items-center">
-                    <vs-input label-placeholder="Дата" v-model="score.date" style="width:100%" />
+                    <datepicker v-model="score.date"
+                                format="yyyy-MM-d"
+                                inputClass="vs-inputx vs-input--input normal hasValue"
+                                style="width:100%;"
+                                :language="datePickerLang"
+                    >
+                    <span class="input-span-placeholder vs-input--placeholder normal normal vs-placeholder-label"
+                          slot="afterDateInput"
+                    >
+                        Дата
+                    </span>
+                    </datepicker>
                 </div>
 
                 <br/>
@@ -74,19 +86,20 @@
 </template>
 
 <script>
+    import {ru as datePickerLang} from 'vuejs-datepicker/dist/locale'
+    import Datepicker from 'vuejs-datepicker';
     import ModalResult from "../based/ModalResult";
     export default {
         components: {
-            ModalResult
+            ModalResult, Datepicker,
         },
 
         data() {
             const blankScore = {
                 id: 0,
-                name: null,
-                name_for_document: null,
                 supply_id: null,
-                customer_id: null
+                customer_id: null,
+                date: new Date(),
             };
 
             return {
@@ -101,6 +114,7 @@
                 contracts: null,
                 contragents: null,
                 supplies: null,
+                datePickerLang,
             }
         },
 
