@@ -75,10 +75,39 @@
 
                 <br/>
 
-                <vs-button color="success" style="width:100%" type="filled" @click="checkForm">Сохранить</vs-button>
-            </form>
 
-            <br/>
+                <div class="form-group" v-if="userId > 0">
+                        <vs-select
+                                v-model="newRole"
+                                style="width:100%"
+                                placeholder="Введите название или выберите"
+                                autocomplete
+                        >
+                            <vs-select-item
+                                    :key="index"
+                                    :value="unit.id"
+                                    :text="unit.title"
+                                    v-for="(unit, index) in roles"
+                            >
+                            </vs-select-item>
+                        </vs-select>
+                </div>
+
+                <div class="form-group"  v-if="userId > 0">
+                        <vs-button color="warning" style="width:100%"
+                                   type="filled"
+                                   @click="attachRole()"
+                        >
+                            Добавить роль
+                        </vs-button>
+                </div>
+
+                <hr class="mb-1" />
+
+                <div class="form-group">
+                    <vs-button color="success" style="width:100%" type="filled" @click="checkForm">Сохранить</vs-button>
+                </div>
+            </form>
 
             <router-link v-bind:to="linkList">
                 <vs-button style="width:100%" color="primary">Открыть список пользователей</vs-button>
@@ -111,6 +140,8 @@
                 userId: this.$route.params.id,
                 user: {},
                 typeAction: (this.$route.params.id > 0) ? 'put' : 'post',
+                roles: null,
+                newRole: null,
             }
         },
 
@@ -120,6 +151,8 @@
             } else {
                 window.document.title = 'Создать пользователя';
             }
+
+            this.getRoles();
         },
 
         methods: {
@@ -162,11 +195,19 @@
                 this.isOpenModalResult = false;
             },
             detachRole(user, role) {
-                const URL = API_URL + `/users/${user}/detach-role/${role}`;
+                const URL = window.API_URL + `/users/${user}/detach-role/${role}`;
 
-                http.get(URL)
+                http.get(URL).then(response => {this.user = response.data.data;});
+            },
+            attachRole() {
+                const URL = window.API_URL + `/users/${this.user.id}/attach-role/${this.newRole}`;
+
+                http.get(URL).then(response => {this.user = response.data.data;});
+            },
+            getRoles() {
+                http.get(window.API_URL + '/roles')
                     .then(response => {
-                        this.user = response.data.data;
+                        this.roles = response.data.data;
                     })
                     .finally(() => (document.title = 'Пользователь #' + this.user.id));
             },
