@@ -19,8 +19,7 @@
             </vs-input>
 
             <vs-list style="max-height: 400px; overflow-y: auto">
-                <div v-for="profile in profiles">
-                    <router-link tag="div" :to="{'name': 'Profile', 'params': {'id' : profile.id}}">
+                <div v-for="profile in profiles" @click="openProfile(profile)">
                     <div class="vs-list--item cursor-pointer">
                         <div class="vs-list--avatar">
                             <div class="con-vs-avatar null" style="background: rgb(195, 195, 195);">
@@ -51,7 +50,6 @@
                             </div>
                         </div>
                         <div class="vs-list--slot"></div></div>
-                    </router-link>
                 </div>
             </vs-list>
         </div>
@@ -98,6 +96,11 @@
                     .then(response => {
                         this.profiles = response.data.data;
                     });
+            },
+            openProfile(profile) {
+                this.close();
+
+                this.$router.push('/profile/' + profile.id);
             },
         }
     }
