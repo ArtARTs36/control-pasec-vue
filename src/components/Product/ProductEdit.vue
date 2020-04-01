@@ -121,7 +121,7 @@
                     this.$http.post(window.API_URL + '/products/', this.product);
 
                 request.then((response) => {
-                    this.resultSave = (response.data.id) ? 'Данные успешно сохранены!' : response.data.message;
+                    this.resultSave = (response.data.success) ? 'Данные успешно сохранены!' : response.data.message;
                 }).catch((error) => {
                     this.resultSave = error;
                 }).finally(() => (this.isOpenModalResult = true));
