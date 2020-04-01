@@ -160,6 +160,12 @@
 				icon: 'monetization_on',
 				permission: window.VOCAB_CURRENCIES_LIST_VIEW,
 			},
+			{
+				url: "/vocab/words",
+				name: "Словарь",
+				icon: 'g_translate',
+				permission: window.VOCAB_CURRENCIES_LIST_VIEW,
+			},
 		]
 	},
 	{

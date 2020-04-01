@@ -5,6 +5,7 @@ import { routes as contracts } from './contracts';
 import { routes as users } from './users';
 import { routes as dialogs } from './dialogs';
 import { routes as profiles } from './profiles';
+import { routes as vocabWords } from './vocabWords';
 
 export default [
   ...supplies,
@@ -14,4 +15,5 @@ export default [
   ...users,
   ...dialogs,
   ...profiles,
+  ...vocabWords,
 ];
