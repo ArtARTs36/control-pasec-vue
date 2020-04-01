@@ -103,9 +103,9 @@
                     page = this.currentPage;
                 }
 
-                const URL = API_VOCAB_QUANTITIES_INDEX + 'page-' + page;
+                const URL = window.API_VOCAB_QUANTITIES_INDEX + 'page-' + page;
 
-                this.$axios.get(URL)
+                this.$http.get(URL)
                     .then(response => {
                         this.quantities = response.data.data;
                         this.totalCount = response.data.total;
@@ -119,7 +119,7 @@
                     });
             },
             removeQuantity(id) {
-                this.$axios.delete(API_VOCAB_QUANTITIES_INDEX + id)
+                this.$http.delete(window.API_VOCAB_QUANTITIES_INDEX + id)
                     .then(response => {
                         this.$openModalResult(response.data.success ? 'Единица удалена!' : response);
                         this.loadQuantities();

@@ -60,7 +60,7 @@ export default {
 
     methods: {
         loadNews() {
-            this.$axios.get(API_EXTERNAL_NEWS_INDEX + 'chart')
+            this.$http.get(API_EXTERNAL_NEWS_INDEX + 'chart')
                 .then(response => {
                     this.news = response.data.data;
                 })

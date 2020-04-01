@@ -119,7 +119,7 @@
 
                 const URL = API_URL + '/contragents/page-' + page;
 
-                this.$axios.get(URL)
+                this.$http.get(URL)
                     .then(response => {
                         this.contragents = response.data.data;
                         this.totalCount = response.data.total;
@@ -137,7 +137,7 @@
                 this.loadContragents(page);
             },
             removeContragent(id) {
-                this.$axios.delete(API_URL + '/contragents/' + id)
+                this.$http.delete(API_URL + '/contragents/' + id)
                     .then(response => {
                         this.openModalResult('Контрагент удален!');
                         this.refreshContragents();

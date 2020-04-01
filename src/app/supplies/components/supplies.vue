@@ -183,7 +183,7 @@
 
                 const URL = window.API_SUPPLY_INDEX + 'page-' + page;
 
-                this.$axios.get(URL)
+                this.$http.get(URL)
                     .then(response => {
                         this.supplies = response.data.data;
                         this.totalCount = response.data.meta.total;
@@ -197,7 +197,7 @@
                 this.loadSupplies(page);
             },
             removeSupply(id) {
-                this.$axios.delete(API_URL + '/supplies/' + id)
+                this.$http.delete(API_URL + '/supplies/' + id)
                     .then(response => {
                         this.openModalResult('Поставка удалена!');
                         this.refreshSupplies();

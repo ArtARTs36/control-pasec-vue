@@ -114,9 +114,9 @@
 
                 let request;
                 if (this.typeAction === 'put') {
-                    request = this.$axios.put(API_VOCAB_CURRENCIES_INDEX + this.currencyId, this.currency);
+                    request = this.$http.put(API_VOCAB_CURRENCIES_INDEX + this.currencyId, this.currency);
                 } else {
-                    request = this.$axios.post(API_VOCAB_CURRENCIES_INDEX, this.currency);
+                    request = this.$http.post(API_VOCAB_CURRENCIES_INDEX, this.currency);
                 }
 
                 request.then((response) => {
@@ -126,7 +126,7 @@
                 }).finally(() => (this.isOpenModalResult = true));
             },
             loadCurrency() {
-                this.$axios.get(API_VOCAB_CURRENCIES_INDEX + this.currencyId)
+                this.$http.get(API_VOCAB_CURRENCIES_INDEX + this.currencyId)
                     .then(response => {
                         this.currency = response.data;
 

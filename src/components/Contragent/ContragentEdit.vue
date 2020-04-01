@@ -75,13 +75,24 @@
             <router-link v-bind:to="linkList">
                 <vs-button style="width:100%" color="primary">Открыть список контрагентов</vs-button>
             </router-link>
+
+            <ModalResult
+                    v-if="isOpenModalResult"
+                    v-bind:result="resultSave"
+                    @closeModal="closeModalResult"
+                    v-bind:form-errors="formErrors"
+            />
         </vs-card>
     </vs-row>
 </template>
 
 <script>
-    import axios from 'axios';
+    import ModalResult from "../based/ModalResult";
     export default {
+        components: {
+            ModalResult
+        },
+
         data() {
             const blankContragent = {
                 id: 0,
@@ -109,9 +120,9 @@
 
                 let request;
                 if (this.typeAction === 'put') {
-                    request = axios.put(API_URL + '/contragents/' + this.contragentId, this.contragent);
+                    request = this.$http.put(window.API_URL + '/contragents/' + this.contragentId, this.contragent);
                 } else {
-                    request = axios.post(API_URL + '/contragents/', options);
+                    request = this.$http.post(window.API_URL + '/contragents/', this.contragent);
                 }
 
                 request.then((response) => {
@@ -127,7 +138,7 @@
                     .finally(() => (this.isOpenModalResult = true));
             },
             loadContragent() {
-                axios.get(API_URL + '/contragents/' + this.contragentId)
+                this.$http.get(window.API_URL + '/contragents/' + this.contragentId)
                     .then(response => {
                         this.contragent = response.data.data;
                     })

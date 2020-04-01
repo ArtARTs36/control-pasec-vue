@@ -141,7 +141,7 @@
 
                 const URL = API_URL + '/score-for-payments/page-' + page;
 
-                this.$axios.get(URL)
+                this.$http.get(URL)
                     .then(response => {
                         this.supplies = response.data.data;
                         this.totalCount = response.data.total;
@@ -152,7 +152,7 @@
                     });
             },
             removeScore(id) {
-                this.$axios.delete(API_URL + '/score-for-payments/' + id)
+                this.$http.delete(API_URL + '/score-for-payments/' + id)
                     .then(response => {
                         this.openModalResult('Счет удален!');
                         this.loadScores(this.currentPage);
@@ -183,7 +183,7 @@
                     'supplies': suppliesOfOptions
                 };
 
-                this.$axios.post(url, options)
+                this.$http.post(url, options)
                     .then((response) => {
                         if (response.data) {
                             window.open(response.data.data.download_url);

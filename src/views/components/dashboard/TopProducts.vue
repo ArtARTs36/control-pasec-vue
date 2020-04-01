@@ -1,5 +1,5 @@
 <template>
-<div class="table-responsive">    
+<div class="table-responsive">
 <table class="table v-middle border">
     <thead>
         <tr class="">
@@ -42,7 +42,7 @@ export default {
 
     methods: {
         loadProducts() {
-            this.$axios.get(API_PRODUCTS_INDEX + '/top-chart')
+            this.$http.get(API_PRODUCTS_INDEX + '/top-chart')
                 .then(response => {
                     this.products = response.data;
                 });

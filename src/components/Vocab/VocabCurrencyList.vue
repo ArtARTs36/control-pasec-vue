@@ -108,7 +108,7 @@
 
                 const URL = API_VOCAB_CURRENCIES_INDEX + 'page-' + page;
 
-                this.$axios.get(URL)
+                this.$http.get(URL)
                     .then(response => {
                         this.currencies = response.data.data;
                         this.totalCount = response.data.total;
@@ -122,7 +122,7 @@
                     });
             },
             removeCurrency(id) {
-                this.$axios.delete(API_VOCAB_CURRENCIES_INDEX + id)
+                this.$http.delete(API_VOCAB_CURRENCIES_INDEX + id)
                     .then(response => {
                         this.$openModalResult(response.data.success ? 'Валюта удалена' : response);
                         this.loadCurrencies();

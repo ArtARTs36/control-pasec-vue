@@ -51,7 +51,7 @@ export default function install(Vue) {
             return function(supplyId, types) {
                     this.$openNotifyToDocCreate();
 
-                    this.$axios.post(window.API_URL + '/generate-documents/' + supplyId, {'types': types})
+                    this.$http.post(window.API_URL + '/generate-documents/' + supplyId, {'types': types})
                         .then((response) => {
                             if (response.data) {
                                 this.$openNotifyToDocCreated(response.data.data);

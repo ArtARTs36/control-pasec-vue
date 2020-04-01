@@ -84,7 +84,7 @@
 
                 const URL = API_URL + '/products/page-' + page;
 
-                this.$axios.get(URL)
+                this.$http.get(URL)
                     .then(response => {
                         this.products = response.data.data;
                         this.totalCount = response.data.total;
@@ -101,7 +101,7 @@
                 this.loadProducts(page);
             },
             removeProduct(id) {
-                this.$axios.delete(API_URL + '/products/' + id)
+                this.$http.delete(API_URL + '/products/' + id)
                     .then(response => {
                         this.openModalResult('Контрагент удален!');
                         this.refreshProducts();

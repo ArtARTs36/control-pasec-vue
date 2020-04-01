@@ -57,7 +57,7 @@
             save() {
                 this.resultAction = null;
 
-                this.$axios.get(API_URL + '/contragents/find-external-by-inn/' + this.inn)
+                this.$http.get(API_URL + '/contragents/find-external-by-inn/' + this.inn)
                     .then((response) => {
                         if (response.data.success) {
                             this.resultAction = 'Контрагент найден!' + '\n' + response.data.data.title;

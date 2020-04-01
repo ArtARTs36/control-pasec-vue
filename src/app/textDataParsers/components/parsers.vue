@@ -28,7 +28,7 @@
 
         methods: {
             loadParsers() {
-                this.$axios.get(API_URL + '/text-data-parser-components')
+                this.$http.get(API_URL + '/text-data-parser-components')
                     .then(response => {
                         this.parsers = response.data.data;
                     })

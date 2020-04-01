@@ -70,13 +70,23 @@
             <router-link v-bind:to="linkList">
                 <vs-button style="width:100%" color="primary">Открыть список товаров</vs-button>
             </router-link>
+
+            <ModalResult
+                    v-if="isOpenModalResult"
+                    v-bind:result="resultSave"
+                    @closeModal="closeModalResult"
+                    v-bind:form-errors="formErrors"
+            />
         </vs-card>
     </vs-row>
 </template>
 
 <script>
-    import axios from 'axios';
+    import ModalResult from "../based/ModalResult";
     export default {
+        components: {
+            ModalResult,
+        },
         data() {
             const blankProduct = {
                 id: 0,
@@ -106,27 +116,18 @@
             save() {
                 this.resultSave = null;
 
-                let request;
-                if (this.typeAction === 'put') {
-                    request = axios.put(API_URL + '/products/' + this.productId, this.product);
-                } else {
-                    request = axios.post(API_URL + '/products/', options);
-                }
+                let request = (this.typeAction === 'put') ?
+                    this.$http.put(window.API_URL + '/products/' + this.productId, this.product) :
+                    this.$http.post(window.API_URL + '/products/', this.product);
 
                 request.then((response) => {
-                    if (response.data.success) {
-                        this.resultSave = 'Данные успешно сохранены!';
-                    } else {
-                        this.resultSave = response.data.message;
-                    }
-                })
-                    .catch((error) => {
-                        this.resultSave = error;
-                    })
-                    .finally(() => (this.isOpenModalResult = true));
+                    this.resultSave = (response.data.id) ? 'Данные успешно сохранены!' : response.data.message;
+                }).catch((error) => {
+                    this.resultSave = error;
+                }).finally(() => (this.isOpenModalResult = true));
             },
             loadProduct() {
-                axios.get(API_URL + '/products/' + this.productId)
+                this.$http.get(window.API_URL + '/products/' + this.productId)
                     .then(response => {
                         this.product = response.data.data;
                     })
@@ -135,13 +136,13 @@
                     }).finally(() => (document.title = 'Товар: ' + this.product.name));
             },
             loadSizeOfUnits() {
-                axios.get(API_URL + '/vocab/size-of-units')
+                this.$http.get(window.API_URL + '/vocab/size-of-units')
                     .then(response => {
                         this.sizeOfUnits = response.data.data;
                     });
             },
             loadCurrencies() {
-                axios.get(API_VOCAB_CURRENCIES_INDEX)
+                this.$http.get(window.API_VOCAB_CURRENCIES_INDEX)
                     .then(response => {
                         this.currencies = response.data.data;
                     });
@@ -154,18 +155,6 @@
                 if (!this.product.name) {
                     this.formErrors.push('Не указано наименование');
                 }
-                //
-                // if (!this.contragent.patronymic) {
-                //     this.formErrors.push('Не указано отчество');
-                // }
-                //
-                // if (!this.contragent.family) {
-                //     this.formErrors.push('Не указана фамилия');
-                // }
-                //
-                // if (!this.isValidPhone()) {
-                //     this.formErrors.push('Не корректно указан номер');
-                // }
 
                 if (!this.formErrors.length) {
                     this.save();

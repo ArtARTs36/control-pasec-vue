@@ -66,7 +66,7 @@
 
         methods: {
             getGeneralStat() {
-                this.$axios.get(API_STAT_GENERAL)
+                this.$http.get(API_STAT_GENERAL)
                     .then(response => {
                         this.stat = response.data;
                     });

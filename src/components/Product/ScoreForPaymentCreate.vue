@@ -108,7 +108,7 @@
             save() {
                 this.resultSave = null;
 
-                this.$axios.post(API_URL + '/score-for-payments/', this.score)
+                this.$http.post(API_URL + '/score-for-payments/', this.score)
                     .then((response) => {
                         if (response.data.success) {
                             this.resultSave = 'Данные успешно сохранены!';
@@ -152,13 +152,13 @@
                 return "Поставка №" + id;
             },
             loadSupplies(e) {
-                this.$axios.get(API_URL + '/supplies/find-by-customer/' + this.score.customer_id)
+                this.$http.get(API_URL + '/supplies/find-by-customer/' + this.score.customer_id)
                     .then(response => {
                         this.supplies = response.data.data;
                     });
             },
             loadContracts(customerId) {
-                this.$axios.get(API_URL + '/contracts/find-by-customer/' + customerId)
+                this.$http.get(API_URL + '/contracts/find-by-customer/' + customerId)
                     .then(response => {
                         this.contracts = response.data.data;
                     });
@@ -174,7 +174,7 @@
                 let term = e.target.value;
                 let url = API_URL + '/contragents/live-find/' + term + '';
 
-                this.$axios.get(url)
+                this.$http.get(url)
                     .then(response => {
                         this.contragents = response.data.data;
                     });

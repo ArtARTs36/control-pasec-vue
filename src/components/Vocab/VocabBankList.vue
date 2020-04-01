@@ -101,7 +101,7 @@
 
                 const URL = API_VOCAB_BANKS_INDEX + 'page-' + page;
 
-                this.$axios.get(URL)
+                this.$http.get(URL)
                     .then(response => {
                         this.banks = response.data.data;
                         this.totalCount = response.data.total;
@@ -115,7 +115,7 @@
                     });
             },
             removeBank(id) {
-                this.$axios.delete(API_VOCAB_BANKS_INDEX + id)
+                this.$http.delete(API_VOCAB_BANKS_INDEX + id)
                     .then(response => {
                         this.$openModalResult(response.data.success ? 'Банк удален' : response);
                         this.loadBanks();

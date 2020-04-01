@@ -90,9 +90,9 @@
 
                 let request;
                 if (this.typeAction === 'put') {
-                    request = this.$axios.put(API_VOCAB_QUANTITIES_INDEX + this.standardId, this.standard);
+                    request = this.$http.put(API_VOCAB_QUANTITIES_INDEX + this.standardId, this.standard);
                 } else {
-                    request = this.$axios.post(API_VOCAB_QUANTITIES_INDEX, this.standard);
+                    request = this.$http.post(API_VOCAB_QUANTITIES_INDEX, this.standard);
                 }
 
                 request.then((response) => {
@@ -102,7 +102,7 @@
                 }).finally(() => (this.isOpenModalResult = true));
             },
             loadStandard() {
-                this.$axios.get(API_VOCAB_QUANTITIES_INDEX + this.standardId)
+                this.$http.get(API_VOCAB_QUANTITIES_INDEX + this.standardId)
                     .then(response => {
                         this.standard = response.data;
 

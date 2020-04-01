@@ -105,7 +105,7 @@
 
                 const URL = API_VOCAB_GOS_STANDARDS_INDEX + 'page-' + page;
 
-                this.$axios.get(URL)
+                this.$http.get(URL)
                     .then(response => {
                         this.gosStandards = response.data.data;
                         this.totalCount = response.data.total;
@@ -119,7 +119,7 @@
                     });
             },
             removeGosStandard(id) {
-                this.$axios.delete(API_VOCAB_GOS_STANDARDS_INDEX + id)
+                this.$http.delete(API_VOCAB_GOS_STANDARDS_INDEX + id)
                     .then(response => {
                         this.openModalResult('ГОСТ удален!');
                         this.loadGosStandards();

@@ -85,12 +85,9 @@
             save() {
                 this.resultAction = null;
 
-                let request;
-                if (this.typeAction === 'put') {
-                    request = this.$axios.put(API_VOCAB_BANKS_INDEX + this.bankId, this.bank);
-                } else {
-                    request = this.$axios.post(API_VOCAB_BANKS_INDEX, this.bank);
-                }
+                let request = (this.typeAction === 'put') ?
+                    this.$http.put(window.API_VOCAB_BANKS_INDEX + this.bankId, this.bank) :
+                    this.$http.post(window.API_VOCAB_BANKS_INDEX, this.bank);
 
                 request.then((response) => {
                     this.resultAction = (response.data.success) ? 'Данные успешно сохранены!' : response.data.message;
@@ -99,7 +96,7 @@
                 }).finally(() => (this.isOpenModalResult = true));
             },
             loadBank() {
-                this.$axios.get(API_VOCAB_BANKS_INDEX + this.bankId)
+                this.$http.get(window.API_VOCAB_BANKS_INDEX + this.bankId)
                     .then(response => {
                         this.bank = response.data;
 

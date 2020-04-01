@@ -62,7 +62,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
     export default {
         data() {
             const blankScore = {
@@ -96,9 +95,9 @@
 
                 let request;
                 if (this.typeAction === 'put') {
-                    request = axios.put(API_URL + '/score-for-payments/' + this.scoreId, this.score);
+                    request = this.$http.put(API_URL + '/score-for-payments/' + this.scoreId, this.score);
                 } else {
-                    request = axios.post(API_URL + '/score-for-payments/', options);
+                    request = this.$http.post(API_URL + '/score-for-payments/', this.score);
                 }
 
                 request.then((response) => {
@@ -114,7 +113,7 @@
                     .finally(() => (this.isOpenModalResult = true));
             },
             loadScore() {
-                this.$axios.get(API_URL + '/score-for-payments/' + this.scoreId)
+                this.$http.get(API_URL + '/score-for-payments/' + this.scoreId)
                     .then(response => {
                         this.score = response.data;
 
@@ -160,13 +159,13 @@
                 return "Поставка №" + id;
             },
             loadSupplies(customerId) {
-                this.$axios.get(API_URL + '/supplies/find-by-customer/' + customerId)
+                this.$http.get(API_URL + '/supplies/find-by-customer/' + customerId)
                     .then(response => {
                         this.supplies = response.data.data;
                     });
             },
             loadContracts(customerId) {
-                this.$axios.get(API_URL + '/contracts/find-by-customer/' + customerId)
+                this.$http.get(API_URL + '/contracts/find-by-customer/' + customerId)
                     .then(response => {
                         this.contracts = response.data.data;
                     });
