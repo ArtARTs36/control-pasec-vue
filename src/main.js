@@ -3,6 +3,7 @@ import Vuesax from 'vuesax'
 import Axios from 'axios';
 import RootApp from './Root.vue'
 import httpPlugin from './plugins/http';
+import documentPlugin from './plugins/document';
 import 'vuesax/dist/vuesax.css';
 import 'material-icons/iconfont/material-icons.css';
 // Vuex Store
@@ -22,6 +23,7 @@ Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
 Vue.use(httpPlugin, { store, index });
+Vue.use(documentPlugin);
 
 new Vue({
   store,
@@ -130,53 +132,6 @@ Vue.filter('cutText', function (text, symbolsCount) {
       : text;
 });
 
-Vue.prototype.$genDocument = function(supplyId, typeId) {
-  this.$openNotifyToDocCreate();
-
-  this.$axios.get(API_URL + '/generate-document/' + supplyId + '/' + typeId)
-      .then((response) => {
-        if (response.data) {
-          this.$openNotifyToDocCreated(response.data.data);
-        } else {
-          this.resultSave = response.data.message;
-        }
-      });
-};
-
-Vue.prototype.$genDocumentManyTypes = function(supplyId, types) {
-  this.$openNotifyToDocCreate();
-
-  this.$axios.post(API_URL + '/generate-documents/' + supplyId, {'types': types})
-      .then((response) => {
-        if (response.data) {
-          this.$openNotifyToDocCreated(response.data.data);
-        } else {
-          this.resultSave = response.data.message;
-        }
-      });
-};
-
-Vue.prototype.$openNotifyToDocCreate = function () {
-  this.$vs.notify({
-    title: 'Документ готовится',
-    text: 'Подождите некоторое время',
-    color: 'dark',
-    icon: 'access_time'
-  })
-};
-
-Vue.prototype.$openNotifyToDocCreated = function (document) {
-  this.$vs.notify({
-    title: 'Документ '+ document.title +' готов',
-    text: 'Что бы скачать нажмите на это сообщение',
-    color: 'primary',
-    icon:'check_box',
-    fixed: true,
-    click: () => {
-      window.open(document.download_url);
-    }
-  })
-};
 Vue.prototype.$messageSendNotify = function () {
   this.$vs.notify({
     title: 'Успех',
