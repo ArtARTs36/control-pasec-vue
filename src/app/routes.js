@@ -6,6 +6,7 @@ import { routes as users } from './users';
 import { routes as dialogs } from './dialogs';
 import { routes as profiles } from './profiles';
 import { routes as vocabWords } from './vocabWords';
+import { routes as externalNews } from './externalNews';
 
 export default [
   ...supplies,
@@ -16,4 +17,5 @@ export default [
   ...dialogs,
   ...profiles,
   ...vocabWords,
+  ...externalNews,
 ];

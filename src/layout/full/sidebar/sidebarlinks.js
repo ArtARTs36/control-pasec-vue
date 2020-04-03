@@ -131,6 +131,19 @@
 		]
 	},
 	{
+		url: "/external-news",
+		name: "Новости",
+		icon: 'shopping_cart',
+		permission: window.EXTERNAL_NEWS_LIST_VIEW,
+		children: [
+			{
+				url: "/external-news",
+				name: "Список",
+				icon: 'view_agenda'
+			},
+		]
+	},
+	{
 		url: "",
 		name: "Справочники",
 		icon: 'shopping_cart',
