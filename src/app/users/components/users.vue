@@ -5,6 +5,12 @@
                 <h4>Список пользователей</h4>
             </div>
 
+            <div class="form-group">
+                <vs-button color="success" style="width:100%" type="filled" @click="downloadReport">
+                    Скачать отчет по ролевой системе
+                </vs-button>
+            </div>
+
             <div class="table-responsive">
                 <table class="table v-middle border">
                     <thead>
@@ -19,7 +25,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(item, index) in users">
+                    <tr v-for="(item) in users">
                         <td>{{ item.id }}</td>
                         <td>{{ item.family }}</td>
                         <td>{{ item.name }}</td>
@@ -143,6 +149,10 @@
                 });
 
                 return find;
+            },
+            downloadReport()
+            {
+                this.$createDocument(window.DOCUMENT_TYPE_ROLE_SYSTEM_ID);
             }
         }
     };

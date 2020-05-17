@@ -46,6 +46,23 @@ export default function install(Vue) {
         },
     });
 
+    Object.defineProperty(Vue.prototype, '$createDocument', {
+        get() {
+            return function(typeId) {
+                    this.$openNotifyToDocCreate();
+
+                    this.$http.get(window.API_URL + '/create-document/' + typeId)
+                        .then((response) => {
+                            if (response.data) {
+                                this.$openNotifyToDocCreated(response.data.data);
+                            } else {
+                                this.resultSave = response.data.message;
+                            }
+                        });
+                };
+        },
+    });
+
     Object.defineProperty(Vue.prototype, '$genDocumentManyTypes', {
         get() {
             return function(supplyId, types) {
