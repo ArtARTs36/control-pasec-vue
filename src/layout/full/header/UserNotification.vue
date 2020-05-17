@@ -20,6 +20,7 @@
                                              v-model="item.is_read"
                                              :disabled="item.is_read"
                                              @click="read(item)"
+                                             @change="read(item)"
                                 >
                                     Уведомление #{{ item.id }}
                                 </vs-checkbox>
@@ -87,7 +88,7 @@
             },
 
             read(notification) {
-                const URL = API_URL + `/user-notifications/${notification.id}/read`;
+                const URL = window.API_URL + `/user-notifications/${notification.id}/read`;
 
                 http.put(URL).then(
                     response => {

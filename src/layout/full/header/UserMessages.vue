@@ -12,13 +12,14 @@
 
         <vs-dropdown-menu style="width:20%">
             <vs-list style="overflow-y: auto;max-height:300px" v-if="currentUser.messages.length > 0">
-                <div v-for="(item, index) in currentUser.messages">
+                <div v-for="item in currentUser.messages">
                     <div class="vs-list--header vs-header-list-primary">
                         <div class="list-titles">
                             <div class="vs-list--title">
                                 <vs-checkbox class="justify-content-start"
                                              v-model="item.is_read"
                                              :disabled="item.is_read"
+                                             @change="read(item)"
                                              @click="read(item)"
                                 >
                                     {{ item.from }}
@@ -54,7 +55,7 @@
         },
         methods: {
             read(notification) {
-                const URL = API_URL + `/dialog-messages/${notification.id}/read`;
+                const URL = window.API_URL + `/dialog-messages/${notification.id}/read`;
 
                 http.put(URL).then(
                     response => {
