@@ -24,6 +24,29 @@
 		]
 	},
 	{
+		url: "/employees",
+		name: "Сотрудники",
+		icon: 'all_inbox',
+		permission: window.SCORE_FOR_PAYMENTS_LIST_VIEW,
+		children: [
+			{
+				url: "/employees",
+				name: "Список сотрудников",
+				icon: 'all_inbox',
+			},
+			{
+				url: "/employees/add",
+				name: "Добавить сотрудника",
+				icon: 'all_inbox',
+			},
+			{
+				url: "/times",
+				name: "Учет времени",
+				icon: 'all_inbox',
+			},
+		]
+	},
+	{
 		url: "/contragents",
 		name: "Контрагенты",
 		icon: 'face',

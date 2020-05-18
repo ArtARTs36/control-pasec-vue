@@ -79,4 +79,21 @@ export default function install(Vue) {
                 }
         },
     });
+
+    Object.defineProperty(Vue.prototype, '$createTimeReport', {
+        get() {
+            return function(employeeId) {
+                    this.$openNotifyToDocCreate();
+
+                    this.$http.get(window.API_URL + '/controltime/report-month/' + employeeId)
+                        .then((response) => {
+                            if (response.data) {
+                                this.$openNotifyToDocCreated(response.data.data);
+                            } else {
+                                this.resultSave = response.data.message;
+                            }
+                        });
+                }
+        },
+    });
 }

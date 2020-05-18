@@ -43,6 +43,8 @@ window.API_PRODUCTS_INDEX = window.API_URL + '/products';
 window.API_STAT_INDEX = window.API_URL + '/stat';
 window.API_STAT_GENERAL = window.API_URL + '/stat/general';
 window.API_SUPPLY_INDEX = window.API_URL + '/supplies/';
+window.API_CONTROLTIME_INDEX = window.API_URL + '/controltime/times';
+window.API_EMPLOYEES_INDEX = window.API_URL + '/employees';
 
 window.PERMISSION_SUPPLIES_EDIT = 'supplies_edit';
 window.PERMISSION_SUPPLIES_VIEW = 'supplies_view';
@@ -137,6 +139,19 @@ Vue.prototype.$messageSendNotify = function () {
     color: 'success',
     icon:'check_box',
   })
+};
+
+Vue.prototype.$goodNotify = function (message) {
+  this.$vs.notify({
+    title: 'Успех',
+    text: message,
+    color: 'success',
+    icon:'check_box',
+  })
+};
+
+Vue.prototype.$dataUpdateNotify = function () {
+  this.$goodNotify('Данные успешно обновлены');
 };
 
 Vue.filter('decOfNum', function (number, titles) {

@@ -7,6 +7,8 @@ import { routes as dialogs } from './dialogs';
 import { routes as profiles } from './profiles';
 import { routes as vocabWords } from './vocabWords';
 import { routes as externalNews } from './externalNews';
+import { routes as employees } from './employees';
+import { routes as controlTime } from './controlTime';
 
 export default [
   ...supplies,
@@ -18,4 +20,6 @@ export default [
   ...profiles,
   ...vocabWords,
   ...externalNews,
+  ...employees,
+  ...controlTime,
 ];
