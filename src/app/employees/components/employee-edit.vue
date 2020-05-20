@@ -7,21 +7,55 @@
             </div>
 
             <form>
-                <div class="default-input d-flex align-items-c">
-                    <vs-input label-placeholder="Имя" v-model="user.name" style="width:100%" />
-                </div>
+                <vs-tabs alignment="fixed">
+                    <vs-tab label="Данные о сотруднике">
+                        <br/>
 
-                <br/>
+                        <div>
+                            <div class="default-input d-flex align-items-c">
+                                <vs-input label-placeholder="Имя" v-model="user.name" style="width:100%" />
+                            </div>
 
-                <div class="default-input d-flex align-items-c">
-                    <vs-input label-placeholder="Отчество" v-model="user.patronymic" style="width:100%" />
-                </div>
+                            <br/>
 
-                <br/>
+                            <div class="default-input d-flex align-items-c">
+                                <vs-input label-placeholder="Отчество" v-model="user.patronymic" style="width:100%" />
+                            </div>
 
-                <div class="default-input d-flex align-items-c">
-                    <vs-input label-placeholder="Фамилия" v-model="user.family" style="width:100%" />
-                </div>
+                            <br/>
+
+                            <div class="default-input d-flex align-items-c">
+                                <vs-input label-placeholder="Фамилия" v-model="user.family" style="width:100%" />
+                            </div>
+                        </div>
+                    </vs-tab>
+
+                    <vs-tab label="Условия труда">
+                        <br/>
+
+                        <div>
+                            <div class="default-input d-flex align-items-c form-group">
+                                <vs-input label-placeholder="Должность" style="width:100%"
+                                          v-model="work_condition.position"/>
+                            </div>
+
+                            <div class="default-input d-flex align-items-c form-group">
+                                <vs-input label-placeholder="Ставка" style="width:100%"
+                                          v-model="work_condition.rate"/>
+                            </div>
+
+                            <div class="default-input d-flex align-items-c form-group">
+                                <vs-input label-placeholder="З/П в месяц" style="width:100%"
+                                          v-model="work_condition.amount_month"/>
+                            </div>
+
+                            <div class="default-input d-flex align-items-c form-group">
+                                <vs-input label-placeholder="З/П в час" style="width:100%"
+                                          v-model="work_condition.amount_hour"/>
+                            </div>
+                        </div>
+                    </vs-tab>
+                </vs-tabs>
 
                 <hr class="mb-1" />
 
@@ -60,6 +94,12 @@
                 linkList: '/employees',
                 userId: this.$route.params.id,
                 user: {},
+                work_condition: {
+                    'amount_hour': 0,
+                    'amount_month': 0,
+                    'rate': 1,
+                    'position': '',
+                },
                 roles: null,
                 newRole: null,
             }
@@ -77,9 +117,12 @@
             save() {
                 this.resultSave = null;
 
+                let data = duplicate(this.user);
+                data.work_condition = this.work_condition;
+
                 let request = (this.$route.params.id > 0) ?
-                    http.put(window.API_EMPLOYEES_INDEX + '/' + this.userId, this.user) :
-                    http.post(window.API_EMPLOYEES_INDEX, this.user);
+                    http.put(window.API_EMPLOYEES_INDEX + '/' + this.userId, data) :
+                    http.post(window.API_EMPLOYEES_INDEX, data);
 
                 request.then((response) => {
                     this.resultSave = (response.data.success) ? 'Данные успешно сохранены!' : response.data.message;
@@ -89,7 +132,12 @@
             },
             loadUser() {
                 http.get(window.API_EMPLOYEES_INDEX + '/' + this.userId)
-                    .then(response => {this.user = response.data})
+                    .then(response => {
+                        this.user = response.data;
+                        if (this.user.work_condition !== undefined && this.user.work_condition !== null) {
+                            this.work_condition = this.user.work_condition;
+                        }
+                    })
                     .finally(() => (document.title = 'Сотрудник #' + this.user.id));
             },
             checkForm(e) {

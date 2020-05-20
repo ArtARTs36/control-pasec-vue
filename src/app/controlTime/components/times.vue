@@ -40,7 +40,7 @@
                         </td>
                         <td>
                             <span v-if="item.isSelected">
-                                <vs-input v-model="item.comment" />
+                                <vs-textarea v-model="item.comment" />
                             </span>
                             <span v-else>
                                 {{ item.comment }}
@@ -127,7 +127,7 @@
                     page = this.currentPage;
                 }
 
-                http.get(window.API_URL + '/controltime/times/')
+                http.get(window.API_URL + '/controltime/times/page-' + page)
                     .then(response => {
                         this.users = response.data.data.map(function (time) {
                             time.quantity_hours = Math.floor(time.quantity / 60);
