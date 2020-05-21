@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@bit/lusaxweb.vuesax.functions.vs-dialog": "^3.8.62",
     "@fortawesome/fontawesome-free": "^5.12.1",
     "auth0-js": "^9.11.3",
     "axios": "^0.19.2",

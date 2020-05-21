@@ -18,16 +18,16 @@ Vue.component(VsPrism.name, VsPrism);
 Vue.use(Vuesax);
 
 // Vue Router
-import index from './router/index'
+import router from './router/index'
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
-Vue.use(httpPlugin, { store, index });
+Vue.use(httpPlugin, { store, router });
 Vue.use(documentPlugin);
 
 new Vue({
   store,
-  router: index,
+  router: router,
   render: h => h(RootApp),
 }).$mount('#app');
 
@@ -140,6 +140,7 @@ Vue.prototype.$messageSendNotify = function () {
     icon:'check_box',
   })
 };
+
 
 Vue.prototype.$goodNotify = function (message) {
   this.$vs.notify({

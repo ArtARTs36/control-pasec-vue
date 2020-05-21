@@ -71,8 +71,6 @@
 
 
         created() {
-            this.loadProducts(1);
-
             document.title = 'Список товаров';
         },
 
@@ -81,8 +79,8 @@
                 if (page === undefined) {
                     page = this.currentPage;
                 }
-
-                const URL = API_URL + '/products/page-' + page;
+                
+                const URL = window.API_URL + '/products/page-' + page;
 
                 this.$http.get(URL)
                     .then(response => {

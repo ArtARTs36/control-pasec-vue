@@ -676,6 +676,25 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@bit/lusaxweb.vuesax.functions.vs-dialog@^3.8.62":
+  version "3.8.62"
+  resolved "https://node.bit.dev/lusaxweb.vuesax.functions.vs-dialog/-/lusaxweb.vuesax.functions.vs-dialog-3.8.62.tgz#a470aadc68aba412b1022a9f20859fe9d78a498d"
+  integrity sha1-pHCq3GirpBKxAiqfIIWf6deKSY0=
+  dependencies:
+    "@bit/lusaxweb.vuesax.utils.color" "3.8.62"
+    "@bit/lusaxweb.vuesax.utils.index" "3.8.62"
+    vue "^2.6.9"
+
+"@bit/lusaxweb.vuesax.utils.color@3.8.62":
+  version "3.8.62"
+  resolved "https://node.bit.dev/lusaxweb.vuesax.utils.color/-/lusaxweb.vuesax.utils.color-3.8.62.tgz#68a218395e624f31ad88d349706224cff7257fd7"
+  integrity sha1-aKIYOV5iTzGtiNNJcGIkz/clf9c=
+
+"@bit/lusaxweb.vuesax.utils.index@3.8.62":
+  version "3.8.62"
+  resolved "https://node.bit.dev/lusaxweb.vuesax.utils.index/-/lusaxweb.vuesax.utils.index-3.8.62.tgz#29d710c5c4efe0f6f364d34700cd1c03c9e2db0b"
+  integrity sha1-KdcQxcTv4PbzZNNHAM0cA8ni2ws=
+
 "@fortawesome/fontawesome-free@^5.12.1":
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.12.1.tgz#2a98fea9fbb8a606ddc79a4680034e9d5591c550"
