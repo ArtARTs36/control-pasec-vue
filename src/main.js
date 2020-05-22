@@ -45,6 +45,7 @@ window.API_STAT_GENERAL = window.API_URL + '/stat/general';
 window.API_SUPPLY_INDEX = window.API_URL + '/supplies/';
 window.API_CONTROLTIME_INDEX = window.API_URL + '/controltime/times';
 window.API_EMPLOYEES_INDEX = window.API_URL + '/employees';
+window.API_TECH_SUPPORT_REPORTS_INDEX = window.API_URL + '/tech-support-reports/';
 
 window.PERMISSION_SUPPLIES_EDIT = 'supplies_edit';
 window.PERMISSION_SUPPLIES_VIEW = 'supplies_view';
@@ -85,6 +86,7 @@ window.USER_GENDER_MALE = 1;
 window.USER_GENDER_FEMALE = 2;
 
 window.USER_NOTIFICATION_TYPE_USER_REGISTERED = 'user_registered';
+window.USER_NOTIFICATION_TECH_SUPPORT_REPORT_CREATED = 'tech_support_report_created';
 
 window.DOCUMENT_TYPE_SCORE_FOR_PAYMENT_ID = 1;
 window.DOCUMENT_TYPE_TORG_12_ID = 3;

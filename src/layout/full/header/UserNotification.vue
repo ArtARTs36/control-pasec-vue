@@ -74,10 +74,17 @@
                 let link = '';
                 let title = '';
 
+                let id = notification.about_model_id;
+
                 switch (notification.type.name) {
                     case window.USER_NOTIFICATION_TYPE_USER_REGISTERED:
-                        link = `/users/${notification.about_model_id}/edit`;
+                        link = `/users/${id}/edit`;
                         title = 'Перейти к пользователю';
+                        break;
+
+                    case window.USER_NOTIFICATION_TECH_SUPPORT_REPORT_CREATED:
+                        link = `/tech-support/reports/${id}`;
+                        title = 'Перейти к обращению';
                         break;
                 }
 

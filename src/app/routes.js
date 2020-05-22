@@ -9,6 +9,7 @@ import { routes as vocabWords } from './vocabWords';
 import { routes as externalNews } from './externalNews';
 import { routes as employees } from './employees';
 import { routes as controlTime } from './controlTime';
+import { routes as techSupport } from './techSupport';
 
 export default [
   ...supplies,
@@ -22,4 +23,5 @@ export default [
   ...externalNews,
   ...employees,
   ...controlTime,
+  ...techSupport,
 ];

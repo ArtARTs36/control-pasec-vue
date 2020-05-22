@@ -41,9 +41,16 @@
             </vs-sidebar-item>
         </template>
 
-<!--        <div class="footer-sidebar" slot="footer">-->
-<!--            <vs-button icon="reply" color="danger" type="flat" href="">Вернуться на сайт</vs-button>-->
-<!--        </div>-->
+        <div class="footer-sidebar" slot="footer">
+            <vs-button icon="reply" color="danger" type="flat" @click="openTechSupportDialog">
+                Тех Поддержка
+            </vs-button>
+        </div>
+
+        <TechSupportDialog
+                v-if="isOpenTechSupportDialog"
+                @closeModal="closeTechSupportDialog"
+        />
 
     </vs-sidebar>
   </div>
@@ -52,10 +59,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+    import TechSupportDialog from '../TechSupportDialog';
+    import { mapGetters } from 'vuex';
 // eslint-disable-next-line no-unused-vars
 import {currentUser} from "../../../app/auth/vuex/getters";
 export default {
+    components: {
+        TechSupportDialog,
+    },
   name: "SideBar",
   props: {
     parent: {
@@ -73,6 +84,7 @@ export default {
   data:()=>({
     doNotClose: false,
     windowWidth: window.innerWidth,
+      isOpenTechSupportDialog: false,
   }),
   computed: {
       ...mapGetters([
@@ -113,7 +125,13 @@ export default {
           this.$store.commit('IS_SIDEBAR_ACTIVE', true);
           this.doNotClose= true
         }
-      }
+      },
+       openTechSupportDialog() {
+           this.isOpenTechSupportDialog = true;
+       },
+       closeTechSupportDialog() {
+          this.isOpenTechSupportDialog = false;
+       },
   },
   mounted() {
       this.$nextTick(() => {

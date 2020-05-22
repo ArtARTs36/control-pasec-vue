@@ -11,7 +11,9 @@ export default (http, store, router, Vue) => {
       if ([401, 400].indexOf(response.status) > -1) {
         router.push({ name: 'AuthForm' });
       } else if (response.status === 403) {
-          openAlert('У Вас нет доступа к "' + response.data.permission + '"', null, null, router)
+          if (response.data.permission !== undefined) {
+              openAlert('У Вас нет доступа к "' + response.data.permission + '"', null, null, router)
+          }
       } else if (response.status === 409) {
           openAlert(response.message ? response.message : response.data.message);
       }
