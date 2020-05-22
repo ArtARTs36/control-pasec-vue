@@ -17,7 +17,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="item in words">
+                    <tr v-for="item in reports">
                         <td>{{ item.id }}</td>
                         <td>{{ item.created_at }}</td>
                         <td>{{ item.author_full_name }}</td>
@@ -37,9 +37,8 @@
             <vs-pagination
                     color="#f91f43"
                     :total="totalPages"
-                    v-model="currentPage"
                     prev-icon="arrow_back" next-icon="arrow_forward"
-                    @change="loadRoles"
+                    @change="loadReports"
                     v-if="totalPages > 1"
             ></vs-pagination>
         </vs-card>
@@ -49,35 +48,32 @@
 <script>
     import { http } from '@/plugins/http';
     export default {
-        name: "VocabWordsList",
+        name: "TechSupportReportList",
         data: () => ({
-            words: [],
+            reports: [],
             error: null,
             totalCount: null,
             maxCountEntriesForOnePage: 10,
-            isLoadEntries: false,
-            currentOffset: 0,
-            currentPage: 1,
-            totalPages: null
+            currentPage: 0,
+            totalPages: null,
         }),
 
         created() {
-            this.loadRoles(1);
+            this.loadReports(1);
 
             document.title = 'Обращения в тех поддержку';
         },
 
         methods: {
-            loadRoles(page) {
-                if (page === undefined) {
-                    page = this.currentPage;
+            loadReports(page) {
+                if (this.currentPage === page) {
+                    return;
                 }
 
                 http.get(window.API_TECH_SUPPORT_REPORTS_INDEX + 'page-' + page)
                     .then(response => {
-                        this.words = response.data.data;
+                        this.reports = response.data.data;
                         this.totalCount = response.data.meta.total;
-                        this.isLoadEntries = true;
                         this.totalPages = response.data.meta.last_page;
                         this.currentPage = page;
                     })
