@@ -59,6 +59,8 @@ window.PERMISSION_ROLE_LIST_VIEW = 'role_list_view';
 
 window.PERMISSION_PERMISSIONS_LIST_VIEW = 'permissions_list_view';
 
+window.PERMISSION_TECH_SUPPORT_REPORT_SHOW_LIST = 'tech_support_report_show_list';
+
 window.CONTRAGENTS_LIST_VIEW = 'contragents_list_view';
 window.CONTRAGENTS_FIND_EXTERNAL_SYSTEM = 'contragents_find_external_system';
 window.VARIABLE_DEFINITIONS_LIST_VIEW = 'variable_definitions_list_view';

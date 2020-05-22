@@ -150,6 +150,12 @@
 				name: "Справочник прав",
 				icon: 'perm_identity',
 				permission: window.PERMISSION_PERMISSIONS_LIST_VIEW,
+			},
+			{
+				url: "/tech-support/reports/",
+				name: "Техническая поддержка",
+				icon: 'contact_support',
+				permission: window.PERMISSION_TECH_SUPPORT_REPORT_SHOW_LIST,
 			}
 		]
 	},

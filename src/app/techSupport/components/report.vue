@@ -8,7 +8,7 @@
             <form>
                 <div class="default-input d-flex align-items-c">
                     <br/>
-                    <vs-input label-placeholder="Автор" v-model="authorName" style="width:100%" />
+                    <vs-input label-placeholder="Автор" v-model="report.author_full_name" style="width:100%" />
                 </div>
 
                 <br/>
@@ -61,7 +61,6 @@
                 linkList: '/tech-support/reports',
                 reportId: this.$route.params.id,
                 report: {},
-                authorName: '',
             }
         },
 
@@ -71,17 +70,9 @@
 
                 this.$http.get(window.API_TECH_SUPPORT_REPORTS_INDEX + this.reportId)
                     .then((response) => {
+                        this.report = response.data.data;
                         this.prepareReport(response.data);
                     });
-            },
-            prepareReport(report) {
-                if (report.user !== undefined && report.user !== null) {
-                    this.authorName = report.user.name + ' ' + report.user.patronymic + ' ' + report.user.family;
-                } else {
-                    this.authorName = report.author_title;
-                }
-
-                this.report = report;
             },
         },
         created() {
