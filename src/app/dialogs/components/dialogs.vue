@@ -2,12 +2,20 @@
     <vs-row vs-justify="center">
         <vs-card>
             <div slot="header">
-                <h4>Диалоги</h4>
+                <h4>
+                    <span class="material-icons cursor-pointer"
+                          style="color: #2962FF"
+                          @click="loadDialogs(undefined)"
+                    >
+                        refresh
+                    </span>
+                    Диалоги
+                </h4>
             </div>
 
             <div class="table-responsive">
-                <vs-list>
-                    <div v-for="item in contracts" class="cursor-pointer" @click="openDialog(item.id)">
+                <vs-list v-if="dialogs.length">
+                    <div v-for="item in dialogs" class="cursor-pointer" @click="openDialog(item.id)">
                         <vs-list-item
                                 :title="item.inter_user.full_name"
                                 :subtitle="item.last_message.text|cutText(120)"
@@ -20,6 +28,12 @@
                         </vs-list-item>
                     </div>
                 </vs-list>
+                <vs-alert
+                        color="warning"
+                        v-else
+                >
+                    У Вас нет диалогов
+                </vs-alert>
             </div>
 
             <br/>
@@ -27,9 +41,8 @@
             <vs-pagination
                     color="#f91f43"
                     :total="totalPages"
-                    v-model="currentPage"
                     prev-icon="arrow_back" next-icon="arrow_forward"
-                    @change="loadContracts"
+                    @change="loadDialogs"
             ></vs-pagination>
         </vs-card>
     </vs-row>
@@ -40,33 +53,33 @@
     export default {
         name: "DialogsList",
         data: () => ({
-            contracts: [],
+            dialogs: [],
             error: null,
             totalCount: null,
             maxCountEntriesForOnePage: 10,
             isLoadEntries: false,
             currentOffset: 0,
-            currentPage: 1,
+            currentPage: 0,
             isOpenModalResult: false,
             resultAction: '',
             totalPages: null
         }),
 
         created() {
-            this.loadContracts(1);
+            this.loadDialogs(1);
 
             document.title = 'Диалоги';
         },
 
         methods: {
-            loadContracts(page) {
+            loadDialogs(page) {
                 if (page === undefined) {
                     page = this.currentPage;
                 }
 
                 http.get(window.API_URL + '/dialogs/user/page-' + page)
                     .then(response => {
-                        this.contracts = response.data.data;
+                        this.dialogs = response.data.data;
                         this.totalCount = response.data.meta.total;
                         this.isLoadEntries = true;
                         this.totalPages = response.data.meta.last_page;
