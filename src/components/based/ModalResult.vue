@@ -13,8 +13,8 @@
         </vs-alert>
     </p>
     {{ result }}
-    <p v-if="link">
-        <div class="form-group">
+    <p v-if="link && linkTitle">
+        <div class="form-group" v-if="link && linkTitle">
             <vs-button color="success" style="width:100%" type="filled" @click="redirectToLink">
                 {{ linkTitle }}
             </vs-button>
