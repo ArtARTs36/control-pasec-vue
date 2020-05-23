@@ -27,6 +27,8 @@
                     @closeModal="closeModalResult"
                     v-bind:form-errors="formErrors"
                     v-bind:title:="modalTitle"
+                    v-bind:link="contragentLink"
+                    link-title="Перейти к контрагенту"
             />
         </vs-card>
     </vs-row>
@@ -49,7 +51,9 @@
                 workerId: this.$route.params.id,
                 inn: null,
                 popupActivo: false,
-                modalTitle: 'Поиск контрагента'
+                modalTitle: 'Поиск контрагента',
+                contragent: null,
+                contragentLink: '',
             }
         },
 
@@ -57,13 +61,11 @@
             save() {
                 this.resultAction = null;
 
-                this.$http.get(API_URL + '/contragents/find-external-by-inn/' + this.inn)
+                this.$http.get(window.API_URL + '/contragents/find-external-by-inn/' + this.inn)
                     .then((response) => {
-                        if (response.data.success) {
-                            this.resultAction = 'Контрагент найден!' + '\n' + response.data.data.title;
-                        } else {
-                            this.resultAction = response.data.message;
-                        }
+                        this.resultAction = response.data.data.message;
+                        this.contragent = response.data.data.contragent;
+                        this.contragentLink = '/contragents/' + this.contragent.id + '/edit';
                     })
                     .catch((error) => {
                         this.resultAction = error;

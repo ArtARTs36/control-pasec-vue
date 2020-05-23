@@ -13,6 +13,13 @@
         </vs-alert>
     </p>
     {{ result }}
+    <p v-if="link">
+        <div class="form-group">
+            <vs-button color="success" style="width:100%" type="filled" @click="redirectToLink">
+                {{ linkTitle }}
+            </vs-button>
+        </div>
+    </p>
     </vs-popup>
 </template>
 
@@ -25,13 +32,18 @@
         },
 
         props: [
-            'result', '', 'formErrors', 'backLink', 'title'
+            'result', '', 'formErrors', 'backLink', 'title', 'link', 'linkTitle'
         ],
 
         methods: {
             closeModal() {
                 this.$emit('closeModal');
-            }
+            },
+            redirectToLink()
+            {
+                this.$router.push(this.link);
+                this.isOpenModalResult = false;
+            },
         },
         mounted() {
             if (this.title === undefined) {
