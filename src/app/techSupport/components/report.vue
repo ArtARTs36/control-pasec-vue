@@ -71,7 +71,6 @@
                 this.$http.get(window.API_TECH_SUPPORT_REPORTS_INDEX + this.reportId)
                     .then((response) => {
                         this.report = response.data.data;
-                        this.prepareReport(response.data);
                     });
             },
         },

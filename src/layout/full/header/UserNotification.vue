@@ -86,6 +86,11 @@
                         link = `/tech-support/reports/${id}`;
                         title = 'Перейти к обращению';
                         break;
+
+                    case window.USER_NOTIFICATION_DOCUMENT_OF_QUEUE_GENERATED:
+                        link = `/documents/${id}/`;
+                        title = 'Перейти к документу';
+                        break;
                 }
 
                 return [

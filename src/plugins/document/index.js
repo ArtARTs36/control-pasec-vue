@@ -15,16 +15,21 @@ export default function install(Vue) {
     Object.defineProperty(Vue.prototype, '$openNotifyToDocCreated', {
         get() {
             return function(document) {
-                return this.$vs.notify({
-                    title: 'Документ '+ document.title +' готов',
-                    text: 'Что бы скачать нажмите на это сообщение',
+                let params = {
+                    title: document.action_title,
+                    text: document.action_message,
                     color: 'primary',
                     icon:'check_box',
                     fixed: true,
-                    click: () => {
+                };
+
+                if (document.status_id === 2) {
+                    params.click = () => {
                         window.open(document.download_url);
-                    }
-                })
+                    };
+                }
+
+                return this.$vs.notify(params)
             }
         }
     });

@@ -10,6 +10,7 @@ import { routes as externalNews } from './externalNews';
 import { routes as employees } from './employees';
 import { routes as controlTime } from './controlTime';
 import { routes as techSupport } from './techSupport';
+import { routes as documents } from './documents';
 
 export default [
   ...supplies,
@@ -24,4 +25,5 @@ export default [
   ...employees,
   ...controlTime,
   ...techSupport,
+  ...documents,
 ];
