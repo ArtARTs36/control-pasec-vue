@@ -2,7 +2,8 @@
     <vs-row vs-justify="center">
         <vs-card>
             <div slot="header">
-                <h4>Поставка №{{ supply.id }}</h4>
+                <h4 v-if="supplyId">Поставка №{{ supply.id }}</h4>
+                <h4 v-else>Создать поставку</h4>
             </div>
 
             <form>
@@ -24,7 +25,6 @@
                 </vs-select>
 
                 <br/>
-
 
                 <vs-select
                         v-if="contracts"
