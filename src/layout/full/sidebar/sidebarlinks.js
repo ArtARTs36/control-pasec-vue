@@ -170,6 +170,11 @@
 				name: "Список",
 				icon: 'view_agenda'
 			},
+			{
+				url: "/external-news-sources",
+				name: "Список источников",
+				icon: 'view_agenda'
+			},
 		]
 	},
 	{

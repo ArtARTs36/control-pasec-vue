@@ -39,6 +39,7 @@ window.API_VOCAB_BANKS_INDEX = window.API_VOCAB_URL + '-banks/';
 window.API_VOCAB_QUANTITIES_INDEX = window.API_VOCAB_URL + '-quantity-units/';
 window.API_VOCAB_CURRENCIES_INDEX = window.API_VOCAB_URL + '-currencies/';
 window.API_EXTERNAL_NEWS_INDEX = window.API_URL + '/external-news/';
+window.API_EXTERNAL_NEWS_SOURCES_INDEX = window.API_URL + '/external-news-sources/';
 window.API_PRODUCTS_INDEX = window.API_URL + '/products';
 window.API_STAT_INDEX = window.API_URL + '/stat';
 window.API_STAT_GENERAL = window.API_URL + '/stat/general';
