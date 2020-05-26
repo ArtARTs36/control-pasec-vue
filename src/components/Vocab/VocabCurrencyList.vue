@@ -2,7 +2,7 @@
     <vs-row vs-justify="center">
         <vs-card>
             <div slot="header">
-                <h4>Список курсов валют</h4>
+                <h4>Валюты</h4>
             </div>
 
             <router-link :to="{ name: 'VocabCurrencyCreate' }">

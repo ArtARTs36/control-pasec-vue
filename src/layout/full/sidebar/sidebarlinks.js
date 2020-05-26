@@ -203,7 +203,7 @@
 			},
 			{
 				url: "/vocab/currencies",
-				name: "Курсы валют",
+				name: "Валюты",
 				icon: 'monetization_on',
 				permission: window.VOCAB_CURRENCIES_LIST_VIEW,
 			},

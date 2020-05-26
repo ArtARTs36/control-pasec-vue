@@ -114,7 +114,7 @@
             truncate() {
                 http.get(window.API_EXTERNAL_NEWS_INDEX + 'truncate')
                     .then(response => {
-                        this.loadNews(1);
+                        this.loadNews(0);
                     })
                     .catch(e => {
                         this.error = e;

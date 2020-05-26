@@ -20,7 +20,7 @@
                         <th class="border-top-0">Имя</th>
                         <th class="border-top-0">Отчество</th>
                         <th class="border-top-0">Email</th>
-                        <th class="border-top-0">Главная роль</th>
+                        <th class="border-top-0">Роль</th>
                         <th class="border-top-0">Действия</th>
                     </tr>
                     </thead>

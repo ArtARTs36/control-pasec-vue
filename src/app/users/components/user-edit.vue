@@ -26,7 +26,7 @@
                 <br/>
 
                 <div class="default-input d-flex align-items-c">
-                    <vs-input label-placeholder="Главная роль" v-model="user.position" style="width:100%" />
+                    <vs-input label-placeholder="Роль" v-model="user.position" style="width:100%" />
                 </div>
 
                 <br/>
