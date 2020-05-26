@@ -2,7 +2,14 @@
     <vs-row vs-justify="center">
         <vs-card>
             <div slot="header">
-                <h4>Новости из внешних источников</h4>
+                <h4>
+                    <a href="#" style="color:red" @click="truncate()" title="Очистить">
+                        <i class="material-icons">
+                            delete_forever
+                        </i>
+                    </a>
+                    Новости из внешних источников
+                </h4>
             </div>
 
             <div class="table-responsive">
@@ -92,7 +99,7 @@
                     return;
                 }
 
-                http.get(window.API_URL + '/external-news/page-' + page)
+                http.get(window.API_EXTERNAL_NEWS_INDEX + 'page-' + page)
                     .then(response => {
                         this.news = response.data.data;
                         this.totalCount = response.data.total;
@@ -104,6 +111,15 @@
                         this.error = e;
                     });
             },
+            truncate() {
+                http.get(window.API_EXTERNAL_NEWS_INDEX + 'truncate')
+                    .then(response => {
+                        this.loadNews(1);
+                    })
+                    .catch(e => {
+                        this.error = e;
+                    });
+            }
         }
     };
 </script>
