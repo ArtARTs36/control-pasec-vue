@@ -34,9 +34,13 @@
 
                                 </high-light>
 
+                                &nbsp;
+
                                 <high-light v-bind:query="query" v-bind:given="profile.name">
 
                                 </high-light>
+
+                                &nbsp;
 
                                 <high-light v-bind:query="query" v-bind:given="profile.patronymic">
 

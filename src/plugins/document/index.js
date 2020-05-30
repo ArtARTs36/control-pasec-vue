@@ -23,7 +23,7 @@ export default function install(Vue) {
                     fixed: true,
                 };
 
-                if (document.status_id === 2) {
+                if (document.status_id === 2 || document.timestamp !== undefined) {
                     params.click = () => {
                         window.open(document.download_url);
                     };
