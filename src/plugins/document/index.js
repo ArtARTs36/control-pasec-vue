@@ -23,9 +23,15 @@ export default function install(Vue) {
                     fixed: true,
                 };
 
-                if (document.status_id === 2 || document.timestamp !== undefined) {
+                if (document.timestamp !== undefined) {
                     params.title = 'Архив готов';
                     params.text = 'Нажмите, чтобы скачать';
+                }
+
+                if (document.status_id === 2 || document.timestamp !== undefined) {
+                    if (params.text === null) {
+                        params.text = 'Нажмите, чтобы скачать';
+                    }
 
                     params.click = () => {
                         window.open(document.download_url);

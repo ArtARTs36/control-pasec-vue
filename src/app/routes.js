@@ -11,6 +11,7 @@ import { routes as employees } from './employees';
 import { routes as controlTime } from './controlTime';
 import { routes as techSupport } from './techSupport';
 import { routes as documents } from './documents';
+import { routes as adminServices } from './adminServices';
 
 export default [
   ...supplies,
@@ -26,4 +27,5 @@ export default [
   ...controlTime,
   ...techSupport,
   ...documents,
+  ...adminServices,
 ];
