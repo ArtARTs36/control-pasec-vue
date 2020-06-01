@@ -27,7 +27,7 @@
         methods: {
             initRedirect() {
                 http.get(window.API_ADMIN_SERVICES_INDEX + this.serviceName)
-                    .then(response => window.open(response.data.service_url));
+                    .then(response => window.open(response.data.data.service_url));
             },
         },
     }

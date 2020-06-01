@@ -217,7 +217,7 @@
 	},
 	{
 		url: "",
-		name: "Настройки",
+		name: "Администрирование",
 		icon: 'shopping_cart',
 		permission: window.SETTINGS_VIEW,
 		children: [
@@ -225,6 +225,12 @@
 				url: "/settings/variable-definitions",
 				name: "Определения переменных",
 				icon: 'flag',
+				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
+			},
+			{
+				url: "/admin-services/redirect/horizon",
+				name: "Laravel Horizon",
+				icon: 'cloud_queue',
 				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
 			},
 		]
