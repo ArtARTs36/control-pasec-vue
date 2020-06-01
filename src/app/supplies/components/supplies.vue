@@ -31,6 +31,11 @@
                 <br/>
                 <br/>
 
+                <item-filter @changeFilters="loadSupplies" v-bind:page="currentPage" v-bind:refresh="refreshFilters">
+                </item-filter>
+
+                <br/>
+
                 <table class="table v-middle border">
                     <thead>
                     <tr class="">
@@ -117,7 +122,6 @@
                     :total="totalPages"
                     v-model="currentPage"
                     prev-icon="arrow_back" next-icon="arrow_forward"
-                    @change="loadSupplies"
             ></vs-pagination>
         </vs-card>
     </vs-row>
@@ -125,9 +129,13 @@
 
 <script>
     import { mapState, mapGetters } from 'vuex';
+    import ItemFilter from "../../../components/based/ItemFilter";
     import * as supplyServices from '../services';
     export default {
         name: "Supplies",
+        components: {
+            ItemFilter,
+        },
         data: () => ({
             supplies: [],
             error: null,
@@ -146,12 +154,11 @@
                 }
             ],
             isAllSelected: false,
-            totalPages: null
+            totalPages: null,
+            refreshFilters: null,
         }),
 
         created() {
-            this.loadSupplies(1);
-
             document.title = 'Список поставок';
         },
 
@@ -176,31 +183,21 @@
         },
 
         methods: {
-            loadSupplies(page) {
-                if (page === undefined) {
-                    page = this.currentPage;
-                }
-
-                const URL = window.API_SUPPLY_INDEX + 'page-' + page;
-
-                this.$http.get(URL)
+            loadSupplies(requestParams) {
+                this.$http.get(window.API_SUPPLY_INDEX, {params: requestParams})
                     .then(response => {
                         this.supplies = response.data.data;
                         this.totalCount = response.data.meta.total;
                         this.isLoadEntries = true;
                         this.totalPages = response.data.meta.last_page;
-
-                        this.currentPage = page;
+                        this.currentPage = response.data.meta.current_page;
                     });
             },
-            refreshSupplies(page) {
-                this.loadSupplies(page);
-            },
             removeSupply(id) {
-                this.$http.delete(API_URL + '/supplies/' + id)
+                this.$http.delete(window.API_SUPPLY_INDEX + id)
                     .then(response => {
                         this.openModalResult('Поставка удалена!');
-                        this.refreshSupplies();
+                        this.refreshFilters = true;
                     });
             },
             closeModalResult() {
