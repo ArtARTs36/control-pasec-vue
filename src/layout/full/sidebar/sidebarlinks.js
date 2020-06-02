@@ -228,6 +228,12 @@
 				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
 			},
 			{
+				url: "/security/logs",
+				name: "Логи",
+				icon: 'report',
+				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
+			},
+			{
 				url: "/admin-services/redirect/horizon",
 				name: "Laravel Horizon",
 				icon: 'cloud_queue',

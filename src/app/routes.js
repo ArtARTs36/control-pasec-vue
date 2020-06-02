@@ -12,6 +12,7 @@ import { routes as controlTime } from './controlTime';
 import { routes as techSupport } from './techSupport';
 import { routes as documents } from './documents';
 import { routes as adminServices } from './adminServices';
+import { routes as security } from './security';
 
 export default [
   ...supplies,
@@ -28,4 +29,5 @@ export default [
   ...techSupport,
   ...documents,
   ...adminServices,
+  ...security,
 ];
