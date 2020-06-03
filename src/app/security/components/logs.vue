@@ -5,6 +5,16 @@
                 <h4>Журнал ошибок</h4>
             </div>
 
+                <div class="default-input d-flex align-items-c">
+                    <vs-input label-placeholder="Полнотекстовый поиск <ENTER>"
+                              v-model="query"
+                              style="width:100%"
+                              v-on:keyup.enter="search"
+                    />
+                </div>
+
+            <br/>
+
             <div class="table-responsive">
                 <table class="table v-middle border">
                     <thead>
@@ -15,7 +25,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="item in users">
+                    <tr v-for="item in logs">
                         <td>{{ prepareDate(item.datetime) }}</td>
                         <td>
                             <span v-if="item.level_name === 'ERROR'">
@@ -52,6 +62,7 @@
             </div>
 
             <vs-pagination
+                    v-if="totalPages > 0"
                     color="#f91f43"
                     :total="totalPages"
                     v-model="currentPage"
@@ -67,7 +78,7 @@
     export default {
         name: "LogsList",
         data: () => ({
-            users: [],
+            logs: [],
             error: null,
             totalCount: null,
             maxCountEntriesForOnePage: 10,
@@ -76,7 +87,8 @@
             currentPage: 1,
             isOpenModalResult: false,
             resultAction: '',
-            totalPages: null
+            totalPages: null,
+            query: '',
         }),
 
         created() {
@@ -93,7 +105,7 @@
 
                 http.get(window.API_LOGS_INDEX + 'page-' + page)
                     .then(response => {
-                        this.users = response.data.data.map(function (log) {
+                        this.logs = response.data.data.map(function (log) {
                             log.show = false;
                             return log;
                         });
@@ -123,6 +135,25 @@
             showMessage(log)
             {
                 log.show = !log.show;
+            },
+            search(e)
+            {
+                http.get(window.API_LOGS_INDEX + 'search/?query='+ e.target.value)
+                    .then(response => {
+                        console.log(response);
+                        this.logs = response.data.data.map(function (log) {
+                            log.show = false;
+                            return log;
+                        });
+
+                        this.totalCount = response.data.total;
+                        this.isLoadEntries = true;
+                        this.totalPages = response.data.last_page;
+                        this.currentPage = 1;
+                    })
+                    .catch(e => {
+                        this.error=e;
+                    });
             }
         }
     };
