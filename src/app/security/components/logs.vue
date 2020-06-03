@@ -138,6 +138,10 @@
             },
             search(e)
             {
+                if (e.target.value === null) {
+                    return;
+                }
+
                 http.get(window.API_LOGS_INDEX + 'search/?query='+ e.target.value)
                     .then(response => {
                         console.log(response);
