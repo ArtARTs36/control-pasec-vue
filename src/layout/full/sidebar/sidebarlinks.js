@@ -239,6 +239,12 @@
 				icon: 'cloud_queue',
 				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
 			},
+			{
+				url: "/admin-services/redirect/totem",
+				name: "Laravel Totem",
+				icon: 'bookmarks',
+				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
+			},
 		]
 	},
 ]
