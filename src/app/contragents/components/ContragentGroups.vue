@@ -13,12 +13,12 @@
                 </router-link>
             </div>
 
-            <item-filter @changeFilters="loadUsers" v-bind:page="currentPage" v-bind:refresh="refreshFilters">
+            <item-filter @changeFilters="loadGroups" v-bind:page="currentPage" v-bind:refresh="refreshFilters">
             </item-filter>
 
             <div>
                 <vs-collapse>
-                    <vs-collapse-item v-for="item in users">
+                    <vs-collapse-item v-for="item in groups">
                         <div slot="header">
                             #{{ item.id }} {{ item.name }}
                         </div>
@@ -77,7 +77,7 @@
             ItemFilter,
         },
         data: () => ({
-            users: [],
+            groups: [],
             error: null,
             totalCount: null,
             isLoadEntries: false,
@@ -94,10 +94,10 @@
         },
 
         methods: {
-            loadUsers(params) {
+            loadGroups(params) {
                 http.get(window.API_CONTRAGENT_GROUPS_INDEX, {params})
                     .then(response => {
-                        this.users = response.data.data;
+                        this.groups = response.data.data;
                         this.totalCount = response.data.total;
                         this.isLoadEntries = true;
                         this.totalPages = response.data.last_page;
@@ -127,7 +127,7 @@
                 this.$http.delete(window.API_CONTROLTIME_INDEX + '/' + id)
                     .then(response => {
                         this.$goodNotify('Списание удалено');
-                        this.loadUsers();
+                        this.loadGroups();
                     })
                     .catch(e => {
                         this.openModalResult(e);
