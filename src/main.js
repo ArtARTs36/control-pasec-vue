@@ -50,7 +50,7 @@ window.API_TECH_SUPPORT_REPORTS_INDEX = window.API_URL + '/tech-support-reports/
 window.API_DOCUMENTS_INDEX = window.API_URL + '/documents/';
 window.API_ADMIN_SERVICES_INDEX = window.API_URL + '/admin-services/';
 window.API_LOGS_INDEX = window.API_URL + '/security/logs/';
-window.API_CONTRAGENT_GROUPS_INDEX = window.API_URL + '/contragent-groups';
+window.API_CONTRAGENT_GROUPS_INDEX = window.API_URL + '/contragent-groups/';
 
 window.PERMISSION_SUPPLIES_EDIT = 'supplies_edit';
 window.PERMISSION_SUPPLIES_VIEW = 'supplies_view';

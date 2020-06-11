@@ -6,7 +6,7 @@
             </div>
 
             <div class="form-group">
-                <router-link :to="{ name: 'TimeAdd' }">
+                <router-link :to="{ name: 'ContragentGroupsCreate' }">
                     <vs-button color="success" style="width:100%" type="filled">
                         Создать группу
                     </vs-button>
@@ -21,6 +21,12 @@
                     <vs-collapse-item v-for="item in groups">
                         <div slot="header">
                             #{{ item.id }} {{ item.name }}
+
+                            <router-link :to="{ name: 'ContragentGroupsEdit', params: { id: item.id }}">
+                                <i class="material-icons" title="Редактировать" style="font-size:14pt">
+                                    edit
+                                </i>
+                            </router-link>
                         </div>
 
                         <div class="table-responsive">
@@ -43,7 +49,7 @@
                                     <td>
                                         <a style="cursor: pointer; color:red"
                                            @click="detachContragent(item.id, contragent.id)"
-                                           title="Удалить списание"
+                                           title="Открепить контрагента"
                                         >
                                             <i class="material-icons">
                                                 delete_forever
@@ -108,7 +114,7 @@
                     });
             },
             detachContragent(groupId, contragentId) {
-                http.get(window.API_CONTRAGENT_GROUPS_INDEX + `/${groupId}/detach/${contragentId}`)
+                http.get(window.API_CONTRAGENT_GROUPS_INDEX + `${groupId}/detach/${contragentId}`)
                     .then(response => {
                         this.$goodNotify('Контрагент успешно откреплен от группы');
                     })
@@ -122,16 +128,6 @@
             openModalResult(result) {
                 this.isOpenModalResult = true;
                 this.resultAction = result;
-            },
-            removeTime(id) {
-                this.$http.delete(window.API_CONTROLTIME_INDEX + '/' + id)
-                    .then(response => {
-                        this.$goodNotify('Списание удалено');
-                        this.loadGroups();
-                    })
-                    .catch(e => {
-                        this.openModalResult(e);
-                    });
             },
         }
     };
