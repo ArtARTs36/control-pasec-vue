@@ -62,7 +62,12 @@
 				name: "Найти контрагента",
 				icon: 'search',
 				permission: window.CONTRAGENTS_FIND_EXTERNAL_SYSTEM,
-			}
+			},
+			{
+				url: "/contragent-groups",
+				name: "Группы контрагентов",
+				icon: 'group',
+			},
 		]
 	},
 	{

@@ -13,6 +13,7 @@ import { routes as techSupport } from './techSupport';
 import { routes as documents } from './documents';
 import { routes as adminServices } from './adminServices';
 import { routes as security } from './security';
+import { routes as contragents } from './contragents';
 
 export default [
   ...supplies,
@@ -30,4 +31,5 @@ export default [
   ...documents,
   ...adminServices,
   ...security,
+  ...contragents,
 ];
