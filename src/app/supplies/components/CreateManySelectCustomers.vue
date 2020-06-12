@@ -37,6 +37,26 @@
 
                 <div class="form-group">
                     <div slot="header">
+                        <h6>Выбрать планируемую дату</h6>
+                    </div>
+
+                    <br/>
+
+                    <div class="form-group">
+                        <datepicker v-model="date"
+                                    format="yyyy-MM-d"
+                                    inputClass="vs-inputx vs-input--input normal hasValue"
+                                    style="width:100%;"
+                                    :language="datePickerLang"
+                        >
+                        </datepicker>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <div slot="header">
                         <h6>Выбрать заказчиков из группы</h6>
                     </div>
 
@@ -133,15 +153,6 @@
             Datepicker
         },
         data() {
-            let blankSupply = {
-                id: 0,
-                planned_date: null,
-                execute_date: null,
-                products: null,
-                customer_id: null,
-                contract_id: null
-            };
-
             return {
                 error: null,
                 isOpenModalResult: false,
@@ -149,7 +160,7 @@
                 formErrors: [],
                 linkList: '/supplies',
                 supplyId: this.$route.params.id,
-                supply: blankSupply,
+                date: new Date(),
                 typeAction: (this.$route.params.id > 0) ? 'put' : 'post',
                 products: null,
                 supplyProducts: null,
