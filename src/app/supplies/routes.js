@@ -17,4 +17,10 @@ export default [
         component: () => import('./components/supply-edit'),
         meta: { requiresAuth: true },
     },
+    {
+        path: '/supplies/create-many',
+        name: 'CreateMany',
+        component: () => import('./components/CreateManySelectCustomers'),
+        meta: { requiresAuth: true },
+    },
 ];

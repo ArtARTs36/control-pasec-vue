@@ -105,7 +105,13 @@
 				name: "Создать",
 				icon: 'note_add',
 				permission: window.PERMISSION_SUPPLIES_CREATE,
-			}
+			},
+			{
+				url: "/supplies/create-many",
+				name: "Создать несколько",
+				icon: 'note_add',
+				permission: window.PERMISSION_SUPPLIES_CREATE,
+			},
 		]
 	},
 	{
