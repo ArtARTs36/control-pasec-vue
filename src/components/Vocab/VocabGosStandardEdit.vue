@@ -84,21 +84,21 @@
 
                 let request;
                 if (this.typeAction === 'put') {
-                    request = this.$http.put(API_VOCAB_GOS_STANDARDS_INDEX + this.standardId, this.standard);
+                    request = this.$http.put(window.API_VOCAB_GOS_STANDARDS_INDEX + this.standardId, this.standard);
                 } else {
-                    request = this.$http.post(API_VOCAB_GOS_STANDARDS_INDEX, this.standard);
+                    request = this.$http.post(window.API_VOCAB_GOS_STANDARDS_INDEX, this.standard);
                 }
 
                 request.then((response) => {
-                    this.resultSave = (response.data.success) ? 'Данные успешно сохранены!' : response.data.message;
+                    this.resultSave = (response.data) ? 'Данные успешно сохранены!' : response.data.message;
                 }).catch((error) => {
                     this.resultSave = error;
                 }).finally(() => (this.isOpenModalResult = true));
             },
             loadStandard() {
-                this.$http.get(API_VOCAB_GOS_STANDARDS_INDEX + this.standardId)
+                this.$http.get(window.API_VOCAB_GOS_STANDARDS_INDEX + this.standardId)
                     .then(response => {
-                        this.standard = response.data;
+                        this.standard = response.data.data;
                     })
                     .catch(e => {
                         this.error = e;
@@ -109,19 +109,19 @@
                 this.formErrors = [];
                 this.resultSave = '';
 
-                if (!this.standard.name) {
+                if (! this.standard.name) {
                     this.formErrors.push('Не указано название');
                 }
 
-                if (!this.standard.description) {
+                if (! this.standard.description) {
                     this.formErrors.push('Не указано описание');
                 }
 
-                if (!this.standard.date_introduction) {
+                if (! this.standard.date_introduction) {
                     this.formErrors.push('Не указана дата введения');
                 }
 
-                if (!this.formErrors.length) {
+                if (! this.formErrors.length) {
                     this.save();
                 } else {
                     this.isOpenModalResult = true;
