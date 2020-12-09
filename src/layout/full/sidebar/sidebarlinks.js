@@ -258,4 +258,18 @@
 			},
 		]
 	},
+	{
+		url: "",
+		name: "Лендинг",
+		icon: 'shopping_cart',
+		permission: window.SETTINGS_VIEW,
+		children: [
+			{
+				url: "/landing/feedbacks",
+				name: "Обратная связь",
+				icon: 'flag',
+				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
+			},
+		]
+	},
 ]
