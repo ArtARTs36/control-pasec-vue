@@ -56,18 +56,26 @@ export default {
     },
     prepareEvents(events) {
       events.forEach(function (dataset) {
-        const classes = [
-            'bg-red-600 text-white',
-            'bg-blue-500 text-white',
-            'bg-teal-500 text-white',
-            'bg-indigo-500 text-white',
-        ];
+        // bg-teal-500 text-white
+        let _class = 'bg-indigo-500 text-white';
+
+        switch (dataset.type) {
+          case 'holiday':
+            if (dataset.title === 'Сокращенный день') {
+              _class = 'bg-pink-500 text-white';
+            } else {
+              _class = 'bg-red-600 text-white';
+            }
+            break;
+          case 'supply':
+            _class = 'bg-blue-500 text-white';
+        }
 
         this.attributes.push({
           'key': 1,
           customData: {
             title: dataset.title,
-            class: classes[Math.floor(Math.random()*classes.length)],
+            class: _class,
           },
           dates: new Date(dataset.date.split('-')),
         });
@@ -163,5 +171,11 @@ export default {
   --bg-opacity: 1;
   background-color: #667eea;
   background-color: rgba(102,126,234,var(--bg-opacity));
+}
+
+.bg-pink-500 {
+  --bg-opacity: 1;
+  background-color: #ed64a6;
+  background-color: rgba(237,100,166,var(--bg-opacity));
 }
 </style>
