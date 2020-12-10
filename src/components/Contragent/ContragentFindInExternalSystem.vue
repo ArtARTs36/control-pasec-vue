@@ -68,7 +68,7 @@
                         this.contragentLink = '/contragents/' + this.contragent.id + '/edit';
                     })
                     .catch((error) => {
-                        this.resultAction = error;
+                      this.resultAction = 'Контрагент не найден!';
                     })
                     .finally(() => (this.isOpenModalResult = true));
             },
