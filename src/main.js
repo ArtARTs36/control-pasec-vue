@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuesax from 'vuesax'
 import RootApp from './Root.vue'
+import VCalendar from 'v-calendar';
 import httpPlugin from './plugins/http';
 import documentPlugin from './plugins/document';
 import 'vuesax/dist/vuesax.css';
@@ -16,6 +17,9 @@ import VsPrism from './components/prism/VsPrism.vue';
 Vue.component(VsPrism.name, VsPrism);
 
 Vue.use(Vuesax);
+Vue.use(VCalendar, {
+  componentPrefix: 'v',
+});
 
 // Vue Router
 import router from './router/index'

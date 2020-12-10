@@ -5,6 +5,10 @@
 		icon: "home",
 	},
 	{
+		url: "/calendar",
+		name: "Календарь",
+	},
+	{
 		url: "/scores-for-payments",
 		name: "Счета",
 		icon: 'all_inbox',

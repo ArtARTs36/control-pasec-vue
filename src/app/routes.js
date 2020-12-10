@@ -14,6 +14,7 @@ import { routes as adminServices } from './adminServices';
 import { routes as security } from './security';
 import { routes as contragents } from './contragents';
 import { routes as landing } from './landing';
+import { routes as calendar } from './calendar';
 
 export default [
   ...supplies,
@@ -32,4 +33,5 @@ export default [
   ...security,
   ...contragents,
   ...landing,
+  ...calendar,
 ];
