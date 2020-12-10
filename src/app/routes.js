@@ -1,5 +1,4 @@
 import { routes as supplies } from './supplies';
-import { routes as textDataParsers } from './textDataParsers';
 import { routes as variableDefinitions } from './variableDefinitions';
 import { routes as contracts } from './contracts';
 import { routes as users } from './users';
@@ -18,7 +17,6 @@ import { routes as landing } from './landing';
 
 export default [
   ...supplies,
-  ...textDataParsers,
   ...variableDefinitions,
   ...contracts,
   ...users,
