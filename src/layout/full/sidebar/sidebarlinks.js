@@ -5,6 +5,10 @@
 		icon: "home",
 	},
 	{
+		url: "/calendar",
+		name: "Календарь",
+	},
+	{
 		url: "/scores-for-payments",
 		name: "Счета",
 		icon: 'all_inbox',
@@ -254,6 +258,20 @@
 				url: "/admin-services/redirect/totem",
 				name: "Laravel Totem",
 				icon: 'bookmarks',
+				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
+			},
+		]
+	},
+	{
+		url: "",
+		name: "Лендинг",
+		icon: 'shopping_cart',
+		permission: window.SETTINGS_VIEW,
+		children: [
+			{
+				url: "/landing/feedbacks",
+				name: "Обратная связь",
+				icon: 'flag',
 				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
 			},
 		]
