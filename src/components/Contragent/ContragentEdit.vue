@@ -126,11 +126,7 @@
                 }
 
                 request.then((response) => {
-                    if (response.data.success) {
-                        this.resultSave = 'Данные успешно сохранены!';
-                    } else {
-                        this.resultSave = response.data.message;
-                    }
+                  this.resultSave = 'Данные успешно сохранены!';
                 })
                     .catch((error) => {
                         this.resultSave = error;

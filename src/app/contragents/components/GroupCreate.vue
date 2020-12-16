@@ -156,7 +156,7 @@
             loadGroup() {
                 this.$http.get(window.API_CONTRAGENT_GROUPS_INDEX + this.groupId)
                     .then(response => {
-                        this.group = response.data;
+                        this.group = response.data.data;
                     })
                     .catch(e => {
                         this.error = e;
