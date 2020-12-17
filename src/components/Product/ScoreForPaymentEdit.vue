@@ -87,7 +87,7 @@
 </template>
 
 <script>
-    import {ru as datePickerLang} from 'vuejs-datepicker/dist/locale'
+    import {ru as datePickerLang} from 'vuejs-datepicker/dist/locale';
     import Datepicker from 'vuejs-datepicker';
     import ModalResult from "../based/ModalResult";
     export default {

@@ -27,6 +27,24 @@
                             <div class="default-input d-flex align-items-c">
                                 <vs-input label-placeholder="Фамилия" v-model="user.family" style="width:100%" />
                             </div>
+
+                            <br/>
+
+                            <div class="default-input d-flex align-items-c">
+                              <vs-input label-placeholder="Дата рождения" v-model="user.holiday" style="width:100%" />
+                            </div>
+
+                            <br/>
+
+                            <div class="default-input d-flex align-items-c">
+                              <vs-input label-placeholder="Дата принятия на работу" v-model="user.hired_date" style="width:100%" />
+                            </div>
+
+                            <br/>
+
+                            <div class="default-input d-flex align-items-c">
+                              <vs-input label-placeholder="СНИЛС" v-model="user.insurance_number" style="width:100%" />
+                            </div>
                         </div>
                     </vs-tab>
 
@@ -79,10 +97,14 @@
 </template>
 
 <script>
+    import {ru as datePickerLang} from 'vuejs-datepicker/dist/locale';
+    import Datepicker from 'vuejs-datepicker';
     import { http } from '@/plugins/http';
     import ModalResult from "../../../components/based/ModalResult";
     export default {
         components: {
+            ModalResult,
+            Datepicker,
             ModalResult,
         },
         data() {
