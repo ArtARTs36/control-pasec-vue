@@ -54,7 +54,10 @@ window.API_TECH_SUPPORT_REPORTS_INDEX = window.API_URL + '/tech-support-reports/
 window.API_DOCUMENTS_INDEX = window.API_URL + '/documents/';
 window.API_ADMIN_SERVICES_INDEX = window.API_URL + '/admin-services/';
 window.API_LOGS_INDEX = window.API_URL + '/security/logs/';
+window.API_ADMIN_APP_HISTORY_INDEX = window.API_URL + '/admin/app-history';
 window.API_CONTRAGENT_GROUPS_INDEX = window.API_URL + '/contragent-groups/';
+window.API_PLANTS_INDEX = window.API_URL + '/plants/';
+window.API_PLANT_CATEGORIES_INDEX = window.API_URL + '/plant/categories';
 window.API_LANDING_FEEDBACKS_INDEX = window.API_URL + '/landing/feedbacks/';
 
 window.PERMISSION_SUPPLIES_EDIT = 'supplies_edit';

@@ -228,6 +228,12 @@
 				icon: 'g_translate',
 				permission: window.VOCAB_CURRENCIES_LIST_VIEW,
 			},
+			{
+				url: "/plants",
+				name: "Растения",
+				icon: 'g_translate',
+				permission: window.VOCAB_CURRENCIES_LIST_VIEW,
+			},
 		]
 	},
 	{
@@ -253,6 +259,12 @@
 				name: "Laravel Horizon",
 				icon: 'cloud_queue',
 				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
+			},
+			{
+				url: "/admin/app-history",
+				name: "История изменений приложения",
+				icon: 'cloud_queue',
+				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW, // @todo
 			},
 			{
 				url: "/admin-services/redirect/totem",

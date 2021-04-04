@@ -5,4 +5,10 @@ export default [
     component: () => import('./components/logs'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/admin/app-history/',
+    name: 'AdminAppHistory',
+    component: () => import('./components/app-history'),
+    meta: { requiresAuth: true },
+  },
 ];

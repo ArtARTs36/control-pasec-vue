@@ -15,6 +15,7 @@ import { routes as security } from './security';
 import { routes as contragents } from './contragents';
 import { routes as landing } from './landing';
 import { routes as calendar } from './calendar';
+import { routes as plants } from './plants';
 
 export default [
   ...supplies,
@@ -34,4 +35,5 @@ export default [
   ...contragents,
   ...landing,
   ...calendar,
+  ...plants,
 ];
