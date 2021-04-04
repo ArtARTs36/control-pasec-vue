@@ -12,6 +12,7 @@
                         <th class="border-top-0">Дата</th>
                         <th class="border-top-0">Изменение</th>
                         <th class="border-top-0">Автор</th>
+                        <th class="border-top-0">Область</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -19,6 +20,7 @@
                         <td> {{ item.date }} </td>
                         <td> {{ item.title }} </td>
                         <td> {{ item.author }} </td>
+                        <td> {{ item.subject }} </td>
                     </tr>
                     </tbody>
                 </table>
@@ -48,7 +50,7 @@
         created() {
             this.loadChanges();
 
-            document.title = 'Логи';
+            document.title = 'История изменений';
         },
 
         methods: {
