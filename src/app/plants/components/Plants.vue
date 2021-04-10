@@ -35,7 +35,7 @@
                     <td>{{ item.name }}</td>
                     <td>{{ item.category.name }}</td>
                     <td>
-                      <router-link :to="{ name: 'VocabBankEdit', params: { id: item.id }}">
+                      <router-link :to="{ name: 'PlantEdit', params: { id: item.id }}">
                         <i class="material-icons" title="Редактировать">
                           edit
                         </i>
