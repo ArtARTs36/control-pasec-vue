@@ -49,6 +49,7 @@ window.API_STAT_INDEX = window.API_URL + '/stat';
 window.API_STAT_GENERAL = window.API_URL + '/stat/general';
 window.API_SUPPLY_INDEX = window.API_URL + '/supplies/';
 window.API_CONTROLTIME_INDEX = window.API_URL + '/controltime/times';
+window.API_CONTROLTIME_SUBJECTS_INDEX = window.API_URL + '/controltime/subjects';
 window.API_EMPLOYEES_INDEX = window.API_URL + '/employees';
 window.API_TECH_SUPPORT_REPORTS_INDEX = window.API_URL + '/tech-support-reports/';
 window.API_DOCUMENTS_INDEX = window.API_URL + '/documents/';

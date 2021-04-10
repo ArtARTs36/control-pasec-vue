@@ -25,6 +25,23 @@
                 <br/>
 
                 <vs-select
+                  v-model="time.subject_id"
+                  style="width:100%"
+                  label="На что списываем"
+                  autocomplete
+              >
+                <vs-select-item
+                    v-for="(unit, index) in subjects"
+                    :key="index"
+                    :value="unit.id"
+                    :text="unit.title"
+                >
+                </vs-select-item>
+              </vs-select>
+
+                <br/>
+
+                <vs-select
                         v-model="time.quantity"
                         style="width:100%"
                         label="Часы"
@@ -109,7 +126,9 @@
                 linkList: '/times',
                 timeId: this.$route.params.id,
                 time: {
-                    'quantity': 0,
+                    'quantity': 8 * 60,
+                    'subject_id': 1,
+                    'date': new Date(),
                 },
                 typeAction: (this.$route.params.id > 0) ? 'put' : 'post',
                 roles: null,
@@ -117,6 +136,7 @@
                 employees: [],
                 employeeId: null,
                 hours,
+                subjects: [],
             }
         },
 
@@ -127,6 +147,7 @@
                 window.document.title = 'Добавить списание';
             }
 
+            this.loadAllSubjects();
             this.initEmployee();
         },
 
@@ -139,7 +160,7 @@
                     http.post(window.API_URL + '/controltime/times/', this.time);
 
                 request.then((response) => {
-                    this.resultSave = (response.data.id) ? 'Данные успешно сохранены!' : response.data.message;
+                    this.resultSave = (response.data.data.id) ? 'Данные успешно сохранены!' : response.data.message;
                 }).catch((error) => {
                     this.resultSave = error;
                 }).finally(() => (this.isOpenModalResult = true));
@@ -179,7 +200,8 @@
             renderEmployeeTitle(employee) {
                 return employee.family + " " + employee.name + " " + employee.patronymic;
             },
-            liveFindEmployees(e){
+            liveFindEmployees(e)
+            {
                 let term = e.target.value;
 
                 if (!term) {
@@ -193,6 +215,15 @@
                         this.employees = response.data;
                     });
             },
+            loadAllSubjects()
+            {
+                let url = window.API_CONTROLTIME_SUBJECTS_INDEX;
+
+                this.$http.get(url)
+                    .then(response => {
+                      this.subjects = response.data.data;
+                    });
+            }
         },
     }
 </script>
