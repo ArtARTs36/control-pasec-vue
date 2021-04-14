@@ -6,6 +6,14 @@
             </div>
 
             <div class="form-group">
+                <router-link :to="{ name: 'TimeAddFromExcel' }">
+                    <vs-button color="gray" style="width:100%" type="filled">
+                        Внести списания из Excel
+                    </vs-button>
+                </router-link>
+            </div>
+
+            <div class="form-group">
                 <router-link :to="{ name: 'TimeAdd' }">
                     <vs-button color="success" style="width:100%" type="filled">
                         Добавить списание

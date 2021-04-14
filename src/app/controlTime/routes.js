@@ -12,6 +12,12 @@ export default [
     meta: { requiresAuth: true },
   },
   {
+    path: '/times/add/from-excel',
+    name: 'TimeAddFromExcel',
+    component: () => import('./components/times-add-from-excel'),
+    meta: { requiresAuth: true },
+  },
+  {
     path: '/times/add/',
     name: 'TimeAdd',
     component: () => import('./components/times-add'),
