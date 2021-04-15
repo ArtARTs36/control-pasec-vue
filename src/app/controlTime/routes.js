@@ -23,4 +23,10 @@ export default [
     component: () => import('./components/times-add'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/times/reports/',
+    name: 'TimeReports',
+    component: () => import('./components/times-reports'),
+    meta: { requiresAuth: true },
+  },
 ];

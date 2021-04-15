@@ -14,6 +14,14 @@
             </div>
 
             <div class="form-group">
+                <router-link :to="{ name: 'TimeReports' }">
+                    <vs-button color="gray" style="width:100%" type="filled">
+                        Выгрузить отчет
+                    </vs-button>
+                </router-link>
+            </div>
+
+            <div class="form-group">
                 <router-link :to="{ name: 'TimeAdd' }">
                     <vs-button color="success" style="width:100%" type="filled">
                         Добавить списание
