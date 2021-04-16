@@ -37,12 +37,6 @@
                             <br/>
 
                             <div class="default-input d-flex align-items-c">
-                              <vs-input label-placeholder="Дата принятия на работу" v-model="user.hired_date" style="width:100%" />
-                            </div>
-
-                            <br/>
-
-                            <div class="default-input d-flex align-items-c">
                               <vs-input label-placeholder="СНИЛС" v-model="user.insurance_number" style="width:100%" />
                             </div>
                         </div>
@@ -71,6 +65,44 @@
                                 <vs-input label-placeholder="З/П в час" style="width:100%"
                                           v-model="work_condition.amount_hour"/>
                             </div>
+
+                          <br/>
+
+                          <datepicker v-model="work_condition.hire_date"
+                                      format="yyyy-MM-d"
+                                      inputClass="vs-inputx vs-input--input normal hasValue"
+                                      style="width:100%;"
+                                      :language="datePickerLang"
+                          >
+                          <span class="input-span-placeholder vs-input--placeholder normal normal vs-placeholder-label"
+                                slot="afterDateInput"
+                          >
+                              Дата трудоустройства
+                          </span>
+                          </datepicker>
+
+                          <br/>
+                          <br/>
+
+                          <datepicker v-model="work_condition.hire_date"
+                                      format="yyyy-MM-d"
+                                      inputClass="vs-inputx vs-input--input normal hasValue"
+                                      style="width:100%;"
+                                      :language="datePickerLang"
+                          >
+                          <span class="input-span-placeholder vs-input--placeholder normal normal vs-placeholder-label"
+                                slot="afterDateInput"
+                          >
+                              Дата увольнения
+                          </span>
+                          </datepicker>
+
+                          <br/>
+
+                          <div class="default-input d-flex align-items-c form-group">
+                            <vs-input label-placeholder="Табельный номер" style="width:100%"
+                                      v-model="work_condition.tab_number"/>
+                          </div>
                         </div>
                     </vs-tab>
                 </vs-tabs>
@@ -105,7 +137,6 @@
         components: {
             ModalResult,
             Datepicker,
-            ModalResult,
         },
         data() {
             return {
@@ -121,6 +152,9 @@
                     'amount_month': 0,
                     'rate': 1,
                     'position': '',
+                    'hire_date': new Date(),
+                    'fire_date': new Date(),
+                    'tab_number': '0000-1',
                 },
                 roles: null,
                 newRole: null,
