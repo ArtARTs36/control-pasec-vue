@@ -255,6 +255,12 @@
 				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
 			},
 			{
+				url: "/admin/system",
+				name: "Производительность",
+				icon: 'report',
+				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
+			},
+			{
 				url: "/admin-services/redirect/horizon",
 				name: "Laravel Horizon",
 				icon: 'cloud_queue',
