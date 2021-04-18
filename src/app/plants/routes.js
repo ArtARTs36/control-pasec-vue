@@ -17,4 +17,10 @@ export default [
     component: () => import('./components/PlantCreate'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/analyze/honey-forecast',
+    name: 'HoneyForecast',
+    component: () => import('./components/HoneyForecast'),
+    meta: { requiresAuth: true },
+  }
 ];

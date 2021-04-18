@@ -294,4 +294,18 @@
 			},
 		]
 	},
+	{
+		url: "",
+		name: "Анализ",
+		icon: 'shopping_cart',
+		permission: window.SETTINGS_VIEW,
+		children: [
+			{
+				url: "/analyze/honey-forecast",
+				name: "Объем производства меда",
+				icon: 'flag',
+				permission: window.VARIABLE_DEFINITIONS_LIST_VIEW,
+			},
+		]
+	},
 ]

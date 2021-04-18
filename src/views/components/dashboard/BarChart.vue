@@ -11,7 +11,7 @@
 
         methods: {
             load: function () {
-                this.$http.get(API_URL + '/vocab/currency-courses').then((response) => {
+                this.$http.get(window.API_URL + '/vocab/currency-courses').then((response) => {
                     this.data = response.data;
 
                     this.data.datasets.forEach(function (dataset) {
