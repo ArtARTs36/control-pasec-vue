@@ -7,7 +7,7 @@
         </h3>
 
         <div>
-          <SystemDiagrams></SystemDiagrams>
+          <SystemDiagrams v-bind:system-data="systemData"></SystemDiagrams>
         </div>
       </vs-card>
     </vs-col>
@@ -19,7 +19,7 @@
         </h3>
 
         <div>
-          <SystemCpu></SystemCpu>
+          <SystemCpu v-bind:system-data="systemData"></SystemCpu>
         </div>
       </vs-card>
     </vs-col>
@@ -35,9 +35,19 @@ export default {
   name: "AdminSystem",
   data() {
     return {
-      data: null
+      systemData: null
     }
   },
+  methods: {
+    load: function () {
+      this.$http.get(window.API_URL + '/admin/system/snapshot').then((response) => {
+        this.systemData = response.data.data;
+      });
+    },
+  },
+  mounted() {
+    this.load();
+  }
 };
 </script>
 

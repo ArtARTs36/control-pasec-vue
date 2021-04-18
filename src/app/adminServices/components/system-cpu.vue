@@ -3,16 +3,11 @@ import {Doughnut} from "vue-chartjs";
 export default {
   extends: Doughnut,
   name: "SystemCpu",
-  data() {
-    return {
-      data: null
-    }
-  },
+  props: [
+    'systemData'
+  ],
   methods: {
     load: function () {
-      this.$http.get(window.API_URL + '/admin/system/snapshot').then((response) => {
-        let data = response.data.data;
-
         this.data = {
           'labels': [
               'Использовано пользователем',
@@ -22,9 +17,9 @@ export default {
           'datasets': [
             {
               'data': [
-                data.cpu.user,
-                data.cpu.system,
-                data.cpu.idle,
+                this.systemData.cpu.user,
+                this.systemData.cpu.system,
+                this.systemData.cpu.idle,
               ],
               backgroundColor: [
                 'rgb(255, 99, 132)',
@@ -36,7 +31,6 @@ export default {
         };
 
         this.render();
-      });
     },
     render: function () {
       this.renderChart(
@@ -50,9 +44,13 @@ export default {
       );
     }
   },
-  mounted() {
-    this.load();
-  }
+  watch: {
+    systemData: function (val) {
+      if (val !== undefined) {
+        this.load();
+      }
+    },
+  },
 };
 </script>
 

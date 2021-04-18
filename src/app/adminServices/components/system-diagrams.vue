@@ -3,37 +3,31 @@ import {Doughnut} from "vue-chartjs";
 export default {
   extends: Doughnut,
   name: "SystemDiagrams",
-  data() {
-    return {
-      data: null
-    }
-  },
+  props: [
+      'systemData'
+  ],
   methods: {
     load: function () {
-      this.$http.get(window.API_URL + '/admin/system/snapshot').then((response) => {
-        let data = response.data.data;
-
         this.data = {
           'labels': [
-              'Всего памяти',
-              'Доступно памяти',
+            'Всего памяти',
+            'Доступно памяти',
           ],
           'datasets': [
             {
               'data': [
-                data.memory.total,
-                data.memory.available,
+                this.systemData.memory.total,
+                this.systemData.memory.available,
               ],
               backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
               ],
-            },
-          ],
+            }
+          ]
         };
 
         this.render();
-      });
     },
     render: function () {
       this.renderChart(
@@ -47,9 +41,13 @@ export default {
       );
     }
   },
-  mounted() {
-    this.load();
-  }
+  watch: {
+    systemData: function (val) {
+      if (val !== undefined) {
+        this.load();
+      }
+    },
+  },
 };
 </script>
 
