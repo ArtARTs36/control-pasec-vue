@@ -71,6 +71,8 @@
 
                 if (!this.user.password) {
                     this.formErrors.push('Не указан пароль');
+                } else if (this.user.password.length < 8) {
+                    this.formErrors.push('Пароль должен содержать не менее 8 символов');
                 }
 
                 if (this.formErrors.length) {
