@@ -18,7 +18,7 @@
     "localforage": "^1.7.3",
     "material-icons": "^0.3.1",
     "mdbvue": "^6.7.2",
-    "prismjs": "^1.17.1",
+    "prismjs": "^1.23.0",
     "v-calendar": "^2.3.0",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2",
