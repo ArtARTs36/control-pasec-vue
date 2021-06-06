@@ -29,7 +29,7 @@ SideBar
 },
 data:() => ({
 	topbarColor: "#2962ff",
-	logotitle: "ControlPasec",
+	logotitle: "ApiaryControl",
 	sidebarLinks: sidebarLinks,
 }),
 methods: {

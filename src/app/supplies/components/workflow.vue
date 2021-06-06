@@ -2,11 +2,11 @@
     <vs-row vs-justify="center">
         <vs-card>
             <div slot="header">
-                <h4>Правила бизнес-процесса</h4>
+                <h4>Правила бизнес-процесса "Ведение поставок"</h4>
             </div>
 
             <div class="table-responsive">
-                <vs-button color="success" style="width:100%" type="filled" @click="manyActionsExecute">
+                <vs-button color="success" style="width:100%" type="filled" @click="downloadDiagram">
                   Скачать диаграмму
                 </vs-button>
 
@@ -34,7 +34,7 @@
                         <td>{{ item.to_status ? item.to_status.title : '' }}</td>
                         <td>{{ item.creator ? item.creator.family + ' ' + item.creator.name : 'Система' }}</td>
                         <td>
-                            <a href="#" style="color:red" @click="removeRule(item.id)" title="Удалить правило"
+                            <a href="#" style="color:red" @click="removeRule(item)" title="Удалить правило"
                                 v-if="isGrantedSuppliesDelete"
                             >
                                 <i class="material-icons">
@@ -47,13 +47,24 @@
                 </table>
             </div>
         </vs-card>
+
+      <ModalResult
+          v-if="isOpenModalResult"
+          v-bind:result="resultAction"
+          @closeModal="closeModalResult"
+          title="Правило удалено"
+      />
     </vs-row>
 </template>
 
 <script>
+    import ModalResult from "../../../components/based/ModalResult";
     import { mapState, mapGetters } from 'vuex';
     export default {
-        name: "Supplies",
+        name: "SupplyWorkflowRules",
+        components: {
+          ModalResult,
+        },
         data: () => ({
             supplies: [],
             error: null,
@@ -94,10 +105,10 @@
                         this.supplies = response.data.data;
                     });
             },
-            removeRule(id) {
-                this.$http.delete(window.API_SUPPLY_STATUS_RULES_INDEX + id)
-                    .then(response => {
-                        this.openModalResult('Правило удалено!');
+            removeRule(rule) {
+                this.$http.delete(window.API_SUPPLY_STATUS_RULES_INDEX + rule.id)
+                    .finally(response => {
+                        this.openModalResult('Правило "' + rule.title +'" удалено!');
                     });
             },
             closeModalResult() {
@@ -107,7 +118,7 @@
                 this.isOpenModalResult = true;
                 this.resultAction = result;
             },
-            async manyActionsExecute()
+            async downloadDiagram()
             {
               this.$http.get(window.API_URL + '/supply-status-rules/diagram', { responseType: 'blob' }).then((response) => {
                 let blob = new Blob([response.data], { type: 'image/png' }),
