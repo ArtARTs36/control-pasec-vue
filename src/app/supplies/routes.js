@@ -23,4 +23,16 @@ export default [
         component: () => import('./components/CreateManySelectCustomers'),
         meta: { requiresAuth: true },
     },
+    {
+        path: '/supplies/workflow',
+        name: 'SupplyWorkflow',
+        component: () => import('./components/workflow'),
+        meta: { requiresAuth: true },
+    },
+    {
+        path: '/supplies/:id/history',
+        name: 'SupplyWorkflowHistory',
+        component: () => import('./components/workflow-history'),
+        meta: { requiresAuth: true },
+    },
 ];

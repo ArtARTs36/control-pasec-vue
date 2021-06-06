@@ -255,17 +255,15 @@
                 this.formErrors = [];
                 this.resultSave = '';
 
-                if (!this.supply.customer_id) {
+                if (this.selectedContragents.length === 0) {
                     this.formErrors.push('Не указан заказчик');
                 }
 
-                if (!this.supply.planned_date) {
+                if (this.date) {
                     this.formErrors.push('Не указана планируемая дата');
                 }
 
-                if (!this.formErrors.length) {
-                    this.save();
-                } else {
+                if (this.formErrors.length) {
                     this.isOpenModalResult = true;
                 }
 

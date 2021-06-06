@@ -116,6 +116,12 @@
 				icon: 'note_add',
 				permission: window.PERMISSION_SUPPLIES_CREATE,
 			},
+			{
+				url: "/supplies/workflow",
+				name: "Бизнес-процесс",
+				icon: 'note_add',
+				permission: window.PERMISSION_SUPPLIES_CREATE,
+			},
 		]
 	},
 	{
